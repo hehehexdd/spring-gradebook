@@ -1,18 +1,55 @@
 package com.gradebook.Gradebook.data.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idDirector")
 public class Director extends AppUser{
 
-    private String FirstName;
+    @Column(nullable = false, length = 30)
+    private String firstName;
 
-    private String LastName;
+    @Column(nullable = false, length = 30)
+    private String secondName;
 
-//    @OneToOne
-//    private School School;
+    @OneToOne
+    @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
+    private School school;
 
+    public Director(String username, String email, String password, Role role, boolean isAccountLocked, String firstName, String secondName, School school) {
+        super(username, email, password, role, isAccountLocked);
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.school = school;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    @Override
+    public String toString() {
+        return "Director{Name: " + firstName + " " + secondName + ", " +
+                "Director of school: " + school.getName() + "}";
+    }
 }
