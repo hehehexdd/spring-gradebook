@@ -16,6 +16,9 @@ public class School {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @OneToOne(mappedBy = "school")
+    private Director director;
+
     public School(String address, String name) {
         this.id = null;
         this.address = address;
