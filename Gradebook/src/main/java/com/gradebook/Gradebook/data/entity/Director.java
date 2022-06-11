@@ -49,7 +49,7 @@ public class Director extends AppUser{
 
     @Override
     public String toString() {
-        return "Director{Name: " + firstName + " " + secondName + ", " +
+        return "Director {Name: " + firstName + " " + secondName + ", " +
                 "Director of school: " + school.getName() + "}";
     }
 }
