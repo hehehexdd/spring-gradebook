@@ -3,11 +3,12 @@ package com.gradebook.Gradebook.data.entity;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role implements GrantedAuthority {
+public class Role{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class Role implements GrantedAuthority {
     public Role(String authority) {
         this.id = null;
         this.authority = authority;
+        this.users = new HashSet<>();
     }
 
     public Role(String authority, Set<AppUser> users) {
@@ -37,17 +39,11 @@ public class Role implements GrantedAuthority {
         return id;
     }
 
-    @Override
-    public String getAuthority() {
-        return authority;
-    }
-
     public Set<AppUser> getUser() {
         return users;
     }
 
     //Setters
-
     public void setAuthority(String authority) {
         this.authority = authority;
     }

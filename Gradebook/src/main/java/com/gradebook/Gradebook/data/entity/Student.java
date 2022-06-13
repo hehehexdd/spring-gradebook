@@ -8,12 +8,15 @@ import java.util.*;
 @PrimaryKeyJoinColumn(name = "idStudent")
 public class Student extends AppUser{
 
+    @Column(nullable = false)
     private String FirstName;
+
+    @Column(nullable = false)
     private String LastName;
 
-//    @ManyToOne
-//    private School school;
-//
+    @ManyToOne
+    private School school;
+
     @Enumerated(value = EnumType.STRING)
     private SClass SClass;
 //

@@ -1,6 +1,7 @@
 package com.gradebook.Gradebook.data.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "schools")
@@ -18,6 +19,9 @@ public class School {
 
     @OneToOne(mappedBy = "school")
     private Director director;
+
+    @OneToMany
+    private List<Student> students;
 
     public School(String address, String name) {
         this.id = null;

@@ -23,12 +23,22 @@ public class AppUser {
     @ManyToOne
     @JoinColumn(name = "role")
     private Role role;
+//    @Enumerated(value = EnumType.STRING)
+//    private Role role;
 
     @Column(name = "isAccLocked", nullable = false)
     private boolean isAccountLocked;
 
     //Constructors
     public AppUser() {
+    }
+    public AppUser(String username, String email, String password, Role role) {
+        this.id = null;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.isAccountLocked = true;
     }
 
     public AppUser(String username, String email, String password, Role role, boolean isAccountLocked) {
