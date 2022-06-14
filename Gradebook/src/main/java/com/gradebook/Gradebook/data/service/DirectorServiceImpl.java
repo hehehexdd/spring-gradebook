@@ -26,6 +26,7 @@ public class DirectorServiceImpl implements DirectorService{
 
     @Override
     public void updateDirector(Director director) {
+        directorRepo.save(director);
     }
 
     @Override
