@@ -15,6 +15,7 @@
 
 # Gradle  project
 .gradle
+/build/
 
 # IDE Files
 .idea
