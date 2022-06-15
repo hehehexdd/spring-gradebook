@@ -23,6 +23,10 @@ public class Director extends AppUser{
         this.school = school;
     }
 
+    public Director() {
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -49,7 +53,10 @@ public class Director extends AppUser{
 
     @Override
     public String toString() {
-        return "Director {Name: " + firstName + " " + secondName + ", " +
-                "Director of school: " + school.getName() + "}";
+        return "Director{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", school=" + school.getName() +
+                '}';
     }
 }
