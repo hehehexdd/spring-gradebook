@@ -3,6 +3,7 @@ package com.gradebook.Gradebook;
 import com.gradebook.Gradebook.model.entity.AppUser;
 import com.gradebook.Gradebook.model.entity.RoleType;
 import com.gradebook.Gradebook.service.IAppUserService;
+import com.gradebook.Gradebook.service.IParentService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,14 +24,17 @@ public class GradebookApplication {
 //	}
 
 	@Bean
-	CommandLineRunner runner(IAppUserService userService) {
-		return args ->
-			userService.saveUser(new AppUser(
+	CommandLineRunner runner(IAppUserService userService, IParentService parentService) {
+
+		return args ->{
+			 userService.saveUser(new AppUser(
 					"user",
 					"stoqn_stoqnov@gmail.com",
 					"123",
 					RoleType.TEST,
 					true));
+		};
+
 
 	}
 }
