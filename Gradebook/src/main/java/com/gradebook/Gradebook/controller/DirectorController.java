@@ -4,7 +4,9 @@ package com.gradebook.Gradebook.controller;
 import com.gradebook.Gradebook.config.GradebookCommon;
 import com.gradebook.Gradebook.model.dto.DirectorDTO;
 import com.gradebook.Gradebook.service.IDirectorService;
+import org.hibernate.annotations.Fetch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,15 +16,37 @@ import java.util.List;
 public class DirectorController {
 
     @Autowired
-    private final IDirectorService IDirectorService;
+    private final IDirectorService directorService;
 
     public DirectorController(IDirectorService IDirectorService) {
-        this.IDirectorService = IDirectorService;
+        this.directorService = IDirectorService;
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping()
     public List<DirectorDTO> getAllDirectors() {
-        return IDirectorService.getAll();
+        return directorService.getAll();
     }
 
+    @GetMapping(path = "/{id}")
+    public DirectorDTO getDirectorById(@PathVariable("id") Long id) {
+        return directorService.getById(id);
+    }
+
+    @PatchMapping(path = "{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public DirectorDTO updateDirector(@PathVariable("id") Long id, @RequestBody DirectorDTO payload) {
+        return new DirectorDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", "PATCH");
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public DirectorDTO createDirector(@RequestBody DirectorDTO payload) {
+        return new DirectorDTO(Long.valueOf(1), "POST", "POST", "POST", "POST");
+    }
+
+    @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteDirectorById(@PathVariable("id") Long id) {
+        directorService.delete(id);
+    }
 }

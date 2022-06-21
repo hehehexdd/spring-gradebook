@@ -6,11 +6,14 @@ import com.gradebook.Gradebook.model.entity.Director;
 import java.util.List;
 
 public interface IDirectorService {
-    Director save(Director director);
+    Director save(Director DirectorDTO);
     void update(Director director);
     void delete(Long id);
-    Director getById(Long id);
+    DirectorDTO getById(Long id);
+    DirectorDTO getByUsername(String username);
     List<DirectorDTO> getAll();
 
     DirectorDTO convertToDTO(Director director);
+
+
 }
