@@ -12,7 +12,7 @@
 *.zip
 *.tar.gz
 *.rar
-*.properties
+
 # Gradle  project
 .gradle
 /build/
