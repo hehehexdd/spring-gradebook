@@ -17,10 +17,10 @@ public class GradebookApplication {
 		SpringApplication.run(GradebookApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return NoOpPasswordEncoder.getInstance();
+//	}
 
 	@Bean
 	CommandLineRunner runner(IAppUserService userService) {
