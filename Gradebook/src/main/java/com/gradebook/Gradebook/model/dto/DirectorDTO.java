@@ -3,17 +3,18 @@ package com.gradebook.Gradebook.model.dto;
 public class DirectorDTO {
 
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String username;
     private String school;
 
     public DirectorDTO() {
-
     }
 
-    public DirectorDTO(Long id, String name, String username, String school) {
+    public DirectorDTO(Long id, String firstName, String secondName, String username, String school) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = secondName;
         this.username = username;
         this.school = school;
     }
@@ -26,12 +27,20 @@ public class DirectorDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -54,7 +63,8 @@ public class DirectorDTO {
     public String toString() {
         return "DirectorDTO{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", school='" + school + '\'' +
                 '}';
