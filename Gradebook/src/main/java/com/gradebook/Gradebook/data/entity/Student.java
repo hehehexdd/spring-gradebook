@@ -2,7 +2,6 @@ package com.gradebook.Gradebook.data.entity;
 
 
 import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idStudent")
@@ -35,7 +34,7 @@ public class Student extends AppUser{
                    String firstName,
                    String lastName,
                    School school,
-                   Role role,
+                   RoleType role,
                    SClass SClass
                    //Set<Parent> parents,
                    //List<Absence> absences,
@@ -57,7 +56,7 @@ public class Student extends AppUser{
                    String firstName,
                    String lastName,
                    //School school,
-                   Role role,
+                   RoleType role,
                    SClass SClass) {
         super(username, email, password, role, isAccountLocked);
         FirstName = firstName;

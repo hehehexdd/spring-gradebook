@@ -1,7 +1,7 @@
 package com.gradebook.Gradebook.controller;
 
 import com.gradebook.Gradebook.data.entity.AppUser;
-import com.gradebook.Gradebook.data.service.AppUserService;
+import com.gradebook.Gradebook.data.service.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public class AppUserController {
 
     @Autowired
-    private AppUserService userService;
+    private IAppUserService userService;
 
-    public AppUserController(AppUserService userService) {
+    public AppUserController(IAppUserService userService) {
         this.userService = userService;
     }
 

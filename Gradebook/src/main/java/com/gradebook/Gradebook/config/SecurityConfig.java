@@ -1,7 +1,7 @@
 package com.gradebook.Gradebook.config;
 
 import com.gradebook.Gradebook.auth.JwtFilter;
-import com.gradebook.Gradebook.data.service.AppUserServiceImpl;
+import com.gradebook.Gradebook.data.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AppUserServiceImpl userService;
+    private AppUserService userService;
 
     @Autowired
     private JwtFilter jwtFilter;

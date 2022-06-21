@@ -20,11 +20,8 @@ public class AppUser {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "role")
-    private Role role;
-//    @Enumerated(value = EnumType.STRING)
-//    private Role role;
+    @Enumerated(value = EnumType.STRING)
+    private RoleType role;
 
     @Column(name = "isAccLocked", nullable = false)
     private boolean isAccountLocked;
@@ -32,7 +29,7 @@ public class AppUser {
     //Constructors
     public AppUser() {
     }
-    public AppUser(String username, String email, String password, Role role) {
+    public AppUser(String username, String email, String password, RoleType role) {
         this.id = null;
         this.username = username;
         this.email = email;
@@ -41,7 +38,7 @@ public class AppUser {
         this.isAccountLocked = true;
     }
 
-    public AppUser(String username, String email, String password, Role role, boolean isAccountLocked) {
+    public AppUser(String username, String email, String password, RoleType role, boolean isAccountLocked) {
         this.id = null;
         this.username = username;
         this.email = email;
@@ -67,7 +64,7 @@ public class AppUser {
         return password;
     }
 
-    public Role getRole() {
+    public RoleType getRole() {
         return role;
     }
 
@@ -88,7 +85,7 @@ public class AppUser {
         this.password = password;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleType role) {
         this.role = role;
     }
 

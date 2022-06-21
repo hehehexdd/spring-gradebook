@@ -3,8 +3,7 @@ package com.gradebook.Gradebook.controller;
 
 import com.gradebook.Gradebook.config.GradebookCommon;
 import com.gradebook.Gradebook.data.dto.DirectorDTO;
-import com.gradebook.Gradebook.data.entity.Director;
-import com.gradebook.Gradebook.data.service.DirectorService;
+import com.gradebook.Gradebook.data.service.IDirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,15 +14,15 @@ import java.util.List;
 public class DirectorController {
 
     @Autowired
-    private final DirectorService directorService;
+    private final IDirectorService IDirectorService;
 
-    public DirectorController(DirectorService directorService) {
-        this.directorService = directorService;
+    public DirectorController(IDirectorService IDirectorService) {
+        this.IDirectorService = IDirectorService;
     }
 
     @GetMapping(path = "/all")
     public List<DirectorDTO> getAllDirectors() {
-        return directorService.getAll();
+        return IDirectorService.getAll();
     }
 
 }
