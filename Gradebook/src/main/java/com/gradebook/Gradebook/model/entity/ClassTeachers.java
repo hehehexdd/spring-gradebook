@@ -4,18 +4,23 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "classes_teachers")
+@Table(name = "ClassesTeachers")
 public class ClassTeachers {
-    @Id
-    @ManyToMany()
-    private List<Student> classId;
 
     @Id
-    @ManyToMany()
-    private List<Teacher> teacherId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id
-    @ManyToMany()
-    private  List<Subject> subjectId;
+    @ManyToOne
+    @JoinColumn(name = "studentId")
+    private Student studentClass;
+
+    @ManyToOne
+    @JoinColumn(name = "teacherId")
+    private Teacher teacher;
+
+    @ManyToOne
+    @JoinColumn(name = "subjectId")
+    private Subject subject;
 
 }

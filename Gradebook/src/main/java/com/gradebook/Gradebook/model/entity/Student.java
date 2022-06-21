@@ -20,6 +20,9 @@ public class Student extends AppUser{
     @Enumerated(value = EnumType.STRING)
     private SClass SClass;
 
+    @OneToMany(mappedBy = "studentClass")
+    private List<ClassTeachers> classTeachers;
+
 //
 //    @ManyToMany
 //    private Set<Parent> parents;

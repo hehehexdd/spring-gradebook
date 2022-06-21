@@ -12,10 +12,11 @@ public class Teacher extends AppUser{
     @Column(nullable = false)
     private String lastName;
 
-    @ManyToMany
-    private List<Subject> subjects;
 
     @ManyToOne
     private School school;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<ClassTeachers> classTeachers;
 
 }

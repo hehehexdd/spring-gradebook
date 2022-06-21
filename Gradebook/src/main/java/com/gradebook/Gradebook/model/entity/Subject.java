@@ -11,4 +11,7 @@ public class Subject {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "subject")
+    private List<ClassTeachers> classTeachers;
 }
