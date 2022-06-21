@@ -24,7 +24,7 @@ public class School {
     private List<Student> students;
 
     public School() {
-        
+
     }
 
     public School(String address, String name) {

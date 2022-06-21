@@ -23,7 +23,7 @@ public class DirectorService implements IDirectorService {
 
     @Override
     public Director save(Director director) {
-        return directorRepo.save(director);
+        return  directorRepo.save(director);
     }
 
     @Override
@@ -37,8 +37,12 @@ public class DirectorService implements IDirectorService {
     }
 
     @Override
-    public Director getById(Long id) {
-        return directorRepo.getById(id);
+    public DirectorDTO getById(Long id) {
+        return convertToDTO(directorRepo.getById(id));
+    }
+
+    public DirectorDTO getByUsername(String username) {
+        return convertToDTO(directorRepo.findByUsername(username));
     }
 
     @Override
@@ -58,11 +62,13 @@ public class DirectorService implements IDirectorService {
 
         if (director != null) {
             directorDTO.setId(director.getId());
-            directorDTO.setName(String.format("%s %s", director.getFirstName(), director.getSecondName()));
+            directorDTO.setFirstName(director.getFirstName());
+            directorDTO.setLastName(director.getLastName());
             directorDTO.setUsername(director.getUsername());
-            directorDTO.setSchool("SCHOOL");
+            directorDTO.setSchool(director.getSchool().getName());
         }
 
         return directorDTO;
     }
+
 }
