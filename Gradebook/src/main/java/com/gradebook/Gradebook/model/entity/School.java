@@ -23,6 +23,10 @@ public class School {
     @OneToMany
     private List<Student> students;
 
+    public School() {
+        
+    }
+
     public School(String address, String name) {
         this.id = null;
         this.address = address;
