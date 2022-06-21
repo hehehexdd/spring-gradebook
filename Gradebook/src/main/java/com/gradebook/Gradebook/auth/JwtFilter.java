@@ -1,7 +1,7 @@
 package com.gradebook.Gradebook.auth;
 
 import com.gradebook.Gradebook.config.JwtUtility;
-import com.gradebook.Gradebook.data.service.AppUserService;
+import com.gradebook.Gradebook.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

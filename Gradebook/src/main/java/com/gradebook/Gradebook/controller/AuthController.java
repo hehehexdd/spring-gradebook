@@ -3,7 +3,7 @@ package com.gradebook.Gradebook.controller;
 import com.gradebook.Gradebook.auth.dto.JwtRequest;
 import com.gradebook.Gradebook.auth.dto.JwtResponse;
 import com.gradebook.Gradebook.config.JwtUtility;
-import com.gradebook.Gradebook.data.service.IAppUserService;
+import com.gradebook.Gradebook.service.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,8 +1,8 @@
-package com.gradebook.Gradebook.data.service;
+package com.gradebook.Gradebook.service;
 
-import com.gradebook.Gradebook.data.dto.DirectorDTO;
-import com.gradebook.Gradebook.data.entity.Director;
-import com.gradebook.Gradebook.data.repo.DirectorRepo;
+import com.gradebook.Gradebook.model.dto.DirectorDTO;
+import com.gradebook.Gradebook.model.entity.Director;
+import com.gradebook.Gradebook.repo.DirectorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,9 +45,9 @@ public class DirectorService implements IDirectorService {
     public List<DirectorDTO> getAll() {
         List<DirectorDTO> directorDTOS = new ArrayList<>();
 
-        directorRepo.findAll().forEach(director -> {
-            directorDTOS.add(convertToDTO(director));
-        });
+        directorRepo.findAll().forEach(director ->
+            directorDTOS.add(convertToDTO(director))
+        );
 
         return directorDTOS;
     }

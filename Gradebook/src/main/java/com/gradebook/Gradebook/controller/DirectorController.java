@@ -2,8 +2,8 @@ package com.gradebook.Gradebook.controller;
 
 
 import com.gradebook.Gradebook.config.GradebookCommon;
-import com.gradebook.Gradebook.data.dto.DirectorDTO;
-import com.gradebook.Gradebook.data.service.IDirectorService;
+import com.gradebook.Gradebook.model.dto.DirectorDTO;
+import com.gradebook.Gradebook.service.IDirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

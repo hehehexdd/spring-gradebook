@@ -1,4 +1,4 @@
-package com.gradebook.Gradebook.data.entity;
+package com.gradebook.Gradebook.model.entity;
 
 import javax.persistence.*;
 

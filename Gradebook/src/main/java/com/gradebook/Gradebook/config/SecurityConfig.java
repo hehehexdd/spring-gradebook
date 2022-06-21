@@ -1,7 +1,7 @@
 package com.gradebook.Gradebook.config;
 
 import com.gradebook.Gradebook.auth.JwtFilter;
-import com.gradebook.Gradebook.data.service.AppUserService;
+import com.gradebook.Gradebook.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

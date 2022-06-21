@@ -1,6 +1,6 @@
-package com.gradebook.Gradebook.data.service;
+package com.gradebook.Gradebook.service;
 
-import com.gradebook.Gradebook.data.entity.AppUser;
+import com.gradebook.Gradebook.model.entity.AppUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

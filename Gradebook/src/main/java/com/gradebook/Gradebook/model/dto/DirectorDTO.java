@@ -1,4 +1,4 @@
-package com.gradebook.Gradebook.data.dto;
+package com.gradebook.Gradebook.model.dto;
 
 public class DirectorDTO {
 

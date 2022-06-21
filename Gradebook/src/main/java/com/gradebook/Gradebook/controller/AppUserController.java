@@ -1,7 +1,7 @@
 package com.gradebook.Gradebook.controller;
 
-import com.gradebook.Gradebook.data.entity.AppUser;
-import com.gradebook.Gradebook.data.service.IAppUserService;
+import com.gradebook.Gradebook.model.entity.AppUser;
+import com.gradebook.Gradebook.service.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
-package com.gradebook.Gradebook.data.repo;
+package com.gradebook.Gradebook.repo;
 
-import com.gradebook.Gradebook.data.entity.AppUser;
+import com.gradebook.Gradebook.model.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

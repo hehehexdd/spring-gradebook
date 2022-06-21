@@ -1,7 +1,7 @@
-package com.gradebook.Gradebook.data.service;
+package com.gradebook.Gradebook.service;
 
-import com.gradebook.Gradebook.data.dto.DirectorDTO;
-import com.gradebook.Gradebook.data.entity.Director;
+import com.gradebook.Gradebook.model.dto.DirectorDTO;
+import com.gradebook.Gradebook.model.entity.Director;
 
 import java.util.List;
 

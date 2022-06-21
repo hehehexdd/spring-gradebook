@@ -1,8 +1,8 @@
-package com.gradebook.Gradebook.data.service;
+package com.gradebook.Gradebook.service;
 
-import com.gradebook.Gradebook.data.entity.AppUser;
-import com.gradebook.Gradebook.data.entity.RoleType;
-import com.gradebook.Gradebook.data.repo.AppUserRepo;
+import com.gradebook.Gradebook.model.entity.AppUser;
+import com.gradebook.Gradebook.model.entity.RoleType;
+import com.gradebook.Gradebook.repo.AppUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
