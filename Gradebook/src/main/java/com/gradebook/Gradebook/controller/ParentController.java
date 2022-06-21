@@ -2,10 +2,7 @@ package com.gradebook.Gradebook.controller;
 
 
 import com.gradebook.Gradebook.config.GradebookCommon;
-import com.gradebook.Gradebook.model.dto.DirectorDTO;
 import com.gradebook.Gradebook.model.dto.ParentDTO;
-import com.gradebook.Gradebook.model.entity.Parent;
-import com.gradebook.Gradebook.service.IDirectorService;
 import com.gradebook.Gradebook.service.IParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +22,7 @@ public class ParentController {
     }
 
     @GetMapping()
-    public List<ParentDTO> getAllDirectors() {
+    public List<ParentDTO> getAllParents() {
         return this.parentService.getAll();
     }
 
