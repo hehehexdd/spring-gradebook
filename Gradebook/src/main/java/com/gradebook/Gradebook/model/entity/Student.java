@@ -2,6 +2,7 @@ package com.gradebook.Gradebook.model.entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idStudent")
@@ -18,6 +19,10 @@ public class Student extends AppUser{
 
     @Enumerated(value = EnumType.STRING)
     private SClass SClass;
+
+    @OneToMany(mappedBy = "studentClass")
+    private List<ClassTeachers> classTeachers;
+
 //
 //    @ManyToMany
 //    private Set<Parent> parents;

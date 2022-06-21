@@ -3,6 +3,7 @@ package com.gradebook.Gradebook.controller;
 import com.gradebook.Gradebook.model.entity.AppUser;
 import com.gradebook.Gradebook.service.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,12 +15,17 @@ public class AppUserController {
     @Autowired
     private IAppUserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public AppUserController(IAppUserService userService) {
         this.userService = userService;
     }
 
     @PostMapping(path="/register")
     public void register(@RequestBody AppUser user) {
+        String pass = passwordEncoder.encode(user.getPassword());
+        user.setPassword(pass);
         userService.saveUser(user);
     }
 
