@@ -20,6 +20,9 @@ public class School {
     @OneToOne(mappedBy = "school")
     private Director director;
 
+    @OneToMany(mappedBy = "school")
+    private List<Teacher> teachers;
+
     @OneToMany
     private List<Student> students;
 
