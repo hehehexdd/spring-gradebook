@@ -37,6 +37,16 @@ public class DirectorService implements IDirectorService {
     }
 
     @Override
+    public Director findById(Long id) {
+        return directorRepo.getById(id);
+    }
+
+    @Override
+    public Director findByUsername(String username) {
+        return directorRepo.findByUsername(username);
+    }
+
+    @Override
     public DirectorDTO getById(Long id) {
         return convertToDTO(directorRepo.getById(id));
     }

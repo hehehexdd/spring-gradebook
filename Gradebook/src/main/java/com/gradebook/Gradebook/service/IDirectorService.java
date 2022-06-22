@@ -9,6 +9,8 @@ public interface IDirectorService {
     DirectorDTO save(Director director);
     void update(Director director);
     void delete(Long id);
+    Director findById(Long id);
+    Director findByUsername(String username);
     DirectorDTO getById(Long id);
     DirectorDTO getByUsername(String username);
     List<DirectorDTO> getAll();

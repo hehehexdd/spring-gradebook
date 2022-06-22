@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface DirectorRepo extends JpaRepository<Director, Long> {
 
     Director findByUsername(String username);
+    Director findByEmail(String email);
 }
