@@ -4,7 +4,6 @@ package com.gradebook.Gradebook.controller;
 import com.gradebook.Gradebook.config.GradebookCommon;
 import com.gradebook.Gradebook.model.dto.DirectorDTO;
 import com.gradebook.Gradebook.service.IDirectorService;
-import org.hibernate.annotations.Fetch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,7 @@ public class DirectorController {
         return directorService.getById(id);
     }
 
-    @PatchMapping(path = "{id}")
+    @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public DirectorDTO updateDirector(@PathVariable("id") Long id, @RequestBody DirectorDTO payload) {
         return new DirectorDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", "PATCH");
