@@ -1,7 +1,6 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.SchoolDTO;
-import com.gradebook.Gradebook.model.entity.AppUser;
 import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.model.entity.Student;
 import com.gradebook.Gradebook.repo.SchoolRepo;
@@ -23,7 +22,6 @@ public class SchoolService implements ISchoolService {
     public SchoolService(SchoolRepo schoolRepo) {
         this.schoolRepo = schoolRepo;
     }
-
 
     @Override
     public SchoolDTO save(School school) {

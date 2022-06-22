@@ -32,7 +32,6 @@ public class School {
         this.address = address;
         this.name = name;
     }
-
     //Getters
     public Long getId() {
         return id;
