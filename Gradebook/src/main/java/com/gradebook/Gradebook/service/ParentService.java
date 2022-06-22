@@ -1,18 +1,14 @@
 package com.gradebook.Gradebook.service;
 
-import com.gradebook.Gradebook.model.dto.DirectorDTO;
 import com.gradebook.Gradebook.model.dto.ParentDTO;
-import com.gradebook.Gradebook.model.entity.Director;
 import com.gradebook.Gradebook.model.entity.Parent;
-import com.gradebook.Gradebook.repo.IParentRepo;
+import com.gradebook.Gradebook.repo.ParentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -20,9 +16,9 @@ import java.util.stream.Collectors;
 public class ParentService implements IParentService{
 
     @Autowired
-    private final IParentRepo parentRepo;
+    private final ParentRepo parentRepo;
 
-    public ParentService(IParentRepo parentRepo) {
+    public ParentService(ParentRepo parentRepo) {
         this.parentRepo = parentRepo;
     }
 

@@ -2,7 +2,7 @@ package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.model.entity.Teacher;
-import com.gradebook.Gradebook.repo.ITeacherRepo;
+import com.gradebook.Gradebook.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +15,9 @@ import java.util.List;
 @Service
 public class TeacherService implements ITeacherService{
     @Autowired
-    private final ITeacherRepo teacherRepo;
+    private final TeacherRepo teacherRepo;
 
-    public TeacherService(ITeacherRepo teacherRepo) {
+    public TeacherService(TeacherRepo teacherRepo) {
         this.teacherRepo = teacherRepo;
     }
 
