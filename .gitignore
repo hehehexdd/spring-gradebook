@@ -32,3 +32,4 @@
 
 Gradebook/build.gradle
 Gradebook/build/resources/main/application.properties
+Gradebook/build/*
