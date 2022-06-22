@@ -21,7 +21,7 @@ public class DirectorController {
         this.directorService = IDirectorService;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<DirectorDTO> getAllDirectors() {
         return directorService.getAll();
     }
