@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = GradebookCommon.TEACHER_BASE_URI)
@@ -22,9 +23,9 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping()
-    public List<TeacherDTO> getAllTeachers() {
-        return this.teacherService.getAll();
+    @GetMapping
+    public List<TeacherDTO> getAllTeachers(@RequestParam(required = false) Long schoolId) {
+        return this.teacherService.getAll(schoolId);
     }
 
     @GetMapping(path = "/{id}")

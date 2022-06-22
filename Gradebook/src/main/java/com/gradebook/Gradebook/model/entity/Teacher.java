@@ -30,6 +30,13 @@ public class Teacher extends AppUser{
         this.classTeachers = classTeachers;
     }
 
+    public Teacher(String username, String email, String password, RoleType role, boolean isAccountLocked, String firstName, String lastName, School school) {
+        super(username, email, password, role, isAccountLocked);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.school = school;
+    }
+
     public String getFirstName() {
         return firstName;
     }
