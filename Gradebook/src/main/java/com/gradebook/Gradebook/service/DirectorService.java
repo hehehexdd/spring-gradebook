@@ -22,8 +22,8 @@ public class DirectorService implements IDirectorService {
     }
 
     @Override
-    public Director save(Director director) {
-        return  directorRepo.save(director);
+    public DirectorDTO save(Director director) {
+        return  convertToDTO(directorRepo.save(director));
     }
 
     @Override
