@@ -5,10 +5,13 @@ import com.gradebook.Gradebook.model.entity.Teacher;
 import com.gradebook.Gradebook.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Transactional
@@ -44,15 +47,16 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
-    public List<TeacherDTO> getAll() {
+    public List<TeacherDTO> getAll(Long schoolId) {
+        if (schoolId != null) {
+            return teacherRepo.findAllBySchool_Id(schoolId)
+                    .stream().map(this::convertToDTO)
+                    .collect(Collectors.toList());
+        }
 
-        List<TeacherDTO> teacherDTOS = new ArrayList<>();
-
-        this.teacherRepo.findAll().forEach(teacher ->
-                teacherDTOS.add(convertToDTO(teacher))
-        );
-
-        return teacherDTOS;
+        return teacherRepo.findAll()
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -60,11 +64,12 @@ public class TeacherService implements ITeacherService{
         TeacherDTO teacherDTO = new TeacherDTO();
 
         if (teacher != null) {
+            teacherDTO.setId(teacher.getId());
             teacherDTO.setUsername(teacher.getUsername());
             teacherDTO.setFirstName(teacher.getFirstName());
             teacherDTO.setLastName(teacher.getLastName());
             teacherDTO.setUsername(teacher.getUsername());
-            teacherDTO.setSchoolId(teacher.getSchool().getId());
+            teacherDTO.setSchoolId((teacher.getSchool() != null) ? teacher.getSchool().getId() : null);
             //to do add teacher_classes
         }
 
