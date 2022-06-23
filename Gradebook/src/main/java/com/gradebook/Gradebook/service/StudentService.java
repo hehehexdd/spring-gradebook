@@ -8,6 +8,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class StudentService implements IStudentService{
 
@@ -53,6 +54,13 @@ public class StudentService implements IStudentService{
     @Override
     public List<StudentDTO> getAllStudent() {
         return null;
+    }
+
+    @Override
+    public List<StudentDTO> getAllStudentsBySchoolId(Long schoolId) {
+        return studentRepo.getAllBySchool_Id(schoolId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
