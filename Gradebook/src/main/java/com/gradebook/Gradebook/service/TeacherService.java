@@ -1,5 +1,6 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.model.entity.Teacher;
 import com.gradebook.Gradebook.repo.TeacherRepo;
@@ -57,6 +58,16 @@ public class TeacherService implements ITeacherService{
         return teacherRepo.findAll()
                 .stream().map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TeacherCourcesDTO> getCourses(Long id) {
+        List<TeacherCourcesDTO> courses= new ArrayList<>();
+        //to add logic
+        courses.add(new TeacherCourcesDTO(id,"Physics 4th Grade",Long.valueOf(5)));
+        courses.add(new TeacherCourcesDTO(id,"Mathematics 7th Grade",Long.valueOf(4)));
+
+        return courses;
     }
 
     @Override

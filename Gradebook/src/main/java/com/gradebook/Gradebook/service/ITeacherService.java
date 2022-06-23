@@ -1,6 +1,7 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.ParentDTO;
+import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.model.entity.Parent;
 import com.gradebook.Gradebook.model.entity.Teacher;
@@ -15,7 +16,7 @@ public interface ITeacherService {
     void delete(Long id);
     TeacherDTO getById(Long id);
     List<TeacherDTO> getAll(Long schoolId);
-
+    List<TeacherCourcesDTO> getCourses(Long id);
     TeacherDTO convertToDTO(Teacher teacher);
 
 }
