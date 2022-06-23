@@ -13,5 +13,7 @@ public class GradebookCommon {
 
     public static final String ADMIN_BASE_URI = "/api/admin";
 
-    public static final String APPUSER_BASE_URI = "/api/users";
+    public static final String APPUSER_BASE_URI = "/api/user";
+
+    public static final String STUDENT_BASE_URI = "/api/student";
 }

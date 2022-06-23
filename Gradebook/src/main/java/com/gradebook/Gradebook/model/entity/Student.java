@@ -76,6 +76,9 @@ public class Student extends AppUser{
         this.grades = new ArrayList<>();
     }
 
+    public Student() {
+    }
+
     //Getters
     public String getFirstName() {
         return FirstName;
