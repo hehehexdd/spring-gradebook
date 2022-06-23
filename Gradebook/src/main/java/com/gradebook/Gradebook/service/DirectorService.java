@@ -23,7 +23,7 @@ public class DirectorService implements IDirectorService {
 
     @Override
     public DirectorDTO save(Director director) {
-        return  convertToDTO(directorRepo.save(director));
+        return convertToDTO(directorRepo.save(director));
     }
 
     @Override

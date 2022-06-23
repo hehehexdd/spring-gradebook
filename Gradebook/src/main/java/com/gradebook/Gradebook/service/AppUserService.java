@@ -1,5 +1,6 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.model.dto.AppUserDTO;
 import com.gradebook.Gradebook.model.entity.AppUser;
 import com.gradebook.Gradebook.model.entity.RoleType;
 import com.gradebook.Gradebook.repo.AppUserRepo;
@@ -76,9 +77,43 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     }
 
     @Override
-    public List<AppUser> getAllUsers() {
-        return userRepo.findAll();
+    public List<AppUserDTO> getAllUsers() {
+        List<AppUser> users = userRepo.findAll();
+        List<AppUserDTO> userDTOS = new ArrayList<>();
+
+        for(AppUser d : users) {
+            AppUserDTO deliveryDTO = this.convertToDTO(d);
+            userDTOS.add(deliveryDTO);
+        }
+        return userDTOS;
     }
+
+    @Override
+    public AppUserDTO convertToDTO(AppUser user) {
+        AppUserDTO userDTO = new AppUserDTO();
+        if(user != null) {
+            userDTO.setId(user.getId());
+            userDTO.setUsername(user.getUsername());
+            userDTO.setEmail(user.getEmail());
+            userDTO.setRole(user.getRole().toString());
+            userDTO.setAccountLocked(user.isAccountLocked());
+        }
+        return userDTO;
+    }
+
+    @Override
+    public AppUser convertToEntity(AppUserDTO userDTO) {
+        AppUser user = new AppUser();
+        if(userDTO != null) {
+            user.setId(userDTO.getId());
+            user.setUsername(userDTO.getUsername());
+            user.setEmail(userDTO.getEmail());
+            user.setPassword(userRepo.findByUsername(user.getUsername()).getPassword());
+            user.setRole(RoleType.valueOf(userDTO.getRole()));
+        }
+        return user;
+    }
+
 
 
 }

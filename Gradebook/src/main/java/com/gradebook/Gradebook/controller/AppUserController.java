@@ -1,19 +1,22 @@
 package com.gradebook.Gradebook.controller;
 
+import com.gradebook.Gradebook.config.GradebookCommon;
+import com.gradebook.Gradebook.model.dto.AppUserDTO;
 import com.gradebook.Gradebook.model.entity.AppUser;
 import com.gradebook.Gradebook.service.IAppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/api/users")
+@RequestMapping(path = GradebookCommon.APPUSER_BASE_URI)
 public class AppUserController {
 
     @Autowired
-    private IAppUserService userService;
+    private final IAppUserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -29,20 +32,26 @@ public class AppUserController {
         userService.saveUser(user);
     }
 
-    @GetMapping(path="/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        AppUser user = userService.getUser(username);
-        if(user == null || !user.getPassword().equals(password)) {
-            return "Invalid user or password!";
-        }
-        else {
-            return "Login successful! Welcome back, " + user.getUsername() + "!";
-        }
+    //TODO put authentication in AppUser controller
+
+    @GetMapping(path = "/all")
+    public List<AppUserDTO> getAppUsers() {
+        return userService.getAllUsers();
     }
 
-    @GetMapping(path="/all")
-    public List<AppUser> getUsers() {
-        return userService.getAllUsers();
+    @GetMapping(path = "/{id}")
+    public AppUserDTO getAppUser(@PathVariable("id") Long id) {
+        return new AppUserDTO(Long.valueOf(1),"GET", "GET","GET",true);
+    }
+
+    @PatchMapping(path = "/{id}")
+    public AppUserDTO updateAppUser(@PathVariable("id") Long id, @RequestBody AppUserDTO payload) {
+        return new AppUserDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", true);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deleteDirectorById(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
     }
 
 }

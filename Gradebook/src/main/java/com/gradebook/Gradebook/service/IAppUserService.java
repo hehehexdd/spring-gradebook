@@ -1,5 +1,6 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.model.dto.AppUserDTO;
 import com.gradebook.Gradebook.model.entity.AppUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -11,7 +12,7 @@ public interface IAppUserService extends UserDetailsService {
     void deleteUser(Long id);
     void addRoleToUser(String username, String role);
     AppUser getUser(String username);
-    //AppUserDTO convertToDTO(AppUser user);
-    //AppUser convertToEntity(AppUserDTO userDTO);
-    List<AppUser> getAllUsers();
+    List<AppUserDTO> getAllUsers();
+    AppUserDTO convertToDTO(AppUser user);
+    AppUser convertToEntity(AppUserDTO userDTO);
 }
