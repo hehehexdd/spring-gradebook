@@ -5,11 +5,15 @@ import com.gradebook.Gradebook.model.entity.Student;
 import com.gradebook.Gradebook.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
+@Transactional
 public class StudentService implements IStudentService{
 
     @Autowired

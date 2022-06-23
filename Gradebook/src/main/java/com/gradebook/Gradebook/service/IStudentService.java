@@ -3,6 +3,7 @@ package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.StudentDTO;
 import com.gradebook.Gradebook.model.entity.Student;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

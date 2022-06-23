@@ -40,17 +40,17 @@ public class AppUserController {
     }
 
     @GetMapping(path = "/{id}")
-    public AppUserDTO getAppUser(@PathVariable("id") Long id) {
+    public AppUserDTO getAppUserById(@PathVariable("id") Long id) {
         return new AppUserDTO(Long.valueOf(1),"GET", "GET","GET",true);
     }
 
     @PatchMapping(path = "/{id}")
-    public AppUserDTO updateAppUser(@PathVariable("id") Long id, @RequestBody AppUserDTO payload) {
+    public AppUserDTO updateAppUserById(@PathVariable("id") Long id, @RequestBody AppUserDTO payload) {
         return new AppUserDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", true);
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteDirectorById(@PathVariable("id") Long id) {
+    public void deleteAppUserById(@PathVariable("id") Long id) {
         userService.deleteUser(id);
     }
 
