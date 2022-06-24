@@ -13,7 +13,9 @@ public class Grade {
 
 //    @ManyToOne
 //    @JoinColumn(name = "subjectId")
-//    private String Subject;
+//    private String subject;
+
+    private Integer grade;
 
     @ManyToOne
     @JoinColumn(name = "studentId")
@@ -29,9 +31,10 @@ public class Grade {
     public Grade() {
     }
 
-    public Grade(Long id, String subject, Student student, Teacher teacher, LocalDate date) {
+    public Grade(Long id, String subject, Integer grade, Student student, Teacher teacher, LocalDate date) {
         this.id = id;
 //        Subject = subject;
+       this.grade = grade;
         this.student = student;
 //        this.teacher = teacher;
         this.date = date;
@@ -45,6 +48,11 @@ public class Grade {
 //    public String getSubject() {
 //        return Subject;
 //    }
+
+
+    public Integer getGrade() {
+        return grade;
+    }
 
     public Student getStudent() {
         return student;
@@ -66,6 +74,11 @@ public class Grade {
 //    public void setSubject(String subject) {
 //        Subject = subject;
 //    }
+
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
 
     public void setStudent(Student student) {
         this.student = student;

@@ -27,12 +27,12 @@ public class GradebookApplication {
 	CommandLineRunner runner(IAppUserService userService, IParentService parentService) {
 
 		return args ->{
-//			 userService.saveUser(new AppUser(
-//					"user",
-//					"stoqn_stoqnov@gmail.com",
-//					"123",
-//					RoleType.TEST,
-//					true));
+			 userService.saveUser(new AppUser(
+					"user",
+					"stoqn_stoqnov@gmail.com",
+					"123",
+					RoleType.TEST,
+					true));
 		};
 
 

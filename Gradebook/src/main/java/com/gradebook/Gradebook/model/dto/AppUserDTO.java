@@ -5,7 +5,7 @@ public class AppUserDTO {
     private String username;
     private String email;
     private String role;
-    private boolean isAccountLocked;
+    private boolean accountLocked;
 
     public AppUserDTO() {
     }
@@ -15,7 +15,7 @@ public class AppUserDTO {
         this.username = username;
         this.email = email;
         this.role = role;
-        this.isAccountLocked = isAccountLocked;
+        this.accountLocked = isAccountLocked;
     }
 
     public Long getId() {
@@ -35,7 +35,7 @@ public class AppUserDTO {
     }
 
     public boolean isAccountLocked() {
-        return isAccountLocked;
+        return accountLocked;
     }
 
     public void setId(Long id) {
@@ -55,7 +55,7 @@ public class AppUserDTO {
     }
 
     public void setAccountLocked(boolean accountLocked) {
-        isAccountLocked = accountLocked;
+        accountLocked = accountLocked;
     }
 
 
@@ -66,7 +66,7 @@ public class AppUserDTO {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
-                ", isAccountLocked=" + isAccountLocked +
+                ", isAccountLocked=" + accountLocked +
                 '}';
     }
 }
