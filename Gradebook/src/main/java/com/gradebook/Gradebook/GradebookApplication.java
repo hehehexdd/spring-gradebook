@@ -30,7 +30,7 @@ public class GradebookApplication {
 			 userService.saveUser(new AppUser(
 					"user",
 					"stoqn_stoqnov@gmail.com",
-					"123",
+					"$2a$10$n1042hx1F577X48aw9YdlO/hJUNYRKbZ5WtncghMYmUwK57ZL4Zte",
 					RoleType.TEST,
 					true));
 		};

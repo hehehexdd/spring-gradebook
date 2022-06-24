@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,27 +31,41 @@ public class AuthController {
     @Autowired
     private IAppUserService userService;
 
+    //TODO make it more clean
     @PostMapping("/authenticate")
     public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
+        AppUser user = new AppUser();
 
         try {
-            AppUser user = userService.getUser(jwtRequest.getUsername());
-            if(passwordEncoder.matches(jwtRequest.getPassword(), user.getPassword())) {
-                authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                jwtRequest.getUsername(),
-                                user.getPassword()
-                        )
-                );
-            }
-        } catch (BadCredentialsException e) {
+            user = userService.getUser(jwtRequest.getUsername());
+        } catch (UsernameNotFoundException e) {
             throw new Exception("Invalid Credentials!", e);
+        }
+
+        if(user == null) {
+            return new JwtResponse();
+        }
+
+        try {
+            if (passwordEncoder.matches(jwtRequest.getPassword(), user.getPassword())) {
+                authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            jwtRequest.getUsername(),
+                            jwtRequest.getPassword()
+                    )
+                    );
+            }
+            else {
+                return new JwtResponse();
+            }
+        }
+        catch (BadCredentialsException e) {
+            throw new Exception("Invalid Credentials!");
         }
 
         final UserDetails userDetails = userService.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtUtility.generateToken(userDetails);
 
-        return  new JwtResponse(token);
+        return  new JwtResponse(user.getId(),token);
     }
-
 }
