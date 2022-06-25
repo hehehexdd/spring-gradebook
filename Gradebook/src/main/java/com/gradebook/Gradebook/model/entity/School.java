@@ -23,7 +23,7 @@ public class School {
     @OneToMany(mappedBy = "school")
     private List<Teacher> teachers;
 
-    @OneToMany
+    @OneToMany(mappedBy = "school")
     private List<Student> students;
 
     public School() {
@@ -75,6 +75,14 @@ public class School {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
     @Override

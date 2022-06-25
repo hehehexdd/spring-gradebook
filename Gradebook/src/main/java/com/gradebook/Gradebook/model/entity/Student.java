@@ -137,4 +137,10 @@ public class Student extends AppUser{
     public void setGrades(List<Grade> grades) {
         this.grades = grades;
     }
+
+    public void addGrade(Grade grade) {
+        if (!grades.contains(grade)) {
+            grades.add(grade);
+        }
+    }
 }

@@ -1,6 +1,8 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.SchoolDTO;
+import com.gradebook.Gradebook.model.dto.SchoolStatisticsDTO;
+import com.gradebook.Gradebook.model.entity.Grade;
 import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.model.entity.Student;
 import com.gradebook.Gradebook.repo.SchoolRepo;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +40,32 @@ public class SchoolService implements ISchoolService {
     public void delete(Long id) {
         School school = schoolRepo.getById(id);
         schoolRepo.delete(school);
+    }
+
+    @Override
+    public SchoolStatisticsDTO getStatisticsForSchool(Long id) {
+        School school = schoolRepo.getById(id);
+        List<Grade> studentsGrades = new ArrayList();
+        double averageGrade = 0.0;
+
+        school.getStudents().forEach(student -> studentsGrades.addAll(student.getGrades()));
+
+        school.getStudents().forEach(student -> System.out.println(student.getGrades()));
+
+        for (Grade grade : studentsGrades) {
+            averageGrade += grade.getGrade();
+            System.out.println(grade.getGrade());
+        }
+
+        averageGrade /= school.getStudents().size();
+
+        return new SchoolStatisticsDTO (
+                school.getId(),
+                school.getName(),
+                school.getTeachers().size(),
+                school.getStudents().size(),
+                (Double.isNaN(averageGrade)) ? 0 : averageGrade
+        );
     }
 
     @Override

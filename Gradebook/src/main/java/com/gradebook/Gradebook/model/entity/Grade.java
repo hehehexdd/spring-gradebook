@@ -31,6 +31,12 @@ public class Grade {
     public Grade() {
     }
 
+    public Grade(Integer grade, Student student, LocalDate date) {
+        this.grade = grade;
+        this.student = student;
+        this.date = date;
+    }
+
     public Grade(Long id, String subject, Integer grade, Student student, Teacher teacher, LocalDate date) {
         this.id = id;
 //        Subject = subject;
