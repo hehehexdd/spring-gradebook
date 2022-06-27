@@ -20,6 +20,6 @@ public class SubjectService implements ISubjectService {
 
     @Override
     public List<GradeDTO> getAllGradesForSubject(Long subjectId) {
-        return gradeService.getAllGradeBySubjectId(subjectId);
+        return gradeService.getAllGradesBySubjectId(subjectId);
     }
 }
