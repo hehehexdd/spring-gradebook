@@ -47,21 +47,22 @@ public class SchoolService implements ISchoolService {
         School school = schoolRepo.getById(id);
         List<Grade> studentsGrades = new ArrayList();
         double averageGrade = 0.0;
+        int totalGrades = 0;
 
         school.getStudents().forEach(student -> studentsGrades.addAll(student.getGrades()));
 
-        school.getStudents().forEach(student -> System.out.println(student.getGrades()));
-
         for (Grade grade : studentsGrades) {
             averageGrade += grade.getGrade();
-            System.out.println(grade.getGrade());
+            totalGrades++;
         }
 
-        averageGrade /= school.getStudents().size();
+        averageGrade /= totalGrades;
 
         return new SchoolStatisticsDTO (
                 school.getId(),
                 school.getName(),
+                (school.getDirector() != null) ? String.format("&s &s", school.getDirector().getFirstName(), school.getDirector().getLastName()) : null,
+                (school.getDirector() != null) ? school.getId() : null,
                 school.getTeachers().size(),
                 school.getStudents().size(),
                 (Double.isNaN(averageGrade)) ? 0 : averageGrade

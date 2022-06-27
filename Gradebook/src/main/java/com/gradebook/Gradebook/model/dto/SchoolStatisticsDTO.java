@@ -4,6 +4,9 @@ public class SchoolStatisticsDTO {
 
     private Long id;
     private String schoolName;
+
+    private String schoolDirector;
+    private Long schoolDirectorId;
     private int totalTeachers;
     private int totalStudents;
     private double averageGrade;
@@ -14,6 +17,16 @@ public class SchoolStatisticsDTO {
     public SchoolStatisticsDTO(Long id, String schoolName, int totalTeachers, int totalStudents, double averageGrade) {
         this.id = id;
         this.schoolName = schoolName;
+        this.totalTeachers = totalTeachers;
+        this.totalStudents = totalStudents;
+        this.averageGrade = averageGrade;
+    }
+
+    public SchoolStatisticsDTO(Long id, String schoolName, String schoolDirector, Long schoolDirectorId, int totalTeachers, int totalStudents, double averageGrade) {
+        this.id = id;
+        this.schoolName = schoolName;
+        this.schoolDirector = schoolDirector;
+        this.schoolDirectorId = schoolDirectorId;
         this.totalTeachers = totalTeachers;
         this.totalStudents = totalStudents;
         this.averageGrade = averageGrade;
@@ -57,5 +70,21 @@ public class SchoolStatisticsDTO {
 
     public void setAverageGrade(double averageGrade) {
         this.averageGrade = averageGrade;
+    }
+
+    public String getSchoolDirector() {
+        return schoolDirector;
+    }
+
+    public void setSchoolDirector(String schoolDirector) {
+        this.schoolDirector = schoolDirector;
+    }
+
+    public Long getSchoolDirectorId() {
+        return schoolDirectorId;
+    }
+
+    public void setSchoolDirectorId(Long schoolDirectorId) {
+        this.schoolDirectorId = schoolDirectorId;
     }
 }
