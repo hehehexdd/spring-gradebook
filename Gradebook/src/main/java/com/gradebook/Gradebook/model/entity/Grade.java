@@ -64,9 +64,9 @@ public class Grade {
         return student;
     }
 
-//    public Teacher getTeacher() {
-//        return teacher;
-//    }
+    public Teacher getTeacher() {
+        return teacher;
+    }
 
     public LocalDate getDate() {
         return date;
@@ -90,9 +90,9 @@ public class Grade {
         this.student = student;
     }
 
-//    public void setTeacher(Teacher teacher) {
-//        this.teacher = teacher;
-//    }
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     public void setDate(LocalDate date) {
         this.date = date;

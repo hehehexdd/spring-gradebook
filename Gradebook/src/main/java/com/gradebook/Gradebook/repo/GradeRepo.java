@@ -19,4 +19,5 @@ public interface GradeRepo extends JpaRepository<Grade, Long> {
     List<Grade> getAllGradesByStudent(@Param("ids") List<Long> studentIds);
 
     List<Grade> getAllBySubject_Id(Long id);
+    List<Grade> getAllByTeacher_Id(Long id);
 }

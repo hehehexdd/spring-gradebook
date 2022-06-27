@@ -4,6 +4,7 @@ package com.gradebook.Gradebook.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gradebook.Gradebook.config.GradebookCommon;
 
+import com.gradebook.Gradebook.model.dto.GradeDTO;
 import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.service.ITeacherService;
@@ -36,6 +37,11 @@ public class TeacherController {
     @GetMapping(path = "/{id}")
     public TeacherDTO getTeacherById(@PathVariable("id") Long id) {
         return this.teacherService.getById(id);
+    }
+
+    @GetMapping(path = "/{id}/grades")
+    public List<GradeDTO> getAllTeacherGrades(@PathVariable("id") Long id) {
+        return teacherService.getAllTeacherGrades(id);
     }
 
     @GetMapping(path = "/{id}/courses")
