@@ -40,7 +40,7 @@ public class GradeController {
     }
 
     @GetMapping(path = "/{studentIds}")
-    public List<GradeDTO> getAllGradesByStudentIds(@PathVariable{"studentIds"} List<Long> studentIds) {
+    public List<GradeDTO> getAllGradesByStudentIds(@PathVariable("studentIds") List<Long> studentIds) {
         GradeDTO grade = new GradeDTO(
                 Long.valueOf(1),
                 "POST_GRADE",
@@ -48,8 +48,8 @@ public class GradeController {
                 Long.valueOf(1),
                 Long.valueOf(2),
                 LocalDate.now());
-        List<GradeDTO> grades
-        return new ArrayList<>(grade, grade);
+        List<GradeDTO> grades;
+        return null;
     }
 
     @PostMapping(path = "{studentId}")

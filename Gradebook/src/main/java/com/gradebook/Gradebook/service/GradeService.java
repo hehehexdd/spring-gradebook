@@ -46,6 +46,13 @@ public class GradeService implements IGradeService{
     }
 
     @Override
+    public List<GradeDTO> getAllGradeBySubjectId(Long subjectId) {
+        return gradeRepo.getAllBySubject_Id(subjectId)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<GradeDTO> getAllGrades() {
         return gradeRepo.findAll()
                 .stream().map(this::convertToDTO)
@@ -60,7 +67,7 @@ public class GradeService implements IGradeService{
             gradeDTO.setId(grade.getId());
             gradeDTO.setGrade(grade.getGrade());
             gradeDTO.setDate(grade.getDate());
-            //gradeDTO.setSubject(grade.getSubject().getName());
+            gradeDTO.setSubject(grade.getSubject().getName());
             gradeDTO.setStudentId(grade.getStudent().getId());
             //gradeDTO.setTeacherId((grade.getTeacher().getId());
         }

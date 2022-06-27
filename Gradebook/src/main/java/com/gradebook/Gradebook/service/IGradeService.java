@@ -18,4 +18,6 @@ public interface IGradeService {
     List<GradeDTO> getAllGradesByStudentId(Long studentId);
     List<GradeDTO> getAllGradesByStudentsIds(List<Long> studentIds);
 
+    List<GradeDTO> getAllGradeBySubjectId(Long subjectId);
+
 }
