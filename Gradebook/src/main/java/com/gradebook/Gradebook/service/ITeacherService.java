@@ -19,7 +19,4 @@ public interface ITeacherService {
     List<TeacherDTO> getAll(Long schoolId);
     List<TeacherCourcesDTO> getCourses(Long id);
     TeacherDTO convertToDTO(Teacher teacher);
-
-    List<GradeDTO> getAllTeacherGrades(Long teacherId);
-
 }

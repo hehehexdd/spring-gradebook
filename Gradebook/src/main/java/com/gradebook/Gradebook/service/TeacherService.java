@@ -20,12 +20,8 @@ public class TeacherService implements ITeacherService{
     @Autowired
     private final TeacherRepo teacherRepo;
 
-    @Autowired
-    private final IGradeService gradeService;
-
-    public TeacherService(TeacherRepo teacherRepo, IGradeService gradeService) {
+    public TeacherService(TeacherRepo teacherRepo) {
         this.teacherRepo = teacherRepo;
-        this.gradeService = gradeService;
     }
 
     @Override
@@ -48,11 +44,6 @@ public class TeacherService implements ITeacherService{
     public TeacherDTO getById(Long id) {
         Teacher teacher = this.teacherRepo.getById(id);
         return this.convertToDTO(teacher);
-    }
-
-    @Override
-    public List<GradeDTO> getAllTeacherGrades(Long teacherId) {
-        return gradeService.getAllGradesByTeacherId(teacherId);
     }
 
     @Override
