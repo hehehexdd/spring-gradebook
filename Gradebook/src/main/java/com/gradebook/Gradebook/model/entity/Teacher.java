@@ -18,6 +18,9 @@ public class Teacher extends AppUser{
     @OneToMany(mappedBy = "teacher")
     private List<ClassTeachers> classTeachers;
 
+    @OneToMany(mappedBy = "teacher")
+    private List<Grade> grades;
+
     public Teacher(){
 
     }

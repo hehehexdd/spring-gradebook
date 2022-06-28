@@ -1,17 +1,16 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.model.dto.GradeDTO;
 import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.model.entity.Teacher;
 import com.gradebook.Gradebook.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 

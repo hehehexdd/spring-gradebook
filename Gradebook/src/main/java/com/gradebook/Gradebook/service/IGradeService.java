@@ -2,7 +2,6 @@ package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.GradeDTO;
 import com.gradebook.Gradebook.model.entity.Grade;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -18,4 +17,7 @@ public interface IGradeService {
     List<GradeDTO> getAllGradesByStudentId(Long studentId);
     List<GradeDTO> getAllGradesByStudentsIds(List<Long> studentIds);
 
+    List<GradeDTO> getAllGradesBySubjectId(Long subjectId);
+    List<GradeDTO> getAllGradesByTeacherId(Long teacherId);
+    List<GradeDTO> getAllGradesBySchool(Long schoolId);
 }

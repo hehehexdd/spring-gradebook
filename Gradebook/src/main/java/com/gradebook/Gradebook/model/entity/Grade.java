@@ -11,9 +11,9 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "subjectId")
-//    private String subject;
+    @ManyToOne
+    @JoinColumn(name = "subjectId")
+    private Subject subject;
 
     private Integer grade;
 
@@ -21,9 +21,9 @@ public class Grade {
     @JoinColumn(name = "studentId")
     private Student student;
 
-//    @ManyToOne
-//    @JoinColumn(name = "teacherId")
-//    private Teacher teacher;
+    @ManyToOne
+    @JoinColumn(name = "teacherId")
+    private Teacher teacher;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
@@ -31,12 +31,18 @@ public class Grade {
     public Grade() {
     }
 
-    public Grade(Long id, String subject, Integer grade, Student student, Teacher teacher, LocalDate date) {
-        this.id = id;
-//        Subject = subject;
-       this.grade = grade;
+    public Grade(Subject subject, Integer grade, Student student, LocalDate date) {
+        this.subject = subject;
+        this.grade = grade;
         this.student = student;
-//        this.teacher = teacher;
+        this.date = date;
+    }
+
+    public Grade(Subject subject, Integer grade, Student student, Teacher teacher, LocalDate date) {
+        this.subject = subject;
+        this.grade = grade;
+        this.student = student;
+        this.teacher = teacher;
         this.date = date;
     }
 
@@ -45,9 +51,9 @@ public class Grade {
         return id;
     }
 
-//    public String getSubject() {
-//        return Subject;
-//    }
+    public Subject getSubject() {
+        return subject;
+    }
 
 
     public Integer getGrade() {
@@ -58,9 +64,9 @@ public class Grade {
         return student;
     }
 
-//    public Teacher getTeacher() {
-//        return teacher;
-//    }
+    public Teacher getTeacher() {
+        return teacher;
+    }
 
     public LocalDate getDate() {
         return date;
@@ -71,9 +77,9 @@ public class Grade {
         this.id = id;
     }
 
-//    public void setSubject(String subject) {
-//        Subject = subject;
-//    }
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 
 
     public void setGrade(Integer grade) {
@@ -84,9 +90,9 @@ public class Grade {
         this.student = student;
     }
 
-//    public void setTeacher(Teacher teacher) {
-//        this.teacher = teacher;
-//    }
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     public void setDate(LocalDate date) {
         this.date = date;

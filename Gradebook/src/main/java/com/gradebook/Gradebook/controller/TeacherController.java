@@ -1,21 +1,18 @@
 package com.gradebook.Gradebook.controller;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gradebook.Gradebook.config.GradebookCommon;
 
+import com.gradebook.Gradebook.model.dto.GradeDTO;
 import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
+import com.gradebook.Gradebook.service.IGradeService;
 import com.gradebook.Gradebook.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = GradebookCommon.TEACHER_BASE_URI)
@@ -24,8 +21,12 @@ public class TeacherController {
     @Autowired
     private final ITeacherService teacherService;
 
-    public TeacherController(ITeacherService teacherService) {
+    @Autowired
+    private final IGradeService gradeService;
+
+    public TeacherController(ITeacherService teacherService, IGradeService gradeService) {
         this.teacherService = teacherService;
+        this.gradeService = gradeService;
     }
 
     @GetMapping
@@ -36,6 +37,11 @@ public class TeacherController {
     @GetMapping(path = "/{id}")
     public TeacherDTO getTeacherById(@PathVariable("id") Long id) {
         return this.teacherService.getById(id);
+    }
+
+    @GetMapping(path = "/{teacherId}/grades")
+    public List<GradeDTO> getAllTeacherGrades(@PathVariable("teacherId") Long teacherId) {
+        return gradeService.getAllGradesByTeacherId(teacherId);
     }
 
     @GetMapping(path = "/{id}/courses")

@@ -1,12 +1,14 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.DirectorDTO;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.entity.Director;
 
 import java.util.List;
 
 public interface IDirectorService {
-    DirectorDTO save(Director director);
+    Director save(Director director);
+    DirectorDTO create(RegisterDTO payload);
     void update(Director director);
     void delete(Long id);
     Director findById(Long id);
@@ -14,8 +16,5 @@ public interface IDirectorService {
     DirectorDTO getById(Long id);
     DirectorDTO getByUsername(String username);
     List<DirectorDTO> getAll();
-
     DirectorDTO convertToDTO(Director director);
-
-
 }

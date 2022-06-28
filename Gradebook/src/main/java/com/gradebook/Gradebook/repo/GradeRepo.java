@@ -17,4 +17,8 @@ public interface GradeRepo extends JpaRepository<Grade, Long> {
     //TODO
     @Query("SELECT g From Grade g JOIN g.student s WHERE s.id in :ids")
     List<Grade> getAllGradesByStudent(@Param("ids") List<Long> studentIds);
+
+    List<Grade> getAllBySubject_Id(Long id);
+    List<Grade> getAllByTeacher_Id(Long id);
+    List<Grade> getAllByStudent_School_Id(Long id);
 }

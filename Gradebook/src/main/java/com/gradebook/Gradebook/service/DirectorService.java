@@ -1,7 +1,9 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.DirectorDTO;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.entity.Director;
+import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.repo.DirectorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,18 +19,38 @@ public class DirectorService implements IDirectorService {
     @Autowired
     private final DirectorRepo directorRepo;
 
-    public DirectorService(DirectorRepo directorRepo) {
+    @Autowired
+    private final ISchoolService schoolService;
+
+
+    public DirectorService(DirectorRepo directorRepo, ISchoolService schoolService) {
         this.directorRepo = directorRepo;
+        this.schoolService = schoolService;
     }
 
-    @Override
-    public DirectorDTO save(Director director) {
-        return convertToDTO(directorRepo.save(director));
-    }
-
+    //TO-DO
     @Override
     public void update(Director director) {
         directorRepo.save(director);
+    }
+
+    @Override
+    public Director save(Director director) {
+        return directorRepo.save(director);
+    }
+
+    @Override
+    public DirectorDTO create(RegisterDTO payload) {
+        return convertToDTO(save(new Director(
+                payload.getUsername(),
+                payload.getEmail(),
+                payload.getPassword(),
+                payload.getRole(),
+                payload.isAccountLocked(),
+                payload.getFirstName(),
+                payload.getLastName(),
+                schoolService.findById(payload.getSchoolId())
+        )));
     }
 
     @Override

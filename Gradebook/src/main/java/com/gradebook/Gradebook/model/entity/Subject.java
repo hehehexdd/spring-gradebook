@@ -15,15 +15,45 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private List<ClassTeachers> classTeachers;
 
+    @OneToMany(mappedBy = "subject")
+    private List<Grade> grades;
+
+    public Subject(String name) {
+        this.name = name;
+    }
+
+    public Subject() {
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<ClassTeachers> getClassTeachers() {
         return classTeachers;
+    }
+
+    public void setClassTeachers(List<ClassTeachers> classTeachers) {
+        this.classTeachers = classTeachers;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
     }
 }

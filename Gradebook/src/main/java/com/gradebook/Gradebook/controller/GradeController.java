@@ -2,6 +2,7 @@ package com.gradebook.Gradebook.controller;
 
 
 import com.gradebook.Gradebook.config.GradebookCommon;
+import com.gradebook.Gradebook.model.dto.AppUserDTO;
 import com.gradebook.Gradebook.model.dto.GradeDTO;
 import com.gradebook.Gradebook.service.IGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
