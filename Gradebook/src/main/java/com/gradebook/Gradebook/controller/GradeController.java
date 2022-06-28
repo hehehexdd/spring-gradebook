@@ -39,20 +39,29 @@ public class GradeController {
                 LocalDate.now());
     }
 
-    @GetMapping(path = "/{studentIds}")
+    //call: uri/course/1,2,3,4
+    @GetMapping(path = "/students/{studentIds}")
     public List<GradeDTO> getAllGradesByStudentIds(@PathVariable("studentIds") List<Long> studentIds) {
-        GradeDTO grade = new GradeDTO(
+        List<GradeDTO> grades = new ArrayList<GradeDTO>();
+        grades.add(new GradeDTO(
                 Long.valueOf(1),
                 "POST_GRADE",
                 Integer.valueOf(5),
-                Long.valueOf(1),
+                studentIds.get(0),
                 Long.valueOf(2),
-                LocalDate.now());
-        List<GradeDTO> grades;
-        return null;
+                LocalDate.now()));
+        grades.add(new GradeDTO(
+                Long.valueOf(2),
+                "POST_GRADE",
+                Integer.valueOf(6),
+                studentIds.get(1),
+                Long.valueOf(3),
+                LocalDate.now())
+        );
+        return grades;
     }
 
-    @PostMapping(path = "{studentId}")
+    @PostMapping(path = "/{studentId}")
     public GradeDTO createGrade(@PathVariable("studentId") Long id) {
         return new GradeDTO(
                 Long.valueOf(1),
