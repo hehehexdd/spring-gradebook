@@ -60,6 +60,13 @@ public class GradeService implements IGradeService{
     }
 
     @Override
+    public List<GradeDTO> getAllGradesBySchool(Long schoolId) {
+        return gradeRepo.getAllByStudent_School_Id(schoolId)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<GradeDTO> getAllGrades() {
         return gradeRepo.findAll()
                 .stream().map(this::convertToDTO)
