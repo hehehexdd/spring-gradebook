@@ -1,5 +1,6 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.exception.EntityNotFoundException;
 import com.gradebook.Gradebook.model.dto.DirectorDTO;
 import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.entity.Director;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -70,7 +72,13 @@ public class DirectorService implements IDirectorService {
 
     @Override
     public DirectorDTO getById(Long id) {
-        return convertToDTO(directorRepo.getById(id));
+        Optional<Director> director = directorRepo.findById(id);
+
+        if (!director.isPresent()) {
+            throw new EntityNotFoundException(String.format("Director with id '%d' not found!", id));
+        }
+
+        return convertToDTO(director.get());
     }
 
     public DirectorDTO getByUsername(String username) {
