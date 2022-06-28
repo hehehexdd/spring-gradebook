@@ -1,10 +1,12 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.dto.SchoolDTO;
 import com.gradebook.Gradebook.model.dto.SchoolStatisticsDTO;
 import com.gradebook.Gradebook.model.entity.Grade;
 import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.model.entity.Student;
+import com.gradebook.Gradebook.model.entity.Teacher;
 import com.gradebook.Gradebook.repo.SchoolRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,16 @@ public class SchoolService implements ISchoolService {
     }
 
     @Override
-    public SchoolDTO save(School school) {
-        return convertToDTO(schoolRepo.save(school));
+    public School save(School school) {
+        return schoolRepo.save(school);
+    }
+
+    @Override
+    public SchoolDTO create(RegisterDTO payload) {
+        return convertToDTO(save(new School(
+                payload.getAddress(),
+                payload.getName()
+        )));
     }
 
     @Override
@@ -91,7 +101,8 @@ public class SchoolService implements ISchoolService {
                 school.getAddress(),
                 school.getName(),
                 (school.getDirector() != null) ? school.getDirector().getUsername() : null,
-                (school.getStudents() != null) ? school.getStudents().stream().map(Student::getUsername).collect(Collectors.toList()) : Collections.emptyList()
+                (school.getStudents() != null) ? school.getStudents().stream().map(Student::getUsername).collect(Collectors.toList()) : Collections.emptyList(),
+                (school.getTeachers() != null) ? school.getTeachers().stream().map(Teacher::getUsername).collect(Collectors.toList()) : Collections.emptyList()
         );
     }
 }
