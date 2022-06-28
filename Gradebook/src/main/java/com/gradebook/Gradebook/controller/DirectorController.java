@@ -3,6 +3,7 @@ package com.gradebook.Gradebook.controller;
 
 import com.gradebook.Gradebook.config.GradebookCommon;
 import com.gradebook.Gradebook.model.dto.DirectorDTO;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.service.IDirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,8 +40,8 @@ public class DirectorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DirectorDTO createDirector(@RequestBody DirectorDTO payload) {
-        return new DirectorDTO(Long.valueOf(1), "POST", "POST", "POST", "POST");
+    public DirectorDTO createDirector(@RequestBody RegisterDTO payload) {
+        return directorService.create(payload);
     }
 
     @DeleteMapping(path = "/{id}")

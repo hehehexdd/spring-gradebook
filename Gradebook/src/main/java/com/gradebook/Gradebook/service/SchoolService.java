@@ -75,6 +75,11 @@ public class SchoolService implements ISchoolService {
     }
 
     @Override
+    public School findById(Long id) {
+        return schoolRepo.getById(id);
+    }
+
+    @Override
     public List<SchoolDTO> getAll() {
         return schoolRepo.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
     }

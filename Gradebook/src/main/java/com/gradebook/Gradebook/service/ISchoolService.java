@@ -11,6 +11,8 @@ public interface ISchoolService {
     SchoolDTO save(School school);
     void update(SchoolDTO schoolDTO);
     void delete(Long id);
+
+    School findById(Long id);
     SchoolDTO getById(Long id);
     List<SchoolDTO> getAll();
 
