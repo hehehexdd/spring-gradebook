@@ -18,4 +18,6 @@ public class GradebookCommon {
     public static final String STUDENT_BASE_URI = "/api/student";
 
     public static final String GRADE_BASE_URI = "/api/grade";
+
+    public static final String ABSENCE_BASE_URI = "/api/absence";
 }

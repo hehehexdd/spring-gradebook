@@ -14,4 +14,16 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject")
     private List<ClassTeachers> classTeachers;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<ClassTeachers> getClassTeachers() {
+        return classTeachers;
+    }
 }
