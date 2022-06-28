@@ -9,16 +9,18 @@ public class SchoolDTO {
     private String name;
     private String directorUsername;
     private List<String> studentUsernames;
+    private List<String> teacherUsernames;
 
     public SchoolDTO() {
     }
 
-    public SchoolDTO(long id, String address, String name, String directorUsername, List<String> studentUsernames) {
+    public SchoolDTO(long id, String address, String name, String directorUsername, List<String> studentUsernames, List<String> teacherUsernames) {
         this.id = id;
         this.address = address;
         this.name = name;
         this.directorUsername = directorUsername;
         this.studentUsernames = studentUsernames;
+        this.teacherUsernames = teacherUsernames;
     }
 
     public long getId() {
