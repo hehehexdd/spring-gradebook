@@ -1,16 +1,18 @@
 package com.gradebook.Gradebook.model.dto;
 
+import com.gradebook.Gradebook.model.entity.SClass;
+
 public class StudentDTO {
     private Long id;
     private String firstName;
     private String lastName;
     private String schoolName;
-    private String schoolClass;
+    private SClass schoolClass;
 
     public StudentDTO() {
     }
 
-    public StudentDTO(Long id, String firstName, String lastName, String schoolName, String schoolClass) {
+    public StudentDTO(Long id, String firstName, String lastName, String schoolName, SClass schoolClass) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,7 +37,7 @@ public class StudentDTO {
         return schoolName;
     }
 
-    public String getSchoolClass() {
+    public SClass getSchoolClass() {
         return schoolClass;
     }
 
@@ -56,7 +58,7 @@ public class StudentDTO {
         this.schoolName = schoolName;
     }
 
-    public void setSchoolClass(String schoolClass) {
+    public void setSchoolClass(SClass schoolClass) {
         this.schoolClass = schoolClass;
     }
 }

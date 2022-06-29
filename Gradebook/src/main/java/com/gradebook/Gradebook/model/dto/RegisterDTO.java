@@ -14,6 +14,7 @@ public class RegisterDTO {
     private String lastName;
     private Long directorId;
     private Long schoolId;
+    private Long classId;
     private SClass sClass;
     private RoleType role;
     private boolean isAccountLocked;
@@ -21,10 +22,11 @@ public class RegisterDTO {
     public RegisterDTO() {
     }
 
-    public RegisterDTO(String username, String email, String password, String firstName, String lastName, RoleType role, boolean isAccountLocked, Long schoolId) {
+    public RegisterDTO(String username, String email, String password, String firstName, String lastName, RoleType role, boolean isAccountLocked, Long schoolId, Long classId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.schoolId = schoolId;
+        this.classId = classId;
         this.isAccountLocked = isAccountLocked;
         this.role = role;
         this.username = username;
@@ -126,5 +128,13 @@ public class RegisterDTO {
 
     public void setAccountLocked(boolean accountLocked) {
         isAccountLocked = accountLocked;
+    }
+
+    public Long getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Long classId) {
+        this.classId = classId;
     }
 }

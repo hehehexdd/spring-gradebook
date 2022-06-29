@@ -12,8 +12,8 @@ public class ClassTeachers {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "studentId")
-    private Student studentClass;
+    @JoinColumn(name = "classId")
+    private SchoolClass studentClass;
 
     @ManyToOne
     @JoinColumn(name = "teacherId")

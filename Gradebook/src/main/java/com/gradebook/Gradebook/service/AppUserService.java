@@ -77,6 +77,11 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     }
 
     @Override
+    public AppUser getUserById(Long id) {
+        return userRepo.getById(id);
+    }
+
+    @Override
     public List<AppUserDTO> getAllUsers() {
         List<AppUser> users = userRepo.findAll();
         List<AppUserDTO> userDTOS = new ArrayList<>();

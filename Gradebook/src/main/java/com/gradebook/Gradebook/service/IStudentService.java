@@ -12,9 +12,9 @@ public interface IStudentService {
     Student saveStudent(Student user);
     void updateStudent(Student user);
     void deleteStudent(Long id);
-    Student getStudent(Long id);
-    List<StudentDTO> getAllStudent();
+    StudentDTO getById(Long id);
+    Student findById(Long id);
+    List<StudentDTO> getAllStudents();
     StudentDTO convertToDTO(Student user);
-    Student convertToEntity(StudentDTO userDTO);
     List<StudentDTO> getAllStudentsBySchoolId(Long schoolId);
 }

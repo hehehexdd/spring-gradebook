@@ -18,6 +18,10 @@ public class Student extends AppUser{
     @ManyToOne
     private School school;
 
+    @ManyToOne
+    @JoinColumn(name = "classId")
+    private SchoolClass schoolClass;
+
     @Enumerated(value = EnumType.STRING)
     private SClass SClass;
 
@@ -42,6 +46,7 @@ public class Student extends AppUser{
                    String firstName,
                    String lastName,
                    School school,
+                   SchoolClass schoolClass,
                    RoleType role,
                    SClass SClass,
                    List<Parent> parents,
@@ -51,6 +56,7 @@ public class Student extends AppUser{
         FirstName = firstName;
         LastName = lastName;
         this.school = school;
+        this.schoolClass = schoolClass;
         this.SClass = SClass;
         this.parents = parents;
         this.absences = absences;
@@ -64,12 +70,14 @@ public class Student extends AppUser{
                    String firstName,
                    String lastName,
                    School school,
+                   SchoolClass schoolClass,
                    RoleType role,
                    SClass SClass) {
         super(username, email, password, role, isAccountLocked);
         FirstName = firstName;
         LastName = lastName;
         this.school = school;
+        this.schoolClass = schoolClass;
         this.SClass = SClass;
         this.parents = new ArrayList<>();
         this.absences = new ArrayList<>();
@@ -90,6 +98,10 @@ public class Student extends AppUser{
 
     public School getSchool() {
         return school;
+    }
+
+    public SchoolClass getSchoolClass() {
+        return schoolClass;
     }
 
     public SClass getSClass() {
@@ -120,6 +132,10 @@ public class Student extends AppUser{
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+    public void setSchoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
     }
 
     public void setSClass(SClass SClass) {

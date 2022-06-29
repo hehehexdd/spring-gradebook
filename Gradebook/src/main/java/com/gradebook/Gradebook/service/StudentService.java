@@ -2,6 +2,7 @@ package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.GradeDTO;
 import com.gradebook.Gradebook.model.dto.StudentDTO;
+import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.model.entity.Student;
 import com.gradebook.Gradebook.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,13 +54,35 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public Student getStudent(Long id) {
-        return null;
+    public StudentDTO getById(Long id) {
+        return this.convertToDTO(studentRepo.getById(id));
     }
 
     @Override
-    public List<StudentDTO> getAllStudent() {
-        return null;
+    public Student findById(Long id) {
+        return studentRepo.getById(id);
+    }
+
+    @Override
+    public List<StudentDTO> getAllStudents() {
+        return studentRepo.findAll()
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public StudentDTO convertToDTO(Student student) {
+        StudentDTO studentDTO = new StudentDTO();
+
+        if (student != null) {
+            studentDTO.setId(student.getId());
+            studentDTO.setFirstName(student.getFirstName());
+            studentDTO.setLastName(student.getLastName());
+            studentDTO.setSchoolName(student.getSchool().getName());
+            studentDTO.setSchoolClass(student.getSClass());
+        }
+
+        return studentDTO;
     }
 
     @Override
@@ -67,15 +90,5 @@ public class StudentService implements IStudentService{
         return studentRepo.getAllBySchool_Id(schoolId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public StudentDTO convertToDTO(Student user) {
-        return null;
-    }
-
-    @Override
-    public Student convertToEntity(StudentDTO userDTO) {
-        return null;
     }
 }

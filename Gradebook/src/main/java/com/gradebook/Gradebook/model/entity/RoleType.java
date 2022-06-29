@@ -1,5 +1,5 @@
 package com.gradebook.Gradebook.model.entity;
 
 public enum RoleType {
-    TEST
+    TEST, STUDENT, PARENT, DIRECTOR, TEACHER, ADMIN
 }
