@@ -51,7 +51,9 @@ public class AbsenceService implements IAbsenceService{
 
     @Override
     public List<AbsenceDTO> getAllAbsences() {
-        return null;
+        return absenceRepo.findAll()
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -75,7 +77,7 @@ public class AbsenceService implements IAbsenceService{
         if(absence != null) {
             absenceDTO.setId(absence.getId());
             absenceDTO.setStudentId(absence.getStudent().getId());
-            absenceDTO.setSubject(absence.getSubject().getName());
+            absenceDTO.setSubject(absence.getSubject().getName() );
             absenceDTO.setTeacherId(absence.getTeacher().getId());
             absenceDTO.setDate(absence.getDate());
         }
