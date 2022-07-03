@@ -12,6 +12,7 @@ import com.gradebook.Gradebook.service.ISchoolClassService;
 import com.gradebook.Gradebook.service.ISchoolService;
 import com.gradebook.Gradebook.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public class StudentController {
     @Autowired
     private final ISchoolClassService schoolClassService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public StudentController(IStudentService studentService, ISchoolService schoolService, ISchoolClassService schoolClassService) {
         this.studentService = studentService;
         this.schoolService = schoolService;
@@ -40,7 +44,7 @@ public class StudentController {
         Student s = new Student(
                 payload.getUsername(),
                 payload.getEmail(),
-                payload.getPassword(),
+                passwordEncoder.encode(payload.getPassword()),
                 payload.isAccountLocked(),
                 payload.getFirstName(),
                 payload.getLastName(),

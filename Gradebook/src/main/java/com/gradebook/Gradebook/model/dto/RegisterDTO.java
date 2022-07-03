@@ -5,6 +5,7 @@ import com.gradebook.Gradebook.model.entity.SClass;
 
 public class RegisterDTO {
 
+    //
     private String username;
     private String email;
     private String password;
