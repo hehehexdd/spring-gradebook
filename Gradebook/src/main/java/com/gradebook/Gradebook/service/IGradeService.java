@@ -10,9 +10,9 @@ public interface IGradeService {
     void updateGrade(GradeDTO gradeDTO);
     void deleteGrade(Long id);
     GradeDTO getGradeById(Long id);
+    Grade findGradeById(Long id);
     List<GradeDTO> getAllGrades();
     GradeDTO convertToDTO(Grade grade);
-    Grade convertToEntity(GradeDTO gradeDTO);
 
     List<GradeDTO> getAllGradesByStudentId(Long studentId);
     List<GradeDTO> getAllGradesByStudentsIds(List<Long> studentIds);

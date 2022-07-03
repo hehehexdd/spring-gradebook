@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,14 +55,28 @@ public class AbsenceService implements IAbsenceService{
     }
 
     @Override
+    public List<AbsenceDTO> getAllAbsencesByStudentId(Long studentId) {
+        return absenceRepo.getAllAbsencesByStudentId(studentId)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AbsenceDTO> getAllAbsencesByStudentsIds(List<Long> studentIds) {
+        return absenceRepo.getAllAbsencesByStudentsId(studentIds)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public AbsenceDTO convertToDTO(Absence absence) {
         AbsenceDTO absenceDTO = new AbsenceDTO();
 
         if(absence != null) {
             absenceDTO.setId(absence.getId());
             absenceDTO.setStudentId(absence.getStudent().getId());
-            absenceDTO.setSubjectId(absence.getSubject().getId());
-            //absenceDTO.setTeacherId(absence.getTeacher().getId());
+            absenceDTO.setSubject(absence.getSubject().getName());
+            absenceDTO.setTeacherId(absence.getTeacher().getId());
             absenceDTO.setDate(absence.getDate());
         }
         return absenceDTO;

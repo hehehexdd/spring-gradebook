@@ -12,6 +12,8 @@ public interface IAbsenceService {
     Absence findById(Long id);
     AbsenceDTO getById(Long id);
     List<AbsenceDTO> getAllAbsences();
+    List<AbsenceDTO> getAllAbsencesByStudentId(Long studentId);
+    List<AbsenceDTO> getAllAbsencesByStudentsIds(List<Long> studentIds);
 
     AbsenceDTO convertToDTO(Absence absence);
 }

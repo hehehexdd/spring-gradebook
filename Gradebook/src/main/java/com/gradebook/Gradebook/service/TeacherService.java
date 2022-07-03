@@ -47,6 +47,11 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
+    public Teacher findById(Long id) {
+        return teacherRepo.getById(id);
+    }
+
+    @Override
     public List<TeacherDTO> getAll(Long schoolId) {
         if (schoolId != null) {
             return teacherRepo.findAllBySchool_Id(schoolId)

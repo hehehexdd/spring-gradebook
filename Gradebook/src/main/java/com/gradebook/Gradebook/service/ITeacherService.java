@@ -16,6 +16,7 @@ public interface ITeacherService {
     void update(Teacher teacher);
     void delete(Long id);
     TeacherDTO getById(Long id);
+    Teacher findById(Long id);
     List<TeacherDTO> getAll(Long schoolId);
     List<TeacherCourcesDTO> getCourses(Long id);
     TeacherDTO convertToDTO(Teacher teacher);

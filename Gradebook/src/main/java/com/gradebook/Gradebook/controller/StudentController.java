@@ -82,10 +82,11 @@ public class StudentController {
         studentService.deleteStudent(id);
     }
 
-    //TODO
-    //assignToSchoolClass()
 
-    public void assignToSchoolClass() {}
-
-
+    @PatchMapping(path = "/{schoolId}/{studentId}")
+    public void assignToSchoolClass(@PathVariable("schoolId") Long schoolId, @PathVariable("studentId") Long studentId) {
+        Student tmp = studentService.findById(studentId);
+        tmp.setSchool(schoolService.findById(schoolId));
+        studentService.saveStudent(tmp);
+    }
 }

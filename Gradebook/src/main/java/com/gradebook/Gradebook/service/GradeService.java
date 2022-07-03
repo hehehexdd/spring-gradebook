@@ -46,6 +46,11 @@ public class GradeService implements IGradeService{
     }
 
     @Override
+    public Grade findGradeById(Long id) {
+        return gradeRepo.getById(id);
+    }
+
+    @Override
     public List<GradeDTO> getAllGradesBySubjectId(Long subjectId) {
         return gradeRepo.getAllBySubject_Id(subjectId)
                 .stream().map(this::convertToDTO)
@@ -87,11 +92,6 @@ public class GradeService implements IGradeService{
         }
 
         return gradeDTO;
-    }
-
-    @Override
-    public Grade convertToEntity(GradeDTO gradeDTO) {
-        return null;
     }
 
     @Override

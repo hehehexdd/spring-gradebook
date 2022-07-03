@@ -12,9 +12,9 @@ import java.util.List;
 public interface AbsenceRepo extends JpaRepository<Absence, Long> {
 
     @Query("SELECT a FROM Absence a JOIN a.student s WHERE s.id = ?1")
-    List<AbsenceDTO> getAllAbsencesByStudentId(Long id);
+    List<Absence> getAllAbsencesByStudentId(Long id);
 
     //TODO
     @Query("SELECT a From Absence a JOIN a.student s WHERE s.id in :ids")
-    List<AbsenceDTO> getAllAbsencesByStudentsId(List<Long> ids);
+    List<Absence> getAllAbsencesByStudentsId(List<Long> ids);
 }
