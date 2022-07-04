@@ -29,6 +29,7 @@
 *.ipr
 .classpath
 .factorypath
+.properties
 
 Gradebook/build.gradle
 Gradebook/build/resources/main/application.properties
