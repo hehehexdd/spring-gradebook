@@ -1,6 +1,7 @@
 package com.gradebook.Gradebook.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,6 +33,14 @@ public class SchoolClass {
         this.classYear = classYear;
         this.students = students;
         this.classTeachers = classTeachers;
+    }
+
+    public SchoolClass(Long id, String name, SClass classYear) {
+        this.id = id;
+        this.name = name;
+        this.classYear = classYear;
+        this.students = new ArrayList<>();
+        this.classTeachers = new ArrayList<>();
     }
 
     //Getters

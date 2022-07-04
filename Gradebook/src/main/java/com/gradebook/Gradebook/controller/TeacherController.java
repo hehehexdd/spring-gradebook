@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4202")
 @RestController
 @RequestMapping(path = GradebookCommon.TEACHER_BASE_URI)
 public class TeacherController {
