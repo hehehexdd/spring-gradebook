@@ -32,18 +32,51 @@ public class AuthController {
     private IAppUserService userService;
 
     //TODO make it more clean
+//    @PostMapping("/authenticate")
+//    public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
+//        AppUser user = new AppUser();
+//
+//        try {
+//            user = userService.getUser(jwtRequest.getUsername());
+//        } catch (UsernameNotFoundException e) {
+//            throw new Exception("Invalid Credentials!", e);
+//        }
+//
+//        if(user == null) {
+//            return new JwtResponse();
+//        }
+//
+//        try {
+//            if (passwordEncoder.matches(jwtRequest.getPassword(), user.getPassword())) {
+//                authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(
+//                            jwtRequest.getUsername(),
+//                            jwtRequest.getPassword()
+//                    )
+//                    );
+//            }
+//            else {
+//                return new JwtResponse();
+//            }
+//        }
+//        catch (BadCredentialsException e) {
+//            throw new Exception("Invalid Credentials!");
+//        }
+//
+//        final UserDetails userDetails = userService.loadUserByUsername(jwtRequest.getUsername());
+//        final String token = jwtUtility.generateToken(userDetails);
+//
+//        return  new JwtResponse(user.getId(),token);
+//    }
+
     @PostMapping("/authenticate")
     public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
-        AppUser user = new AppUser();
 
+        AppUser user = new AppUser();
         try {
             user = userService.getUser(jwtRequest.getUsername());
         } catch (UsernameNotFoundException e) {
             throw new Exception("Invalid Credentials!", e);
-        }
-
-        if(user == null) {
-            return new JwtResponse();
         }
 
         try {
@@ -56,16 +89,16 @@ public class AuthController {
                     );
             }
             else {
-                return new JwtResponse();
+                throw new Exception("Invalid Credentials!");
             }
         }
         catch (BadCredentialsException e) {
-            throw new Exception("Invalid Credentials!");
+            throw new Exception("Invalid Credentials!", e);
         }
 
         final UserDetails userDetails = userService.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtUtility.generateToken(userDetails);
 
-        return  new JwtResponse(user.getId(),token);
+        return  new JwtResponse(user.getId(), token);
     }
 }
