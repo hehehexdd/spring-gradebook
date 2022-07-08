@@ -55,7 +55,7 @@ public class AppUserDTO {
     }
 
     public void setAccountLocked(boolean accountLocked) {
-        accountLocked = accountLocked;
+        this.accountLocked = accountLocked;
     }
 
 

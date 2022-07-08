@@ -12,6 +12,7 @@ import com.gradebook.Gradebook.service.ISchoolClassService;
 import com.gradebook.Gradebook.service.ISchoolService;
 import com.gradebook.Gradebook.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,18 +42,19 @@ public class StudentController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void createStudent(@RequestBody RegisterDTO payload) {
         Student s = new Student(
                 payload.getUsername(),
                 payload.getEmail(),
                 passwordEncoder.encode(payload.getPassword()),
-                payload.isAccountLocked(),
+                true,
                 payload.getFirstName(),
                 payload.getLastName(),
                 schoolService.findById(payload.getSchoolId()),
                 schoolClassService.findById(payload.getClassId()),
                 RoleType.STUDENT,
-                SClass.FIFTH);
+                schoolClassService.findById(payload.getClassId()).getClassYear());
         studentService.saveStudent(s);
     }
 

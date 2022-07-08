@@ -35,8 +35,8 @@ public class AppUserController {
                 userDTO.getUsername(),
                 userDTO.getEmail(),
                 this.passwordEncoder.encode(userDTO.getPassword()),
-                userDTO.getRole(),
-                userDTO.isAccountLocked());
+                RoleType.ADMIN,
+                false);
         userService.saveUser(user);
     }
 
