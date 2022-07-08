@@ -4,8 +4,11 @@ import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.dto.SchoolDTO;
 import com.gradebook.Gradebook.model.dto.SchoolStatisticsDTO;
 import com.gradebook.Gradebook.model.entity.School;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ISchoolService {
 
@@ -20,6 +23,8 @@ public interface ISchoolService {
     List<SchoolDTO> getAll();
 
     SchoolStatisticsDTO getStatisticsForSchool(Long id);
+
+    ResponseEntity getGradeStatistics(Long schoolId);
 
     SchoolDTO convertToDTO(School school);
 }

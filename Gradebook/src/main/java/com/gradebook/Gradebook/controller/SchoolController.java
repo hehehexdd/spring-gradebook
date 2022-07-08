@@ -9,6 +9,7 @@ import com.gradebook.Gradebook.service.IGradeService;
 import com.gradebook.Gradebook.service.ISchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,11 @@ public class SchoolController {
     @GetMapping(path = "/{id}/grades")
     public List<GradeDTO> getAllSchoolGrades(@PathVariable("id") Long schoolId) {
         return gradeService.getAllGradesBySchool(schoolId);
+    }
+
+    @GetMapping(path = "/{id}/grades/statistics")
+    public ResponseEntity getAllSchoolGradeStatistics(@PathVariable("id") Long schoolId) {
+        return schoolService.getGradeStatistics(schoolId);
     }
 
     @GetMapping(path =  "/{id}")

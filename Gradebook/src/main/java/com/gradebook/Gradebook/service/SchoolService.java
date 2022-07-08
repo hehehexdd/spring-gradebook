@@ -7,14 +7,15 @@ import com.gradebook.Gradebook.model.entity.Grade;
 import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.model.entity.Student;
 import com.gradebook.Gradebook.model.entity.Teacher;
+import com.gradebook.Gradebook.repo.GradeRepo;
 import com.gradebook.Gradebook.repo.SchoolRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,8 +25,12 @@ public class SchoolService implements ISchoolService {
     @Autowired
     private final SchoolRepo schoolRepo;
 
-    public SchoolService(SchoolRepo schoolRepo) {
+    @Autowired
+    private final GradeRepo gradeRepo;
+
+    public SchoolService(SchoolRepo schoolRepo, GradeRepo gradeRepo) {
         this.schoolRepo = schoolRepo;
+        this.gradeRepo = gradeRepo;
     }
 
     @Override
@@ -77,6 +82,20 @@ public class SchoolService implements ISchoolService {
                 school.getStudents().size(),
                 (Double.isNaN(averageGrade)) ? 0 : averageGrade
         );
+    }
+
+    @Override
+    public ResponseEntity getGradeStatistics(Long schoolId) {
+        Map<String, Integer> gradeStatistics = new HashMap<String, Integer>();
+
+        for (int grade = 2; grade <= 6; grade++) {
+            gradeStatistics.put(
+                    String.valueOf(grade),
+                    gradeRepo.getAllByStudent_School_IdAndGrade(schoolId, grade).size()
+            );
+        }
+
+        return new ResponseEntity(gradeStatistics, HttpStatus.OK);
     }
 
     @Override
