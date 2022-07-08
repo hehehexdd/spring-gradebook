@@ -52,7 +52,7 @@ public class DirectorService implements IDirectorService {
                 payload.getEmail(),
                 passwordEncoder.encode(payload.getPassword()),
                 payload.getRole(),
-                payload.isAccountLocked(),
+                false,
                 payload.getFirstName(),
                 payload.getLastName(),
                 schoolService.findById(payload.getSchoolId())

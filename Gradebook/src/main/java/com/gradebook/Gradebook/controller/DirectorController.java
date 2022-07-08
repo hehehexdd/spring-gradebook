@@ -39,7 +39,7 @@ public class DirectorController {
         return new DirectorDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", "PATCH");
     }
 
-    @PostMapping
+    @PostMapping(path = "/register")
     @ResponseStatus(HttpStatus.CREATED)
     public DirectorDTO createDirector(@RequestBody RegisterDTO payload) {
         return directorService.create(payload);
