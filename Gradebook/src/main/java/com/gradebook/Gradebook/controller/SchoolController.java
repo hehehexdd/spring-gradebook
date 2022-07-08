@@ -50,7 +50,7 @@ public class SchoolController {
         return schoolService.create(payload);
     }
 
-    @GetMapping
+    @GetMapping(path = "/all")
     public List<SchoolDTO> getAllSchools() {
         return schoolService.getAll();
     }
