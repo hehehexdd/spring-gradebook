@@ -7,6 +7,7 @@ import com.gradebook.Gradebook.model.entity.Director;
 import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.repo.DirectorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,8 @@ public class DirectorService implements IDirectorService {
     @Autowired
     private final ISchoolService schoolService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public DirectorService(DirectorRepo directorRepo, ISchoolService schoolService) {
         this.directorRepo = directorRepo;
@@ -43,10 +46,11 @@ public class DirectorService implements IDirectorService {
 
     @Override
     public DirectorDTO create(RegisterDTO payload) {
+
         return convertToDTO(save(new Director(
                 payload.getUsername(),
                 payload.getEmail(),
-                payload.getPassword(),
+                passwordEncoder.encode(payload.getPassword()),
                 payload.getRole(),
                 payload.isAccountLocked(),
                 payload.getFirstName(),
