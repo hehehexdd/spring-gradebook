@@ -121,7 +121,7 @@ public class TeacherService implements ITeacherService{
 
     @Override
     public List<StudentDTO> getStudents(Long id) {
-        List<StudentDTO> students= new ArrayList<>();
+        List<StudentDTO> students;
         List<ClassTeachers> tmp = this.classTeacherRepo.getAllByTeacher_Id(id);
         List<Long> classIds = new ArrayList<>();
         tmp.forEach(classTeacher -> {
@@ -130,12 +130,6 @@ public class TeacherService implements ITeacherService{
                     classIds.add(classId);
                 }
         });
-
-        if(tmp.isEmpty()){
-            System.out.println("Empty");
-        } else {
-            System.out.println("Length is: "+tmp.size());
-        }
 
         students = this.studentService.getAllStudentsByClassIdS(classIds);
 
