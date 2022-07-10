@@ -21,10 +21,10 @@ public class SchoolClass {
     @ManyToOne
     private School school;
 
-    @OneToMany
+    @OneToMany(mappedBy = "schoolClass")
     private List<Student> students;
 
-    @OneToMany
+    @OneToMany(mappedBy = "studentClass")
     private List<ClassTeachers> classTeachers;
 
     public SchoolClass() {
