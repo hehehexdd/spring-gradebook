@@ -27,15 +27,22 @@ public class TeacherService implements ITeacherService{
     private final IStudentService studentService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final ISubjectService subjectService;
 
     @Autowired
-    private ISchoolService schoolService;
+    private final ISchoolService schoolService;
 
-    public TeacherService(TeacherRepo teacherRepo, ClassTeacherRepo classTeacherRepo, IStudentService studentService) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+
+    public TeacherService(TeacherRepo teacherRepo, ClassTeacherRepo classTeacherRepo, IStudentService studentService, ISubjectService subjectService, ISchoolService schoolService) {
         this.teacherRepo = teacherRepo;
         this.classTeacherRepo = classTeacherRepo;
         this.studentService = studentService;
+        this.subjectService = subjectService;
+        this.schoolService = schoolService;
     }
 
     @Override
@@ -110,18 +117,21 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
-    public List<TeacherCourcesDTO> getCourses(Long id) {
-        List<TeacherCourcesDTO> courses= new ArrayList<>();
-        //to add logic
-        courses.add(new TeacherCourcesDTO(id,"Physics 4th Grade", 5L));
-        courses.add(new TeacherCourcesDTO(id,"Mathematics 7th Grade", 4L));
+    public List<SubjectDTO> getCourses(Long id) {
+        List<ClassTeachers> tmp = this.classTeacherRepo.getAllByTeacher_Id(id);
+        List<Long> courseIds = new ArrayList<>();
+        tmp.forEach(classTeacher -> {
+            Long courseId = classTeacher.getSubject().getId();
+            if(!courseIds.contains(courseId)){
+                courseIds.add(courseId);
+            }
+        });
 
-        return courses;
+        return this.subjectService.getSubjectsByIds(courseIds);
     }
 
     @Override
     public List<StudentDTO> getStudents(Long id) {
-        List<StudentDTO> students;
         List<ClassTeachers> tmp = this.classTeacherRepo.getAllByTeacher_Id(id);
         List<Long> classIds = new ArrayList<>();
         tmp.forEach(classTeacher -> {
@@ -131,9 +141,8 @@ public class TeacherService implements ITeacherService{
                 }
         });
 
-        students = this.studentService.getAllStudentsByClassIds(classIds);
 
-        return students;
+        return this.studentService.getAllStudentsByClassIds(classIds);
     }
 
     @Override

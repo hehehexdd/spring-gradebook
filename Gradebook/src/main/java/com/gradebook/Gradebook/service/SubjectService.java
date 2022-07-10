@@ -65,4 +65,9 @@ public class SubjectService implements ISubjectService{
         }
         return subjectDTO;
     }
+
+    @Override
+    public List<SubjectDTO> getSubjectsByIds(List<Long> subjectIds) {
+        return null;
+    }
 }

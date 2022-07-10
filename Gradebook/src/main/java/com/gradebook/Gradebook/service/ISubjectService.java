@@ -15,4 +15,5 @@ public interface ISubjectService {
     Subject getSubjectByName(String name);
     List<SubjectDTO> getAllSubjects();
     SubjectDTO convertToDTO(Subject subject);
+    List<SubjectDTO> getSubjectsByIds(List<Long> subjectIds);
 }

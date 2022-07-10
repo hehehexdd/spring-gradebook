@@ -44,7 +44,7 @@ public class TeacherController {
     }
 
     @GetMapping(path = "/{id}/courses")
-    public List<TeacherCourcesDTO> getCourses(@PathVariable("id") Long id) {
+    public List<SubjectDTO> getCourses(@PathVariable("id") Long id) {
         return this.teacherService.getCourses(id);
     }
 
