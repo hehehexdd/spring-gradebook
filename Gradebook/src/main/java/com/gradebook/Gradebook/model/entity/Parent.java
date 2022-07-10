@@ -1,14 +1,12 @@
 package com.gradebook.Gradebook.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
-@PrimaryKeyJoinColumn(name = "parentId")
+@PrimaryKeyJoinColumn(name = "Id")
 public class Parent extends AppUser{
 
     @Column(nullable = false)
@@ -17,7 +15,7 @@ public class Parent extends AppUser{
     @Column(nullable = false)
     private String lastName;
 
-    @OneToMany
+    @ManyToMany
     private List<Student> kids;
 
     public Parent() {
@@ -28,6 +26,13 @@ public class Parent extends AppUser{
         this.firstName = firstName;
         this.lastName = lastName;
         this.kids = kids;
+    }
+
+    public Parent(String username, String email, String password, RoleType role, boolean isAccountLocked, String firstName, String lastName) {
+        super(username, email, password, role, isAccountLocked);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.kids= new ArrayList<>();
     }
 
     public String getFirstName() {

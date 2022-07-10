@@ -71,6 +71,7 @@ public class TeacherService implements ITeacherService{
             School school = this.schoolService.findById(payload.getSchoolId());
             teacher.setSchool(school);
         }
+        this.teacherRepo.save(teacher);
         return this.convertToDTO(teacher);
     }
 
@@ -127,7 +128,6 @@ public class TeacherService implements ITeacherService{
             teacherDTO.setLastName(teacher.getLastName());
             teacherDTO.setUsername(teacher.getUsername());
             teacherDTO.setSchoolId((teacher.getSchool() != null) ? teacher.getSchool().getId() : null);
-            //to do add teacher_classes
         }
         return teacherDTO;
     }

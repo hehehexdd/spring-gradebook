@@ -3,6 +3,7 @@ package com.gradebook.Gradebook.controller;
 
 import com.gradebook.Gradebook.config.GradebookCommon;
 import com.gradebook.Gradebook.model.dto.ParentDTO;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.service.IParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,17 +32,15 @@ public class ParentController {
         return this.parentService.getById(id);
     }
 
-    //To-do
     @PatchMapping(path = "/{id}")
-    public ParentDTO updateParentById(@PathVariable("id") Long id, @RequestBody ParentDTO payload) {
-        return new ParentDTO(Long.valueOf(1),"Ivan", "Ivan", "123");
+    public ParentDTO updateParentById(@PathVariable("id") Long id, @RequestBody(required=false) ParentDTO payload) {
+        return this.parentService.update(id, payload);
     }
 
-    //To-do
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ParentDTO createParent(@RequestBody ParentDTO payload) {
-        return new ParentDTO(Long.valueOf(1),"Ivan", "Ivan", "123");
+    public void createParent(@RequestBody RegisterDTO payload) {
+        this.parentService.createParent(payload);
     }
 
     @DeleteMapping(path = "/{id}")

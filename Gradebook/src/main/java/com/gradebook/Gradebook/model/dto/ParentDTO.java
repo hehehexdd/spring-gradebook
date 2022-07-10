@@ -1,9 +1,7 @@
 package com.gradebook.Gradebook.model.dto;
 
-import org.springframework.web.client.HttpClientErrorException;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ParentDTO {
 
@@ -11,25 +9,20 @@ public class ParentDTO {
     private String firstName;
     private String lastName;
     private String username;
-    private List<String> childrenUsernames;
-
-    public ParentDTO(Long id, String firstName, String lastName, List<String> childrenUsernames, String username) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.childrenUsernames = childrenUsernames;
-        this.username = username;
-    }
-
-    public ParentDTO() {
-    }
+    private List<Long> childrenIds;
 
     public ParentDTO(Long id, String firstName, String lastName, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.childrenIds = new ArrayList<>();
         this.username = username;
     }
+
+
+    public ParentDTO() {
+    }
+
 
     public Long getId() {
         return id;
@@ -55,26 +48,26 @@ public class ParentDTO {
         this.lastName = lastName;
     }
 
-    public List<String> getChildrenUsernames() {
-        return childrenUsernames;
+    public List<Long> getChildrenIds() {
+        return childrenIds;
     }
 
-    public void setChildrenUsernames(List<String> childrenUsernames) {
-        this.childrenUsernames = childrenUsernames;
+    public void setChildrenIds(List<Long> childrenIds) {
+        this.childrenIds = childrenIds;
     }
-    public void addKidUsername(String username){
+    public void addKidUsername(Long username){
         if(!this.isExisting(username)) {
-            this.childrenUsernames.add(username);
+            this.childrenIds.add(username);
         }
     }
-    public void removeKidUsername(String username){
+    public void removeKidUsername(Long username){
         if(this.isExisting(username)) {
-            this.childrenUsernames.remove(username);
+            this.childrenIds.remove(username);
         }
 
     }
-    private boolean isExisting(String username){
-        return this.childrenUsernames.contains(username);
+    private boolean isExisting(Long username){
+        return this.childrenIds.contains(username);
     }
 
     public String getUsername() {

@@ -9,7 +9,4 @@ import java.util.List;
 
 @Repository
 public interface SchoolClassRepo extends JpaRepository<SchoolClass, Long> {
-
-    @Query("Select ")
-    List<SchoolClass> test();
 }

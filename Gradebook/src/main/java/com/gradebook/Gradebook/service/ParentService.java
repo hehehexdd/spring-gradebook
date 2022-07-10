@@ -1,9 +1,11 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.ParentDTO;
-import com.gradebook.Gradebook.model.entity.Parent;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
+import com.gradebook.Gradebook.model.entity.*;
 import com.gradebook.Gradebook.repo.ParentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,17 +20,53 @@ public class ParentService implements IParentService{
     @Autowired
     private final ParentRepo parentRepo;
 
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public ParentService(ParentRepo parentRepo) {
         this.parentRepo = parentRepo;
     }
 
     @Override
-    public Parent save(Parent parent) {
-        return this.parentRepo.save(parent);
+    public ParentDTO update(Long parentId, ParentDTO payload) {
+        Parent parent = this.findById(parentId);
+        if(payload == null){
+            return this.convertToDTO(parent);
+        }
+
+        List<Long> childrenIds = payload.getChildrenIds();
+
+        if(payload.getFirstName()!= null){
+            parent.setFirstName(payload.getFirstName());
+        }
+        if(payload.getLastName()!= null){
+            parent.setLastName(payload.getLastName());
+        }
+        if(!childrenIds.isEmpty()){
+            List<Student> children = new ArrayList<>();
+            childrenIds.forEach((id)-> children.add(this.studentService.findById(id)));
+            parent.setKids(children);
+        }
+        this.parentRepo.save(parent);
+        return this.convertToDTO(parent);
     }
 
     @Override
-    public void update(Parent parent) {
+    public void createParent(RegisterDTO user) {
+
+        Parent parent = new Parent(
+                user.getUsername(),
+                user.getEmail(),
+                this.passwordEncoder.encode(user.getPassword()),
+                RoleType.PARENT,
+                true,
+                user.getFirstName(),
+                user.getLastName()
+        );
+
         this.parentRepo.save(parent);
     }
 
@@ -42,6 +80,11 @@ public class ParentService implements IParentService{
     public ParentDTO getById(Long id) {
         Parent parent = this.parentRepo.getById(id);
         return this.convertToDTO(parent);
+    }
+
+    @Override
+    public Parent findById(Long id) {
+        return this.parentRepo.getById(id);
     }
 
     @Override
@@ -66,7 +109,7 @@ public class ParentService implements IParentService{
             parentDTO.setLastName(parent.getLastName());
             parentDTO.setUsername(parent.getUsername());
 
-            parentDTO.setChildrenUsernames(parent.getKids().stream().map(kid->kid.getUsername()).collect(Collectors.toList()));
+            parentDTO.setChildrenIds(parent.getKids().stream().map(AppUser::getId).collect(Collectors.toList()));
         }
 
         return parentDTO;
