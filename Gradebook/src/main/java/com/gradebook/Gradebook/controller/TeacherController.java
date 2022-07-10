@@ -4,6 +4,7 @@ package com.gradebook.Gradebook.controller;
 import com.gradebook.Gradebook.config.GradebookCommon;
 
 import com.gradebook.Gradebook.model.dto.GradeDTO;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.service.IGradeService;
@@ -50,18 +51,15 @@ public class TeacherController {
         return this.teacherService.getCourses(id);
     }
 
-
-    //To-do
     @PatchMapping(path = "/{id}")
-    public TeacherDTO updateTeacherById(@PathVariable("id") Long id, @RequestBody TeacherDTO payload) {
-        return new TeacherDTO(Long.valueOf(1), "Ivan", "Petrov","123", Long.valueOf(1));
+    public TeacherDTO updateTeacherById(@PathVariable("id") Long id, @RequestBody(required=false) TeacherDTO payload) {
+        return this.teacherService.update(id,payload);
     }
 
-    //To-do
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public TeacherDTO createTeacher(@RequestBody TeacherDTO payload) {
-        return new TeacherDTO(Long.valueOf(1), "Ivan", "Petrov","123", Long.valueOf(1));
+    public void createTeacher(@RequestBody RegisterDTO payload) {
+        this.teacherService.createTeacher(payload);
     }
 
     @DeleteMapping(path = "/{id}")
