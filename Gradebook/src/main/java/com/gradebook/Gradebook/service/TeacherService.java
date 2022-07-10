@@ -131,7 +131,7 @@ public class TeacherService implements ITeacherService{
                 }
         });
 
-        students = this.studentService.getAllStudentsByClassIdS(classIds);
+        students = this.studentService.getAllStudentsByClassIds(classIds);
 
         return students;
     }

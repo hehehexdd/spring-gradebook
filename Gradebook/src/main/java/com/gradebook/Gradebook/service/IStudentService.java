@@ -18,7 +18,7 @@ public interface IStudentService {
     Student findById(Long id);
     List<StudentDTO> getAllStudents();
     List<StudentDTO> getAllStudentsByClassId(Long classId);
-    List<StudentDTO> getAllStudentsByClassIdS(List<Long> classIds);
+    List<StudentDTO> getAllStudentsByClassIds(List<Long> classIds);
     StudentDTO convertToDTO(Student user);
     List<StudentDTO> getAllStudentsBySchoolId(Long schoolId);
 }

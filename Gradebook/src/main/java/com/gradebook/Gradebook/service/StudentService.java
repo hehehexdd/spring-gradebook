@@ -127,7 +127,7 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public List<StudentDTO> getAllStudentsByClassIdS(List<Long> classIds) {
+    public List<StudentDTO> getAllStudentsByClassIds(List<Long> classIds) {
         return this.studentRepo.getAllBySchoolClass_Ids(classIds)
                 .stream().map(this::convertToDTO)
                 .collect(Collectors.toList());
