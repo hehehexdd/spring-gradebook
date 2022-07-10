@@ -22,6 +22,8 @@ public interface ISchoolService {
     SchoolDTO getById(Long id);
     List<SchoolDTO> getAll();
 
+    SchoolDTO update(Long id, SchoolDTO schoolDTO);
+
     SchoolStatisticsDTO getStatisticsForSchool(Long id);
 
     ResponseEntity getGradeStatistics(Long schoolId);

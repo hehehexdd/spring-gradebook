@@ -50,6 +50,11 @@ public class SchoolController {
         return schoolService.getById(id);
     }
 
+    @PatchMapping(path = "/{id}")
+    public SchoolDTO updateSchool(@PathVariable Long id, @RequestBody SchoolDTO payload) {
+        return schoolService.update(id, payload);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SchoolDTO createSchool(@RequestBody RegisterDTO payload) {
