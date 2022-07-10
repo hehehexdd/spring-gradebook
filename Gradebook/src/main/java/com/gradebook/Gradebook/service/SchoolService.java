@@ -1,5 +1,6 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.exception.EntityNotFoundException;
 import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.dto.SchoolDTO;
 import com.gradebook.Gradebook.model.dto.SchoolStatisticsDTO;
@@ -82,6 +83,16 @@ public class SchoolService implements ISchoolService {
                 school.getStudents().size(),
                 (Double.isNaN(averageGrade)) ? 0 : averageGrade
         );
+    }
+
+    @Override
+    public SchoolDTO update(Long id, SchoolDTO schoolDTO) {
+        School school = schoolRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("School not found!"));
+
+        school.setName(schoolDTO.getName() != null ? schoolDTO.getName() : school.getName());
+        school.setAddress(schoolDTO.getAddress() != null ? schoolDTO.getAddress() : school.getAddress());
+
+        return convertToDTO(school);
     }
 
     @Override
