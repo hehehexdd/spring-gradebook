@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface SchoolClassRepo extends JpaRepository<SchoolClass, Long> {
 
+    @Query("SELECT c FROM SchoolClass c JOIN c.school s WHERE s.id = ?1")
+    List<SchoolClass> getAllClassesBySchoolId(Long schoolId);
 }

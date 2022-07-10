@@ -120,6 +120,20 @@ public class StudentService implements IStudentService{
     }
 
     @Override
+    public List<StudentDTO> getAllStudentsByClassId(Long classId) {
+        return this.studentRepo.getAllByClass_Id(classId)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDTO> getAllStudentsByClassIdS(List<Long> classIds) {
+        return this.studentRepo.getAllByClass_Ids(classIds)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public StudentDTO convertToDTO(Student student) {
         StudentDTO studentDTO = new StudentDTO();
 

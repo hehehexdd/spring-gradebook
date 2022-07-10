@@ -12,6 +12,7 @@ public interface ISchoolClassService {
     SchoolClassDTO getById(Long id);
     SchoolClass findById(Long id);
     List<SchoolClassDTO> getAll();
+    List<SchoolClassDTO> getAllBySchoolId(Long schoolId);
 
     SchoolClassDTO convertToDTO(SchoolClass schoolClass);
 }

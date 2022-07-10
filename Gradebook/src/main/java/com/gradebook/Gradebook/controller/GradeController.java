@@ -2,18 +2,15 @@ package com.gradebook.Gradebook.controller;
 
 
 import com.gradebook.Gradebook.config.GradebookCommon;
-import com.gradebook.Gradebook.model.dto.AppUserDTO;
 import com.gradebook.Gradebook.model.dto.GradeDTO;
+import com.gradebook.Gradebook.model.dto.ParentDTO;
 import com.gradebook.Gradebook.model.entity.Grade;
-import com.gradebook.Gradebook.service.IGradeService;
-import com.gradebook.Gradebook.service.IStudentService;
-import com.gradebook.Gradebook.service.ISubjectService;
-import com.gradebook.Gradebook.service.ITeacherService;
+import com.gradebook.Gradebook.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mapping.context.InvalidPersistentPropertyPath;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4202")
@@ -33,13 +30,18 @@ public class GradeController {
     @Autowired
     private final IStudentService studentService;
 
+    @Autowired
+    private final IParentService parentService;
+
     public GradeController(IGradeService gradeService, ITeacherService teacherService,
                            ISubjectService subjectService,
-                           IStudentService studentService) {
+                           IStudentService studentService,
+                           IParentService parentService) {
         this.gradeService = gradeService;
         this.teacherService = teacherService;
         this.subjectService = subjectService;
         this.studentService = studentService;
+        this.parentService = parentService;
     }
 
     @GetMapping(path = "/all")
@@ -53,9 +55,10 @@ public class GradeController {
     }
 
     //call: uri/course/1,2,3,4
-    @GetMapping(path = "/students/{studentIds}")
-    public List<GradeDTO> getAllGradesByStudentIds(@PathVariable("studentIds") List<Long> studentIds) {
-        return gradeService.getAllGradesByStudentsIds(studentIds);
+    @GetMapping(path = "/students/parent/{parentId}")
+    public List<GradeDTO> getAllGradesOfStudentsByParentId(@PathVariable("parentId") Long parentId) {
+        ParentDTO parent = parentService.getById(parentId);
+        return gradeService.getAllGradesByStudentsIds(parent.getChildrenIds());
     }
 
     @PostMapping(path = "/{studentId}")

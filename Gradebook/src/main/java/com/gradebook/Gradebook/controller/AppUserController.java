@@ -49,14 +49,12 @@ public class AppUserController {
 
     @GetMapping(path = "/{id}")
     public AppUserDTO getAppUserById(@PathVariable("id") Long id) {
-        //return new AppUserDTO(Long.valueOf(1),"GET", "GET","GET",true);
         AppUser user = this.userService.getUserById(id);
         return userService.convertToDTO(user);
     }
 
     @PatchMapping(path = "/{id}")
     public AppUserDTO updateAppUserById(@PathVariable("id") Long id, @RequestBody AppUserDTO payload) {
-        //return new AppUserDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", true);
         AppUser user = userService.getUserById(id);
         user.setEmail(payload.getEmail());
         user.setAccountLocked(payload.isAccountLocked());

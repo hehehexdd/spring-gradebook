@@ -30,6 +30,6 @@ public class SchoolClassController {
 
     @GetMapping(path = "/{schoolId}/all")
     public List<SchoolClassDTO> getAllClassesBySchoolId(@PathVariable("schoolId") Long id) {
-        return new ArrayList<>();
+        return schoolClassService.getAllBySchoolId(id);
     }
 }

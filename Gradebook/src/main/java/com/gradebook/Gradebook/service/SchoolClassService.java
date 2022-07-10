@@ -1,7 +1,7 @@
 package com.gradebook.Gradebook.service;
 
+
 import com.gradebook.Gradebook.model.dto.SchoolClassDTO;
-import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.model.entity.SchoolClass;
 import com.gradebook.Gradebook.repo.SchoolClassRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -62,7 +63,26 @@ public class SchoolClassService implements ISchoolClassService{
     }
 
     @Override
+    public List<SchoolClassDTO> getAllBySchoolId(Long schoolId) {
+        List<SchoolClassDTO> schoolClassDTOS = new ArrayList<>();
+
+        this.schoolClassRepo.getAllClassesBySchoolId(schoolId).forEach(schoolClass ->
+                schoolClassDTOS.add(convertToDTO(schoolClass))
+        );
+
+        return schoolClassDTOS;
+    }
+
+    @Override
     public SchoolClassDTO convertToDTO(SchoolClass schoolClass) {
-        return null;
+        SchoolClassDTO schoolClassDTO = new SchoolClassDTO();
+
+        if (schoolClass != null) {
+            schoolClassDTO.setId(schoolClass.getId());
+            schoolClassDTO.setClassYear(schoolClass.getClassYear());
+            schoolClassDTO.setName(schoolClass.getName());
+
+        }
+        return schoolClassDTO;
     }
 }

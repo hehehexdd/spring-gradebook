@@ -11,11 +11,10 @@ import java.util.List;
 @Repository
 public interface GradeRepo extends JpaRepository<Grade, Long> {
 
-    @Query("SELECT g FROM Grade g JOIN g.student s WHERE s.id = ?1")
+    @Query("SELECT g FROM Grade g JOIN g.student s WHERE s.id = ?1 ORDER BY g.date DESC")
     List<Grade> getAllGradesByStudent(Long studentId);
 
-    //TODO
-    @Query("SELECT g From Grade g JOIN g.student s WHERE s.id in :ids")
+    @Query("SELECT g From Grade g JOIN g.student s WHERE s.id in :ids ORDER BY g.date DESC")
     List<Grade> getAllGradesByStudent(@Param("ids") List<Long> studentIds);
 
     List<Grade> getAllBySubject_Id(Long id);
