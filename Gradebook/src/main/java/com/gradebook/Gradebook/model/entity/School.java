@@ -26,6 +26,9 @@ public class School {
     @OneToMany(mappedBy = "school")
     private List<Student> students;
 
+    @OneToMany(mappedBy = "school")
+    private List<SchoolClass> classes;
+
     public School() {
 
     }

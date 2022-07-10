@@ -4,6 +4,7 @@ import com.gradebook.Gradebook.exception.EntityNotFoundException;
 import com.gradebook.Gradebook.model.dto.DirectorDTO;
 import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.entity.Director;
+import com.gradebook.Gradebook.model.entity.RoleType;
 import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.repo.DirectorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class DirectorService implements IDirectorService {
                 payload.getUsername(),
                 payload.getEmail(),
                 passwordEncoder.encode(payload.getPassword()),
-                payload.getRole(),
+                RoleType.DIRECTOR,
                 false,
                 payload.getFirstName(),
                 payload.getLastName(),

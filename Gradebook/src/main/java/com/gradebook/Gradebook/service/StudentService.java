@@ -1,12 +1,14 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.GradeDTO;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.dto.StudentDTO;
 import com.gradebook.Gradebook.model.dto.TeacherDTO;
-import com.gradebook.Gradebook.model.entity.Student;
+import com.gradebook.Gradebook.model.entity.*;
 import com.gradebook.Gradebook.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,8 +24,19 @@ public class StudentService implements IStudentService{
     @Autowired
     private final StudentRepo studentRepo;
 
-    public StudentService(StudentRepo studentRepo) {
+    @Autowired
+    private final ISchoolService schoolService;
+
+    @Autowired
+    private final ISchoolClassService schoolClassService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public StudentService(StudentRepo studentRepo, ISchoolService schoolService, ISchoolClassService schoolClassService) {
         this.studentRepo = studentRepo;
+        this.schoolService = schoolService;
+        this.schoolClassService = schoolClassService;
     }
 
     @Override
@@ -31,6 +44,21 @@ public class StudentService implements IStudentService{
         return studentRepo.save(student);
     }
 
+    @Override
+    public void createStudent(RegisterDTO payload) {
+        Student s = new Student(
+                payload.getUsername(),
+                payload.getEmail(),
+                passwordEncoder.encode(payload.getPassword()),
+                true,
+                payload.getFirstName(),
+                payload.getLastName(),
+                schoolService.findById(payload.getSchoolId()),
+                schoolClassService.findById(payload.getClassId()),
+                RoleType.STUDENT,
+                schoolClassService.findById(payload.getClassId()).getClassYear());
+        this.saveStudent(s);
+    }
 
     @Override
     public void updateStudent(Student student) {
@@ -46,6 +74,27 @@ public class StudentService implements IStudentService{
             tmp.setSClass(student.getSClass());
             studentRepo.save(tmp);
         }
+    }
+
+    @Override
+    public StudentDTO update(Long id, StudentDTO payload) {
+        Student student = this.findById(id);
+
+        if(payload == null){
+            return this.convertToDTO(student);
+        }
+        if(payload.getFirstName()!= null){
+            student.setFirstName(payload.getFirstName());
+        }
+        if(payload.getLastName()!= null){
+            student.setLastName(payload.getLastName());
+        }
+        if(payload.getSclassId() != null) {
+            student.setSchoolClass(schoolClassService.findById(payload.getSclassId()));
+            student.setSClass(schoolClassService.findById(payload.getSclassId()).getClassYear());
+        }
+        this.studentRepo.save(student);
+        return this.convertToDTO(student);
     }
 
     @Override
@@ -80,6 +129,7 @@ public class StudentService implements IStudentService{
             studentDTO.setLastName(student.getLastName());
             studentDTO.setSchoolName(student.getSchool().getName());
             studentDTO.setSchoolClass(student.getSClass());
+            studentDTO.setSclassId(student.getSchoolClass().getId());
         }
 
         return studentDTO;

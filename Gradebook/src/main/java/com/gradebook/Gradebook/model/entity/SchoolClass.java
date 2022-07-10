@@ -18,6 +18,9 @@ public class SchoolClass {
     @Enumerated(value = EnumType.STRING)
     private SClass classYear;
 
+    @ManyToOne
+    private School school;
+
     @OneToMany
     private List<Student> students;
 
@@ -27,18 +30,20 @@ public class SchoolClass {
     public SchoolClass() {
     }
 
-    public SchoolClass(String name, SClass classYear, List<Student> students, List<ClassTeachers> classTeachers) {
+    public SchoolClass(String name, SClass classYear, School school,  List<Student> students, List<ClassTeachers> classTeachers) {
         this.id = null;
         this.name = name;
         this.classYear = classYear;
+        this.school = school;
         this.students = students;
         this.classTeachers = classTeachers;
     }
 
-    public SchoolClass(Long id, String name, SClass classYear) {
+    public SchoolClass(Long id, String name, SClass classYear, School school) {
         this.id = id;
         this.name = name;
         this.classYear = classYear;
+        this.school = school;
         this.students = new ArrayList<>();
         this.classTeachers = new ArrayList<>();
     }

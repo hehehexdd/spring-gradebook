@@ -22,4 +22,6 @@ public class GradebookCommon {
     public static final String ABSENCE_BASE_URI = "/api/absence";
 
     public static final String Subject_BASE_URI = "/api/subject";
+
+    public static final String SCHOOL_CLASS_BASE_URI = "/api/schoolclass";
 }
