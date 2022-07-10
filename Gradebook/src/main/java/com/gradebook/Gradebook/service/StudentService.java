@@ -121,14 +121,14 @@ public class StudentService implements IStudentService{
 
     @Override
     public List<StudentDTO> getAllStudentsByClassId(Long classId) {
-        return this.studentRepo.getAllByClass_Id(classId)
+        return this.studentRepo.getAllBySchoolClass_Id(classId)
                 .stream().map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<StudentDTO> getAllStudentsByClassIdS(List<Long> classIds) {
-        return this.studentRepo.getAllByClass_Ids(classIds)
+        return this.studentRepo.getAllBySchoolClass_Ids(classIds)
                 .stream().map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
