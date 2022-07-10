@@ -6,7 +6,6 @@ public class TeacherDTO  {
     private String lastName;
     private String username;
     private Long schoolId;
-    //To-do add variable for class teacher, update constructor and methods for it
 
 
     public TeacherDTO() {
@@ -58,5 +57,16 @@ public class TeacherDTO  {
 
     public void setSchoolId(Long schoolId) {
         this.schoolId = schoolId;
+    }
+
+    @Override
+    public String toString() {
+        return "TeacherDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", schoolId=" + schoolId +
+                '}';
     }
 }

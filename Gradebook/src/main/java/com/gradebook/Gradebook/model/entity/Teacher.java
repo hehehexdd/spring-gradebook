@@ -1,6 +1,7 @@
 package com.gradebook.Gradebook.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,8 @@ public class Teacher extends AppUser{
         this.firstName = firstName;
         this.lastName = lastName;
         this.school = school;
+        this.classTeachers = new ArrayList<>();
+        this.grades = new ArrayList<>();
     }
 
     public String getFirstName() {
