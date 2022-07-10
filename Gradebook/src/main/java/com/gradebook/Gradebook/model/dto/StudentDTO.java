@@ -8,16 +8,18 @@ public class StudentDTO {
     private String lastName;
     private String schoolName;
     private SClass schoolClass;
+    private Long sclassId;
 
     public StudentDTO() {
     }
 
-    public StudentDTO(Long id, String firstName, String lastName, String schoolName, SClass schoolClass) {
+    public StudentDTO(Long id, String firstName, String lastName, String schoolName, SClass schoolClass, Long sclassId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.schoolName = schoolName;
         this.schoolClass = schoolClass;
+        this.sclassId = sclassId;
     }
 
     //Getters
@@ -41,6 +43,10 @@ public class StudentDTO {
         return schoolClass;
     }
 
+    public Long getSclassId() {
+        return sclassId;
+    }
+
     //Setters
     public void setId(Long id) {
         this.id = id;
@@ -60,5 +66,9 @@ public class StudentDTO {
 
     public void setSchoolClass(SClass schoolClass) {
         this.schoolClass = schoolClass;
+    }
+
+    public void setSclassId(Long sclassId) {
+        this.sclassId = sclassId;
     }
 }

@@ -44,18 +44,7 @@ public class StudentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createStudent(@RequestBody RegisterDTO payload) {
-        Student s = new Student(
-                payload.getUsername(),
-                payload.getEmail(),
-                passwordEncoder.encode(payload.getPassword()),
-                true,
-                payload.getFirstName(),
-                payload.getLastName(),
-                schoolService.findById(payload.getSchoolId()),
-                schoolClassService.findById(payload.getClassId()),
-                RoleType.STUDENT,
-                schoolClassService.findById(payload.getClassId()).getClassYear());
-        studentService.saveStudent(s);
+       this.studentService.createStudent(payload);
     }
 
     @GetMapping(path = "/all")
@@ -70,18 +59,13 @@ public class StudentController {
 
     @GetMapping(path = "/{id}")
     public StudentDTO getStudentById(@PathVariable("id") Long id) {
-        //return new StudentDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", "PATCH");
         Student s = studentService.findById(id);
         return studentService.convertToDTO(s);
     }
 
     @PatchMapping(path = "/{id}")
     public StudentDTO updateStudentById(@PathVariable("id") Long id, @RequestBody StudentDTO payload) {
-        //return new StudentDTO(Long.valueOf(1), "PATCH", "PATCH", "PATCH", "PATCH");
-        Student tmp = studentService.findById(id);
-        tmp.setFirstName(payload.getFirstName());
-        tmp.setLastName(payload.getLastName());
-        return studentService.convertToDTO(tmp);
+        return studentService.update(id, payload);
     }
 
     @DeleteMapping(path = "/{id}")

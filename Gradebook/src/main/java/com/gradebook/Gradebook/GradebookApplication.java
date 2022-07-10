@@ -48,12 +48,14 @@ public class GradebookApplication {
 					"$2a$10$n1042hx1F577X48aw9YdlO/hJUNYRKbZ5WtncghMYmUwK57ZL4Zte",
 					RoleType.ADMIN,
 					true));
+			 School s = new School("aaaaa", "A");
+			 schoolService.save(s);
 			 schoolClassService.save(new SchoolClass(
 					 null,
 					 "aaaaaa",
-					 SClass.FIFTH
+					 SClass.FIFTH,
+					 s
 			 ));
-			 schoolService.save(new School("aaaaa", "A"));
 		};
 
 
