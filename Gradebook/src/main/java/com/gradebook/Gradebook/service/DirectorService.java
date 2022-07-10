@@ -36,8 +36,17 @@ public class DirectorService implements IDirectorService {
 
     //TO-DO
     @Override
-    public void update(Director director) {
-        directorRepo.save(director);
+    public void update(Long id, RegisterDTO registerDTO) {
+        Director director = directorRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Director not found!"));
+
+        director.setUsername((registerDTO.getUsername() != null) ? registerDTO.getUsername() : director.getUsername());
+        director.setEmail((registerDTO.getEmail() != null) ? registerDTO.getEmail() : director.getEmail());
+        director.setPassword((registerDTO.getPassword() != null) ? registerDTO.getPassword() : director.getPassword());
+        director.setRole((registerDTO.getRole() != null) ? registerDTO.getRole() : director.getRole());
+        director.setAccountLocked(registerDTO.isAccountLocked());
+        director.setFirstName((registerDTO.getFirstName() != null) ? registerDTO.getFirstName() : director.getFirstName());
+        director.setLastName((registerDTO.getLastName() != null) ? registerDTO.getLastName() : director.getLastName());
+        director.setSchool((registerDTO.getSchoolId() != null) ? schoolService.findById(registerDTO.getSchoolId()) : director.getSchool());
     }
 
     @Override
