@@ -3,10 +3,7 @@ package com.gradebook.Gradebook.controller;
 
 import com.gradebook.Gradebook.config.GradebookCommon;
 
-import com.gradebook.Gradebook.model.dto.GradeDTO;
-import com.gradebook.Gradebook.model.dto.RegisterDTO;
-import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
-import com.gradebook.Gradebook.model.dto.TeacherDTO;
+import com.gradebook.Gradebook.model.dto.*;
 import com.gradebook.Gradebook.service.IGradeService;
 import com.gradebook.Gradebook.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +46,11 @@ public class TeacherController {
     @GetMapping(path = "/{id}/courses")
     public List<TeacherCourcesDTO> getCourses(@PathVariable("id") Long id) {
         return this.teacherService.getCourses(id);
+    }
+
+    @GetMapping(path = "/{id}/students")
+    public List<StudentDTO> getStudents(@PathVariable("id") Long id) {
+        return this.teacherService.getStudents(id);
     }
 
     @PatchMapping(path = "/{id}")

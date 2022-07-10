@@ -1,13 +1,8 @@
 package com.gradebook.Gradebook.service;
 
-import com.gradebook.Gradebook.model.dto.GradeDTO;
-import com.gradebook.Gradebook.model.dto.RegisterDTO;
-import com.gradebook.Gradebook.model.dto.TeacherCourcesDTO;
-import com.gradebook.Gradebook.model.dto.TeacherDTO;
-import com.gradebook.Gradebook.model.entity.RoleType;
-import com.gradebook.Gradebook.model.entity.School;
-import com.gradebook.Gradebook.model.entity.Student;
-import com.gradebook.Gradebook.model.entity.Teacher;
+import com.gradebook.Gradebook.model.dto.*;
+import com.gradebook.Gradebook.model.entity.*;
+import com.gradebook.Gradebook.repo.ClassTeacherRepo;
 import com.gradebook.Gradebook.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,14 +19,23 @@ import java.util.stream.Collectors;
 public class TeacherService implements ITeacherService{
     @Autowired
     private final TeacherRepo teacherRepo;
+
+    @Autowired
+    private final ClassTeacherRepo classTeacherRepo;
+
+    @Autowired
+    private final IStudentService studentService;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private SchoolService schoolService;
+    private ISchoolService schoolService;
 
-    public TeacherService(TeacherRepo teacherRepo) {
+    public TeacherService(TeacherRepo teacherRepo, ClassTeacherRepo classTeacherRepo, IStudentService studentService) {
         this.teacherRepo = teacherRepo;
+        this.classTeacherRepo = classTeacherRepo;
+        this.studentService = studentService;
     }
 
     @Override
@@ -115,7 +119,28 @@ public class TeacherService implements ITeacherService{
         return courses;
     }
 
+    @Override
+    public List<StudentDTO> getStudents(Long id) {
+        List<StudentDTO> students= new ArrayList<>();
+        List<ClassTeachers> tmp = this.classTeacherRepo.getAllByTeacher_Id(id);
+        List<Long> classIds = new ArrayList<>();
+        tmp.forEach(classTeacher -> {
+                Long classId = classTeacher.getStudentClass().getId();
+                if(!classIds.contains(classId)){
+                    classIds.add(classId);
+                }
+        });
 
+        if(tmp.isEmpty()){
+            System.out.println("Empty");
+        } else {
+            System.out.println("Length is: "+tmp.size());
+        }
+
+        students = this.studentService.getAllStudentsByClassIdS(classIds);
+
+        return students;
+    }
 
     @Override
     public TeacherDTO convertToDTO(Teacher teacher) {

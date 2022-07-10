@@ -16,5 +16,6 @@ public interface ITeacherService {
     Teacher findById(Long id);
     List<TeacherDTO> getAll(Long schoolId);
     List<TeacherCourcesDTO> getCourses(Long id);
+    List<StudentDTO> getStudents(Long id);
     TeacherDTO convertToDTO(Teacher teacher);
 }
