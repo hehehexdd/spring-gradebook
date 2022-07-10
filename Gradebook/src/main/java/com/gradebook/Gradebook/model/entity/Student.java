@@ -29,7 +29,7 @@ public class Student extends AppUser{
     private List<ClassTeachers> classTeachers;
 
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "kids")
     private List<Parent> parents;
 
     @ManyToMany
