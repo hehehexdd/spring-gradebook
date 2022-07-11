@@ -21,6 +21,9 @@ public class AppUserController {
     @Autowired
     private final IAppUserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public AppUserController(IAppUserService userService) {
         this.userService = userService;
     }
@@ -28,6 +31,7 @@ public class AppUserController {
     @PostMapping(path="/register")
     @ResponseStatus(HttpStatus.CREATED)
     public void register(@RequestBody RegisterDTO userDTO) {
+        userDTO.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
         userService.saveUser(userDTO);
     }
 

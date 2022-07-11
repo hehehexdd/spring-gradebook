@@ -25,9 +25,6 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     @Autowired
     private AppUserRepo userRepo;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public AppUserService(AppUserRepo userRepo) {
         this.userRepo = userRepo;
     }
@@ -54,7 +51,7 @@ public class AppUserService implements IAppUserService, UserDetailsService {
         AppUser user = new AppUser(
                 userDTO.getUsername(),
                 userDTO.getEmail(),
-                this.passwordEncoder.encode(userDTO.getPassword()),
+                userDTO.getPassword(),
                 RoleType.ADMIN,
                 false);
         return userRepo.save(user);
