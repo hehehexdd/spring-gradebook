@@ -68,6 +68,8 @@ public class SubjectService implements ISubjectService{
 
     @Override
     public List<SubjectDTO> getSubjectsByIds(List<Long> subjectIds) {
-        return null;
+        return subjectRepo.getAllSubjectsByIds(subjectIds)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
