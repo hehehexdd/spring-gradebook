@@ -1,6 +1,7 @@
 package com.gradebook.Gradebook.service;
 
 import com.gradebook.Gradebook.model.dto.AppUserDTO;
+import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.entity.AppUser;
 import com.gradebook.Gradebook.model.entity.RoleType;
 import com.gradebook.Gradebook.repo.AppUserRepo;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,9 @@ public class AppUserService implements IAppUserService, UserDetailsService {
 
     @Autowired
     private AppUserRepo userRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public AppUserService(AppUserRepo userRepo) {
         this.userRepo = userRepo;
@@ -45,18 +50,22 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     }
 
     @Override
-    public AppUser saveUser(AppUser user) {
-        user.setAccountLocked(true);
+    public AppUser saveUser(RegisterDTO userDTO) {
+        AppUser user = new AppUser(
+                userDTO.getUsername(),
+                userDTO.getEmail(),
+                this.passwordEncoder.encode(userDTO.getPassword()),
+                RoleType.ADMIN,
+                false);
         return userRepo.save(user);
     }
 
     @Override
-    public void updateUser(AppUser user) {
+    public void updateUser(Long id, AppUserDTO payload) {
         AppUser tmp;
-        tmp = userRepo.findByUsername(user.getUsername());
-        tmp.setEmail(user.getEmail());
-        tmp.setPassword(user.getPassword());
-        tmp.setAccountLocked(user.isAccountLocked());
+        tmp = userRepo.findByUsername(payload.getUsername());
+        //tmp.setEmail(user.getEmail());
+        tmp.setAccountLocked(payload.isAccountLocked());
         userRepo.save(tmp);
     }
 

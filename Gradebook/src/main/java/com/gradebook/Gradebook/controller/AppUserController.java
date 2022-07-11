@@ -21,9 +21,6 @@ public class AppUserController {
     @Autowired
     private final IAppUserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public AppUserController(IAppUserService userService) {
         this.userService = userService;
     }
@@ -31,16 +28,8 @@ public class AppUserController {
     @PostMapping(path="/register")
     @ResponseStatus(HttpStatus.CREATED)
     public void register(@RequestBody RegisterDTO userDTO) {
-        AppUser user = new AppUser(
-                userDTO.getUsername(),
-                userDTO.getEmail(),
-                this.passwordEncoder.encode(userDTO.getPassword()),
-                RoleType.ADMIN,
-                false);
-        userService.saveUser(user);
+        userService.saveUser(userDTO);
     }
-
-    //TODO put authentication in AppUser controller
 
     @GetMapping(path = "/all")
     public List<AppUserDTO> getAppUsers() {
@@ -55,11 +44,7 @@ public class AppUserController {
 
     @PatchMapping(path = "/{id}")
     public AppUserDTO updateAppUserById(@PathVariable("id") Long id, @RequestBody AppUserDTO payload) {
-        AppUser user = userService.getUserById(id);
-        user.setEmail(payload.getEmail());
-        user.setAccountLocked(payload.isAccountLocked());
-        user.setRole(RoleType.valueOf(payload.getRole()));
-        userService.saveUser(user);
+        this.userService.updateUser(id, payload);
         return userService.convertToDTO(userService.getUserById(id));
     }
 

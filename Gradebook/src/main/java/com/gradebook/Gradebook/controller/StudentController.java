@@ -30,15 +30,11 @@ public class StudentController {
     private final ISchoolService schoolService;
 
     @Autowired
-    private final ISchoolClassService schoolClassService;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public StudentController(IStudentService studentService, ISchoolService schoolService, ISchoolClassService schoolClassService) {
+    public StudentController(IStudentService studentService, ISchoolService schoolService) {
         this.studentService = studentService;
         this.schoolService = schoolService;
-        this.schoolClassService = schoolClassService;
     }
 
     @PostMapping
