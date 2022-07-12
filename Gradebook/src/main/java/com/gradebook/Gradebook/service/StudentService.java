@@ -142,7 +142,7 @@ public class StudentService implements IStudentService{
             studentDTO.setFirstName(student.getFirstName());
             studentDTO.setLastName(student.getLastName());
             studentDTO.setSchoolName(student.getSchool().getName());
-            studentDTO.setSchoolClass(student.getSClass());
+            studentDTO.setSchoolClass(student.getSchoolClass().getName());
             studentDTO.setSclassId(student.getSchoolClass().getId());
         }
 

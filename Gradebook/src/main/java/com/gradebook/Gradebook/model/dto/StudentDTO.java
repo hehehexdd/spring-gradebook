@@ -7,13 +7,13 @@ public class StudentDTO {
     private String firstName;
     private String lastName;
     private String schoolName;
-    private SClass schoolClass;
+    private String schoolClass;
     private Long sclassId;
 
     public StudentDTO() {
     }
 
-    public StudentDTO(Long id, String firstName, String lastName, String schoolName, SClass schoolClass, Long sclassId) {
+    public StudentDTO(Long id, String firstName, String lastName, String schoolName, String schoolClass, Long sclassId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,7 +39,7 @@ public class StudentDTO {
         return schoolName;
     }
 
-    public SClass getSchoolClass() {
+    public String getSchoolClass() {
         return schoolClass;
     }
 
@@ -64,7 +64,7 @@ public class StudentDTO {
         this.schoolName = schoolName;
     }
 
-    public void setSchoolClass(SClass schoolClass) {
+    public void setSchoolClass(String schoolClass) {
         this.schoolClass = schoolClass;
     }
 

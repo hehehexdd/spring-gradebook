@@ -61,24 +61,25 @@ public class GradeController {
         return gradeService.getAllGradesByStudentsIds(parent.getChildrenIds());
     }
 
+    @GetMapping(path = "/students/teacher/{teacherId}")
+    public List<GradeDTO> getAllGradesByTeacherId(@PathVariable("teacherId") Long teacherId) {
+        return gradeService.getAllGradesByTeacherId(teacherId);
+    }
+
+    @GetMapping(path = "/school/{schoolId}")
+    public List<GradeDTO> getAllGradesBySchoolId(@PathVariable("schoolId") Long schoolId) {
+        return gradeService.getAllGradesBySchoolId(schoolId);
+    }
+
     @PostMapping(path = "/{studentId}")
     public GradeDTO createGrade(@PathVariable("studentId") Long id, @RequestBody GradeDTO payload) {
-        Grade grade = new Grade(
-                subjectService.getSubjectByName(payload.getSubject()),
-                payload.getGrade(),
-                studentService.findById(payload.getStudentId()),
-                teacherService.findById(payload.getTeacherId()),
-                LocalDate.now());
-        gradeService.saveGrade(grade);
-        return gradeService.convertToDTO(grade);
+        return gradeService.convertToDTO(gradeService.saveGrade(id, payload));
     }
 
     @PatchMapping(path = "/{id}")
     public GradeDTO updateGradeById(@PathVariable("id") Long id, @RequestBody GradeDTO payload) {
-        Grade tmp = gradeService.findGradeById(id);
-        tmp.setGrade(payload.getGrade());
-        gradeService.saveGrade(tmp);
-        return gradeService.convertToDTO(tmp);
+        this.gradeService.updateGrade(id, payload);
+        return gradeService.convertToDTO(gradeService.findGradeById(id));
     }
 
     @DeleteMapping(path = "/{id}")

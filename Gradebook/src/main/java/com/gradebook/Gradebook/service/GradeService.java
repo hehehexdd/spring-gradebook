@@ -7,6 +7,7 @@ import com.gradebook.Gradebook.repo.GradeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,17 +19,36 @@ public class GradeService implements IGradeService{
     @Autowired
     private final GradeRepo gradeRepo;
 
-    public GradeService(GradeRepo gradeRepo) {
+    @Autowired
+    private final ISubjectService subjectService;
+
+    @Autowired
+    private final IStudentService studentService;
+
+    @Autowired
+    private final ITeacherService teacherService;
+
+    public GradeService(GradeRepo gradeRepo, ISubjectService subjectService,
+                        IStudentService studentService, ITeacherService teacherService) {
         this.gradeRepo = gradeRepo;
+        this.subjectService = subjectService;
+        this.studentService = studentService;
+        this.teacherService = teacherService;
     }
 
     @Override
-    public Grade saveGrade(Grade grade) {
-        return this.gradeRepo.save(grade);
+    public Grade saveGrade(Long id, GradeDTO payload) {
+        Grade grade = new Grade(
+                subjectService.getSubjectByName(payload.getSubject()),
+                payload.getGrade(),
+                studentService.findById(payload.getStudentId()),
+                teacherService.findById(payload.getTeacherId()),
+                LocalDate.now());
+        return gradeRepo.save(grade);
     }
 
     @Override
-    public void updateGrade(GradeDTO gradeDTO) {
+    public void updateGrade(Long id, GradeDTO gradeDTO) {
         Grade tmp = this.gradeRepo.getById(gradeDTO.getId());
         tmp.setDate(gradeDTO.getDate());
         tmp.setGrade(gradeDTO.getGrade());
@@ -65,7 +85,7 @@ public class GradeService implements IGradeService{
     }
 
     @Override
-    public List<GradeDTO> getAllGradesBySchool(Long schoolId) {
+    public List<GradeDTO> getAllGradesBySchoolId(Long schoolId) {
         return gradeRepo.getAllByStudent_School_Id(schoolId)
                 .stream().map(this::convertToDTO)
                 .collect(Collectors.toList());

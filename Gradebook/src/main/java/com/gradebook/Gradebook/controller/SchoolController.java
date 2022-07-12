@@ -37,7 +37,7 @@ public class SchoolController {
 
     @GetMapping(path = "/{id}/grades")
     public List<GradeDTO> getAllSchoolGrades(@PathVariable("id") Long schoolId) {
-        return gradeService.getAllGradesBySchool(schoolId);
+        return gradeService.getAllGradesBySchoolId(schoolId);
     }
 
     @GetMapping(path = "/{id}/grades/statistics")

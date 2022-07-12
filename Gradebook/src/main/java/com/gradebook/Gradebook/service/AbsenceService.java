@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,20 +18,40 @@ public class AbsenceService implements IAbsenceService{
     @Autowired
     private final AbsenceRepo absenceRepo;
 
-    public AbsenceService(AbsenceRepo absenceRepo) {
+    @Autowired
+    private final IStudentService studentService;
+
+    @Autowired
+    private final ISubjectService subjectService;
+
+    @Autowired
+    private final ITeacherService teacherService;
+
+
+    public AbsenceService(AbsenceRepo absenceRepo, IStudentService studentService,
+                          ISubjectService subjectService, ITeacherService teacherService) {
         this.absenceRepo = absenceRepo;
+        this.studentService = studentService;
+        this.subjectService = subjectService;
+        this.teacherService = teacherService;
     }
 
 
     @Override
-    public Absence saveAbsence(Absence absence) {
+    public Absence saveAbsence(Long id, AbsenceDTO payload) {
+        Absence absence = new Absence(payload.getId(),
+                studentService.findById(payload.getStudentId()),
+                subjectService.getSubjectByName(payload.getSubject()),
+                teacherService.findById(payload.getTeacherId()),
+                LocalDate.now());
+        absenceRepo.save(absence);
         return absenceRepo.save(absence);
     }
 
     @Override
-    public void updateAbsence(Absence absence) {
-        Absence tmp = absenceRepo.getById(absence.getId());
-        tmp.setDate(absence.getDate());
+    public void updateAbsence(Long id, AbsenceDTO payload) {
+        Absence absence = absenceRepo.getById(payload.getId());
+        absence.setDate(payload.getDate());
         absenceRepo.save(absence);
     }
 
@@ -66,6 +87,20 @@ public class AbsenceService implements IAbsenceService{
     @Override
     public List<AbsenceDTO> getAllAbsencesByStudentsIds(List<Long> studentIds) {
         return absenceRepo.getAllAbsencesByStudentsId(studentIds)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AbsenceDTO> getAllAbsencesByTeacherId(Long teacherId) {
+        return absenceRepo.getAllByTeacher_Id(teacherId)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AbsenceDTO> getAllAbsencesBySchoolId(Long schoolId) {
+        return absenceRepo.getAllByStudent_School_Id(schoolId)
                 .stream().map(this::convertToDTO)
                 .collect(Collectors.toList());
     }

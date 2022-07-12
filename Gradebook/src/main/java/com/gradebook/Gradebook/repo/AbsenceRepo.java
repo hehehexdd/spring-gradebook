@@ -17,4 +17,9 @@ public interface AbsenceRepo extends JpaRepository<Absence, Long> {
 
     @Query("SELECT a From Absence a JOIN a.student s WHERE s.id in :ids ORDER BY a.date DESC")
     List<Absence> getAllAbsencesByStudentsId(@Param("ids") List<Long> ids);
+
+    List<Absence> getAllByTeacher_Id(Long id);
+
+    //@Query("SELECT a From Absence a JOIN a.student s WHERE s.school = ?1")
+    List<Absence> getAllByStudent_School_Id(Long schoolId);
 }

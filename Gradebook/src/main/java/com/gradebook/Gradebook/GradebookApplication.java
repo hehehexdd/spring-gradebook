@@ -31,7 +31,7 @@ public class GradebookApplication {
 					"admin_adminov@gmail.com",
 					"$2a$10$n1042hx1F577X48aw9YdlO/hJUNYRKbZ5WtncghMYmUwK57ZL4Zte",
 					RoleType.ADMIN,
-					true));
+					false));
 			School s = new School("aaaaa", "A");
 			schoolService.save(s);
 			schoolClassService.save(new SchoolClass(

@@ -54,28 +54,30 @@ public class AbsenceController {
 
     //call: uri/absence/1,2,3,4
     @GetMapping(path = "/students/parent/{parentId}")
-    public List<AbsenceDTO> getAllAbsencesByStudentIds(@PathVariable("parentId") Long parentId) {
+    public List<AbsenceDTO> getAllAbsencesOfStudentsByParentId(@PathVariable("parentId") Long parentId) {
         ParentDTO parent = parentService.getById(parentId);
         return absenceService.getAllAbsencesByStudentsIds(parent.getChildrenIds());
     }
 
+    @GetMapping(path = "/students/teacher/{teacherId}")
+    public List<AbsenceDTO> getAllAbsencesByTeacherIdS(@PathVariable("teacherId") Long teacherId) {
+        return absenceService.getAllAbsencesByTeacherId(teacherId);
+    }
+
+    @GetMapping(path = "/school/{schoolId}")
+    public List<AbsenceDTO> getAllAbsencesBySchoolId(@PathVariable("schoolId") Long schoolId) {
+        return absenceService.getAllAbsencesBySchoolId(schoolId);
+    }
+
     @PostMapping(path = "/{studentId}")
     public AbsenceDTO createAbsence(@PathVariable("studentId") Long id, @RequestBody AbsenceDTO payload) {
-        Absence absence = new Absence(payload.getId(),
-                studentService.findById(payload.getStudentId()),
-                subjectService.getSubjectByName(payload.getSubject()),
-                teacherService.findById(payload.getTeacherId()),
-                LocalDate.now());
-        absenceService.saveAbsence(absence);
-        return absenceService.convertToDTO(absence);
+        return absenceService.convertToDTO(absenceService.saveAbsence(id, payload));
     }
 
     @PatchMapping(path = "/{id}")
-    public AbsenceDTO updateAbsenceById(@PathVariable("id") Long id, @RequestBody GradeDTO payload) {
-        Absence tmp = absenceService.findById(id);
-        tmp.setDate(payload.getDate());
-        absenceService.saveAbsence(tmp);
-        return absenceService.convertToDTO(tmp);
+    public AbsenceDTO updateAbsenceById(@PathVariable("id") Long id, @RequestBody AbsenceDTO payload) {
+        this.absenceService.updateAbsence(id, payload);
+        return absenceService.convertToDTO(absenceService.findById(id));
     }
 
     @DeleteMapping(path = "/{id}")

@@ -6,8 +6,8 @@ import com.gradebook.Gradebook.model.entity.Grade;
 import java.util.List;
 
 public interface IGradeService {
-    Grade saveGrade(Grade grade);
-    void updateGrade(GradeDTO gradeDTO);
+    Grade saveGrade(Long id, GradeDTO payload);
+    void updateGrade(Long id, GradeDTO gradeDTO);
     void deleteGrade(Long id);
     GradeDTO getGradeById(Long id);
     Grade findGradeById(Long id);
@@ -19,5 +19,5 @@ public interface IGradeService {
 
     List<GradeDTO> getAllGradesBySubjectId(Long subjectId);
     List<GradeDTO> getAllGradesByTeacherId(Long teacherId);
-    List<GradeDTO> getAllGradesBySchool(Long schoolId);
+    List<GradeDTO> getAllGradesBySchoolId(Long schoolId);
 }
