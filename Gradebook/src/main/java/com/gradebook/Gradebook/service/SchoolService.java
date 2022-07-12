@@ -29,18 +29,10 @@ public class SchoolService implements ISchoolService {
     private final SchoolRepo schoolRepo;
 
     @Autowired
-    private final TeacherRepo teacherRepo;
-
-    @Autowired
-    final TeacherService teacherService;
-
-    @Autowired
     private final GradeRepo gradeRepo;
 
-    public SchoolService(SchoolRepo schoolRepo, TeacherRepo teacherRepo, TeacherService teacherService, GradeRepo gradeRepo) {
+    public SchoolService(SchoolRepo schoolRepo, GradeRepo gradeRepo) {
         this.schoolRepo = schoolRepo;
-        this.teacherRepo = teacherRepo;
-        this.teacherService = teacherService;
         this.gradeRepo = gradeRepo;
     }
 
@@ -103,13 +95,6 @@ public class SchoolService implements ISchoolService {
         school.setAddress(schoolDTO.getAddress() != null ? schoolDTO.getAddress() : school.getAddress());
 
         return convertToDTO(school);
-    }
-
-    @Override
-    public List<TeacherDTO> getAllTeachersBySchoolId(Long id) {
-        return teacherRepo.findAllBySchool_Id(id)
-                .stream().map(teacherService::convertToDTO)
-                .collect(Collectors.toList());
     }
 
     @Override

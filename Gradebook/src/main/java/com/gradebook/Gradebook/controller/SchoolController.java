@@ -4,6 +4,7 @@ import com.gradebook.Gradebook.config.GradebookCommon;
 import com.gradebook.Gradebook.model.dto.*;
 import com.gradebook.Gradebook.service.IGradeService;
 import com.gradebook.Gradebook.service.ISchoolService;
+import com.gradebook.Gradebook.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,13 @@ public class SchoolController {
     @Autowired
     private final IGradeService gradeService;
 
-    public SchoolController(ISchoolService schoolService, IGradeService gradeService) {
+    @Autowired
+    private final ITeacherService teacherService;
+
+    public SchoolController(ISchoolService schoolService, IGradeService gradeService, ITeacherService teacherService) {
         this.schoolService = schoolService;
         this.gradeService = gradeService;
+        this.teacherService = teacherService;
     }
 
     @GetMapping(path = "/{id}/statistics")
@@ -49,7 +54,7 @@ public class SchoolController {
 
     @GetMapping(path = "/{id}/teachers")
     public List<TeacherDTO> getAllTeachersBySchoolId(@PathVariable Long id) {
-        return schoolService.getAllTeachersBySchoolId(id);
+        return teacherService.getAllBySchoolId(id);
     }
 
     @PatchMapping(path = "/{id}")

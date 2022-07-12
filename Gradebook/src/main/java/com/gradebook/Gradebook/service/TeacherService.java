@@ -146,6 +146,13 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
+    public List<TeacherDTO> getAllBySchoolId(Long id) {
+        return teacherRepo.findAllBySchool_Id(id)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public TeacherDTO convertToDTO(Teacher teacher) {
         TeacherDTO teacherDTO = new TeacherDTO();
 
