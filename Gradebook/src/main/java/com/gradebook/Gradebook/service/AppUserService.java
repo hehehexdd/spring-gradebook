@@ -60,7 +60,7 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     @Override
     public void updateUser(Long id, AppUserDTO payload) {
         AppUser tmp;
-        tmp = userRepo.findByUsername(payload.getUsername());
+        tmp = userRepo.getById(id);
         tmp.setAccountLocked(payload.isAccountLocked());
         userRepo.save(tmp);
     }
