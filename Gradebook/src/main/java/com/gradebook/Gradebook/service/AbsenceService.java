@@ -38,14 +38,14 @@ public class AbsenceService implements IAbsenceService{
 
 
     @Override
-    public Absence saveAbsence(Long id, AbsenceDTO payload) {
+    public AbsenceDTO saveAbsence(Long id, AbsenceDTO payload) {
         Absence absence = new Absence(payload.getId(),
                 studentService.findById(payload.getStudentId()),
                 subjectService.getSubjectByName(payload.getSubject()),
                 teacherService.findById(payload.getTeacherId()),
                 LocalDate.now());
         absenceRepo.save(absence);
-        return absenceRepo.save(absence);
+        return this.convertToDTO(absence);
     }
 
     @Override

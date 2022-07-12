@@ -73,7 +73,7 @@ public class GradeController {
 
     @PostMapping(path = "/{studentId}")
     public GradeDTO createGrade(@PathVariable("studentId") Long id, @RequestBody GradeDTO payload) {
-        return gradeService.convertToDTO(gradeService.saveGrade(id, payload));
+        return gradeService.saveGrade(id, payload);
     }
 
     @PatchMapping(path = "/{id}")

@@ -10,8 +10,7 @@ import java.util.List;
 
 public interface IStudentService {
     Student saveStudent(Student user);
-    void createStudent(RegisterDTO payload);
-    void updateStudent(Student user);
+    StudentDTO createStudent(RegisterDTO payload);
     StudentDTO update(Long id, StudentDTO payload);
     void deleteStudent(Long id);
     StudentDTO getById(Long id);

@@ -47,14 +47,14 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     }
 
     @Override
-    public AppUser saveUser(RegisterDTO userDTO) {
+    public AppUserDTO saveUser(RegisterDTO userDTO) {
         AppUser user = new AppUser(
                 userDTO.getUsername(),
                 userDTO.getEmail(),
                 userDTO.getPassword(),
                 RoleType.ADMIN,
                 false);
-        return userRepo.save(user);
+        return this.convertToDTO(userRepo.save(user));
     }
 
     @Override

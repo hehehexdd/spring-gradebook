@@ -37,14 +37,15 @@ public class GradeService implements IGradeService{
     }
 
     @Override
-    public Grade saveGrade(Long id, GradeDTO payload) {
+    public GradeDTO saveGrade(Long id, GradeDTO payload) {
         Grade grade = new Grade(
                 subjectService.getSubjectByName(payload.getSubject()),
                 payload.getGrade(),
                 studentService.findById(payload.getStudentId()),
                 teacherService.findById(payload.getTeacherId()),
                 LocalDate.now());
-        return gradeRepo.save(grade);
+        gradeRepo.save(grade);
+        return this.convertToDTO(grade);
     }
 
     @Override

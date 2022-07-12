@@ -57,7 +57,7 @@ public class AbsenceController {
 
     @PostMapping(path = "/{studentId}")
     public AbsenceDTO createAbsence(@PathVariable("studentId") Long id, @RequestBody AbsenceDTO payload) {
-        return absenceService.convertToDTO(absenceService.saveAbsence(id, payload));
+        return absenceService.saveAbsence(id, payload);
     }
 
     @PatchMapping(path = "/{id}")

@@ -6,7 +6,7 @@ import com.gradebook.Gradebook.model.entity.Absence;
 import java.util.List;
 
 public interface IAbsenceService {
-    Absence saveAbsence(Long id, AbsenceDTO payload);
+    AbsenceDTO saveAbsence(Long id, AbsenceDTO payload);
     void updateAbsence(Long id, AbsenceDTO payload);
     void deleteAbsence(Long id);
     Absence findById(Long id);

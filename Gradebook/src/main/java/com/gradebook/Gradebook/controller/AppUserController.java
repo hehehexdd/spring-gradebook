@@ -30,9 +30,9 @@ public class AppUserController {
 
     @PostMapping(path="/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestBody RegisterDTO userDTO) {
+    public AppUserDTO register(@RequestBody RegisterDTO userDTO) {
         userDTO.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
-        userService.saveUser(userDTO);
+        return userService.saveUser(userDTO);
     }
 
     @GetMapping(path = "/all")
