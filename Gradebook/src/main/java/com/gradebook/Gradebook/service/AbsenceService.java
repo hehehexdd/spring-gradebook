@@ -112,8 +112,10 @@ public class AbsenceService implements IAbsenceService{
         if(absence != null) {
             absenceDTO.setId(absence.getId());
             absenceDTO.setStudentId(absence.getStudent().getId());
+            absenceDTO.setStudentName(absence.getStudent().getFirstName() + " " + absence.getStudent().getLastName());
             absenceDTO.setSubject(absence.getSubject().getName() );
             absenceDTO.setTeacherId(absence.getTeacher().getId());
+            absenceDTO.setTeacherName(absence.getTeacher().getFirstName() + " " + absence.getTeacher().getLastName());
             absenceDTO.setDate(absence.getDate());
         }
         return absenceDTO;
