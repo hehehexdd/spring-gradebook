@@ -7,18 +7,24 @@ public class GradeDTO {
     private String subject;
     private Integer grade;
     private Long studentId;
+    private String studentName;
     private Long teacherId;
+    private String teacherName;
     private LocalDate date;
 
     public GradeDTO() {
     }
 
-    public GradeDTO(Long id, String subject, Integer grade, Long studentId, Long teacherId, LocalDate date) {
+    public GradeDTO(Long id, String subject, Integer grade,
+                    Long studentId, String studentName,
+                    Long teacherId, String teacherName, LocalDate date) {
         this.id = id;
         this.subject = subject;
         this.grade = grade;
         this.studentId = studentId;
+        this.studentName = studentName;
         this.teacherId = teacherId;
+        this.teacherName = teacherName;
         this.date = date;
     }
 
@@ -39,8 +45,16 @@ public class GradeDTO {
         return studentId;
     }
 
+    public String getStudentName() {
+        return studentName;
+    }
+
     public Long getTeacherId() {
         return teacherId;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
     }
 
     public LocalDate getDate() {
@@ -64,8 +78,16 @@ public class GradeDTO {
         this.studentId = studentId;
     }
 
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
     public void setTeacherId(Long teacherId) {
         this.teacherId = teacherId;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public void setDate(LocalDate date) {

@@ -39,8 +39,8 @@ public class StudentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createStudent(@RequestBody RegisterDTO payload) {
-       this.studentService.createStudent(payload);
+    public StudentDTO createStudent(@RequestBody RegisterDTO payload) {
+       return this.studentService.createStudent(payload);
     }
 
     @GetMapping(path = "/all")

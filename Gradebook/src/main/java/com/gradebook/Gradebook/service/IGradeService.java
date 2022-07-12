@@ -6,7 +6,7 @@ import com.gradebook.Gradebook.model.entity.Grade;
 import java.util.List;
 
 public interface IGradeService {
-    Grade saveGrade(Long id, GradeDTO payload);
+    GradeDTO saveGrade(Long id, GradeDTO payload);
     void updateGrade(Long id, GradeDTO gradeDTO);
     void deleteGrade(Long id);
     GradeDTO getGradeById(Long id);

@@ -4,6 +4,7 @@ import com.gradebook.Gradebook.model.entity.SClass;
 
 public class StudentDTO {
     private Long id;
+    private String username;
     private String firstName;
     private String lastName;
     private String schoolName;
@@ -13,8 +14,10 @@ public class StudentDTO {
     public StudentDTO() {
     }
 
-    public StudentDTO(Long id, String firstName, String lastName, String schoolName, String schoolClass, Long sclassId) {
+    public StudentDTO(Long id, String username, String firstName, String lastName,
+                      String schoolName, String schoolClass, Long sclassId) {
         this.id = id;
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.schoolName = schoolName;
@@ -25,6 +28,10 @@ public class StudentDTO {
     //Getters
     public Long getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getFirstName() {
@@ -50,6 +57,10 @@ public class StudentDTO {
     //Setters
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setFirstName(String firstName) {

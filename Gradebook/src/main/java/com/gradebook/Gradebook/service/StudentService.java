@@ -45,7 +45,7 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public void createStudent(RegisterDTO payload) {
+    public StudentDTO createStudent(RegisterDTO payload) {
         Student s = new Student(
                 payload.getUsername(),
                 payload.getEmail(),
@@ -58,23 +58,24 @@ public class StudentService implements IStudentService{
                 RoleType.STUDENT,
                 schoolClassService.findById(payload.getClassId()).getClassYear());
         this.saveStudent(s);
+        return this.convertToDTO(s);
     }
 
-    @Override
-    public void updateStudent(Student student) {
-        if(student != null) {
-            Student tmp;
-            tmp = studentRepo.getById(student.getId());
-            tmp.setFirstName(student.getFirstName());
-            tmp.setLastName(student.getLastName());
-            tmp.setSchool(student.getSchool());
-            tmp.setAbsences(student.getAbsences());
-            tmp.setGrades(student.getGrades());
-            tmp.setParents(student.getParents());
-            tmp.setSClass(student.getSClass());
-            studentRepo.save(tmp);
-        }
-    }
+//    @Override
+//    public void updateStudent(Student student) {
+//        if(student != null) {
+//            Student tmp;
+//            tmp = studentRepo.getById(student.getId());
+//            tmp.setFirstName(student.getFirstName());
+//            tmp.setLastName(student.getLastName());
+//            tmp.setSchool(student.getSchool());
+//            tmp.setAbsences(student.getAbsences());
+//            tmp.setGrades(student.getGrades());
+//            tmp.setParents(student.getParents());
+//            tmp.setSClass(student.getSClass());
+//            studentRepo.save(tmp);
+//        }
+//    }
 
     @Override
     public StudentDTO update(Long id, StudentDTO payload) {
@@ -139,6 +140,7 @@ public class StudentService implements IStudentService{
 
         if (student != null) {
             studentDTO.setId(student.getId());
+            studentDTO.setUsername(student.getUsername());
             studentDTO.setFirstName(student.getFirstName());
             studentDTO.setLastName(student.getLastName());
             studentDTO.setSchoolName(student.getSchool().getName());

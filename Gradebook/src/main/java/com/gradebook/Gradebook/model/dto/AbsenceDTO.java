@@ -5,18 +5,24 @@ import java.time.LocalDate;
 public class AbsenceDTO {
     private Long id;
     private Long studentId;
+    private String studentName;
     private String subject;
     private Long teacherId;
+    private String teacherName;
     private LocalDate date;
 
     public AbsenceDTO() {
     }
 
-    public AbsenceDTO(Long id, Long studentId, String subject, Long teacherId, LocalDate date) {
+    public AbsenceDTO(Long id, Long studentId, String studentName,
+                      String subject, Long teacherId, String teacherName,
+                      LocalDate date) {
         this.id = id;
         this.studentId = studentId;
+        this.studentName = studentName;
         this.subject = subject;
         this.teacherId = teacherId;
+        this.teacherName = teacherName;
         this.date = date;
     }
 
@@ -27,6 +33,10 @@ public class AbsenceDTO {
 
     public Long getStudentId() {
         return studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
     }
 
     public String getSubject() {
@@ -41,6 +51,10 @@ public class AbsenceDTO {
         return teacherId;
     }
 
+    public String getTeacherName() {
+        return teacherName;
+    }
+
     //Setters
     public void setId(Long id) {
         this.id = id;
@@ -48,6 +62,10 @@ public class AbsenceDTO {
 
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public void setSubject(String subject) {
@@ -60,5 +78,9 @@ public class AbsenceDTO {
 
     public void setTeacherId(Long teacherId) {
         this.teacherId = teacherId;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 }
