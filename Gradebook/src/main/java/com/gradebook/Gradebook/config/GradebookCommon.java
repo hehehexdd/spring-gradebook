@@ -24,4 +24,6 @@ public class GradebookCommon {
     public static final String Subject_BASE_URI = "/api/subject";
 
     public static final String SCHOOL_CLASS_BASE_URI = "/api/schoolclass";
+
+    public static final String TERM_PROGRAM_BASE_URI = "/api/termProgram";
 }
