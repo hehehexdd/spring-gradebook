@@ -21,13 +21,16 @@ public class ParentService implements IParentService{
     private final ParentRepo parentRepo;
 
     @Autowired
-    private StudentService studentService;
+    private final IStudentService studentService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public ParentService(ParentRepo parentRepo) {
+    public ParentService(ParentRepo parentRepo, StudentService studentService, PasswordEncoder passwordEncoder) {
+
         this.parentRepo = parentRepo;
+        this.studentService = studentService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -46,6 +49,7 @@ public class ParentService implements IParentService{
             parent.setLastName(payload.getLastName());
         }
         if(!childrenIds.isEmpty()){
+            System.out.println("child array is not empty");
             List<Student> children = new ArrayList<>();
             childrenIds.forEach((id)-> children.add(this.studentService.findById(id)));
             parent.setKids(children);
@@ -55,7 +59,7 @@ public class ParentService implements IParentService{
     }
 
     @Override
-    public void createParent(RegisterDTO user) {
+    public ParentDTO createParent(RegisterDTO user) {
 
         Parent parent = new Parent(
                 user.getUsername(),
@@ -68,6 +72,8 @@ public class ParentService implements IParentService{
         );
 
         this.parentRepo.save(parent);
+
+        return this.convertToDTO(parent);
     }
 
     @Override

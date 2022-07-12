@@ -39,8 +39,8 @@ public class ParentController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void createParent(@RequestBody RegisterDTO payload) {
-        this.parentService.createParent(payload);
+    public ParentDTO createParent(@RequestBody RegisterDTO payload) {
+        return this.parentService.createParent(payload);
     }
 
     @DeleteMapping(path = "/{id}")

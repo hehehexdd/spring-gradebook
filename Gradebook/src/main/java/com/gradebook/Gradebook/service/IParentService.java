@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IParentService {
     ParentDTO update(Long parentId, ParentDTO parent);
-    void createParent(RegisterDTO user);
+    ParentDTO createParent(RegisterDTO user);
     void delete(Long id);
     ParentDTO getById(Long id);
     Parent findById(Long id);
