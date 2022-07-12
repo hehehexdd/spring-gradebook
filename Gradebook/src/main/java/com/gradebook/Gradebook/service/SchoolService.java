@@ -4,12 +4,14 @@ import com.gradebook.Gradebook.exception.EntityNotFoundException;
 import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.dto.SchoolDTO;
 import com.gradebook.Gradebook.model.dto.SchoolStatisticsDTO;
+import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.model.entity.Grade;
 import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.model.entity.Student;
 import com.gradebook.Gradebook.model.entity.Teacher;
 import com.gradebook.Gradebook.repo.GradeRepo;
 import com.gradebook.Gradebook.repo.SchoolRepo;
+import com.gradebook.Gradebook.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +29,18 @@ public class SchoolService implements ISchoolService {
     private final SchoolRepo schoolRepo;
 
     @Autowired
+    private final TeacherRepo teacherRepo;
+
+    @Autowired
+    final TeacherService teacherService;
+
+    @Autowired
     private final GradeRepo gradeRepo;
 
-    public SchoolService(SchoolRepo schoolRepo, GradeRepo gradeRepo) {
+    public SchoolService(SchoolRepo schoolRepo, TeacherRepo teacherRepo, TeacherService teacherService, GradeRepo gradeRepo) {
         this.schoolRepo = schoolRepo;
+        this.teacherRepo = teacherRepo;
+        this.teacherService = teacherService;
         this.gradeRepo = gradeRepo;
     }
 
@@ -93,6 +103,13 @@ public class SchoolService implements ISchoolService {
         school.setAddress(schoolDTO.getAddress() != null ? schoolDTO.getAddress() : school.getAddress());
 
         return convertToDTO(school);
+    }
+
+    @Override
+    public List<TeacherDTO> getAllTeachersBySchoolId(Long id) {
+        return teacherRepo.findAllBySchool_Id(id)
+                .stream().map(teacherService::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -3,7 +3,9 @@ package com.gradebook.Gradebook.service;
 import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.dto.SchoolDTO;
 import com.gradebook.Gradebook.model.dto.SchoolStatisticsDTO;
+import com.gradebook.Gradebook.model.dto.TeacherDTO;
 import com.gradebook.Gradebook.model.entity.School;
+import com.gradebook.Gradebook.model.entity.Teacher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -23,6 +25,8 @@ public interface ISchoolService {
     List<SchoolDTO> getAll();
 
     SchoolDTO update(Long id, SchoolDTO schoolDTO);
+
+    List<TeacherDTO> getAllTeachersBySchoolId(Long id);
 
     SchoolStatisticsDTO getStatisticsForSchool(Long id);
 
