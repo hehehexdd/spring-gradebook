@@ -5,7 +5,6 @@ import com.gradebook.Gradebook.model.dto.DirectorDTO;
 import com.gradebook.Gradebook.model.dto.RegisterDTO;
 import com.gradebook.Gradebook.model.entity.Director;
 import com.gradebook.Gradebook.model.entity.RoleType;
-import com.gradebook.Gradebook.model.entity.School;
 import com.gradebook.Gradebook.repo.DirectorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -120,6 +119,7 @@ public class DirectorService implements IDirectorService {
             directorDTO.setLastName(director.getLastName());
             directorDTO.setUsername(director.getUsername());
             directorDTO.setSchool(director.getSchool().getName());
+            directorDTO.setSchoolId(director.getSchool().getId());
         }
 
         return directorDTO;

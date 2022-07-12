@@ -8,15 +8,26 @@ public class DirectorDTO {
     private String username;
     private String school;
 
+    private Long schoolId;
+
     public DirectorDTO() {
     }
 
-    public DirectorDTO(Long id, String firstName, String secondName, String username, String school) {
+    public DirectorDTO(Long id, String firstName, String secondName, String username, String school, Long schoolId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = secondName;
         this.username = username;
         this.school = school;
+        this.schoolId = schoolId;
+    }
+
+    public Long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
     }
 
     public Long getId() {

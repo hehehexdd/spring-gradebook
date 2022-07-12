@@ -51,12 +51,4 @@ public class Director extends AppUser{
         this.school = school;
     }
 
-    @Override
-    public String toString() {
-        return "Director{" +
-                "firstName='" + firstName + '\'' +
-                ", secondName='" + lastName + '\'' +
-                ", school=" + school.getName() +
-                '}';
-    }
 }
