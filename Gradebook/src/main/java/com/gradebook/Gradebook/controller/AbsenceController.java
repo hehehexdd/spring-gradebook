@@ -55,9 +55,9 @@ public class AbsenceController {
         return absenceService.getAllAbsencesBySchoolId(schoolId);
     }
 
-    @PostMapping(path = "/{studentId}")
-    public AbsenceDTO createAbsence(@PathVariable("studentId") Long id, @RequestBody AbsenceDTO payload) {
-        return absenceService.saveAbsence(id, payload);
+    @PostMapping
+    public AbsenceDTO createAbsence(@RequestBody AbsenceDTO payload) {
+        return absenceService.saveAbsence(payload);
     }
 
     @PatchMapping(path = "/{id}")

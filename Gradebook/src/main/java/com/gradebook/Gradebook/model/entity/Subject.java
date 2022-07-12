@@ -1,5 +1,6 @@
 package com.gradebook.Gradebook.model.entity;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,10 @@ public class Subject {
     private List<Grade> grades;
 
     public Subject(String name) {
+        this.id = null;
         this.name = name;
+        this.classTeachers = new ArrayList<>();
+        this.grades = new ArrayList<>();
     }
 
     public Subject() {

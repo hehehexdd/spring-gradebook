@@ -37,7 +37,7 @@ public class GradeService implements IGradeService{
     }
 
     @Override
-    public GradeDTO saveGrade(Long id, GradeDTO payload) {
+    public GradeDTO saveGrade(GradeDTO payload) {
         Grade grade = new Grade(
                 subjectService.getSubjectByName(payload.getSubject()),
                 payload.getGrade(),

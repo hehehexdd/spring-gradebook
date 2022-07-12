@@ -19,20 +19,30 @@ public class SchoolClassService implements ISchoolClassService{
     @Autowired
     private final SchoolClassRepo schoolClassRepo;
 
-    public SchoolClassService(SchoolClassRepo schoolClassRepo) {
+    @Autowired
+    private final ISchoolService schoolService;
+
+    public SchoolClassService(SchoolClassRepo schoolClassRepo, ISchoolService schoolService) {
         this.schoolClassRepo = schoolClassRepo;
+        this.schoolService = schoolService;
     }
 
     @Override
-    public SchoolClass save(SchoolClass schoolClass) {
-        return schoolClassRepo.save(schoolClass);
+    public SchoolClassDTO saveClass(Long id, SchoolClassDTO payload) {
+        SchoolClass schoolClass = new SchoolClass(
+                payload.getName(),
+                payload.getClassYear(),
+                schoolService.findById(payload.getSchoolId()
+                ));
+        schoolClassRepo.save(schoolClass);
+        return this.convertToDTO(schoolClass);
     }
 
     @Override
-    public void update(SchoolClass schoolClass) {
-        SchoolClass tmp = schoolClassRepo.getById(schoolClass.getId());
-        tmp.setClassYear(schoolClass.getClassYear());
-        tmp.setName(schoolClass.getName());
+    public void update(Long id, SchoolClassDTO payload) {
+        SchoolClass tmp = schoolClassRepo.getById(id);
+        tmp.setClassYear(payload.getClassYear());
+        tmp.setName(payload.getName());
         schoolClassRepo.save(tmp);
     }
 

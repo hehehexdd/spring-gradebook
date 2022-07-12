@@ -39,8 +39,8 @@ public class SchoolClass {
         this.classTeachers = classTeachers;
     }
 
-    public SchoolClass(Long id, String name, SClass classYear, School school) {
-        this.id = id;
+    public SchoolClass(String name, SClass classYear, School school) {
+        this.id = null;
         this.name = name;
         this.classYear = classYear;
         this.school = school;

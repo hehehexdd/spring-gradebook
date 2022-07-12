@@ -8,8 +8,8 @@ import com.gradebook.Gradebook.model.entity.Subject;
 import java.util.List;
 
 public interface ISubjectService {
-    Subject saveSubject(Subject subject);
-    void updateSubject(SubjectDTO subjectDTO);
+    SubjectDTO saveSubject(SubjectDTO payload);
+    void updateSubject(Long id, SubjectDTO gradeDTO);
     void deleteSubject(Long id);
     SubjectDTO getSubjectById(Long id);
     Subject getSubjectByName(String name);

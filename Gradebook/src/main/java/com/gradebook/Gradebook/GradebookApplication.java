@@ -2,6 +2,7 @@ package com.gradebook.Gradebook;
 
 import com.gradebook.Gradebook.model.entity.*;
 import com.gradebook.Gradebook.repo.AppUserRepo;
+import com.gradebook.Gradebook.repo.SchoolClassRepo;
 import com.gradebook.Gradebook.service.IAppUserService;
 import com.gradebook.Gradebook.service.IParentService;
 import com.gradebook.Gradebook.service.ISchoolClassService;
@@ -23,7 +24,7 @@ public class GradebookApplication {
 	@Bean
 	CommandLineRunner runner(IAppUserService userService, IParentService parentService,
 							 ISchoolService schoolService, ISchoolClassService schoolClassService,
-							 AppUserRepo userRepo) {
+							 AppUserRepo userRepo, SchoolClassRepo schoolClassRepo) {
 
 		return args ->{
 			userRepo.save(new AppUser(
@@ -34,8 +35,7 @@ public class GradebookApplication {
 					false));
 			School s = new School("aaaaa", "A");
 			schoolService.save(s);
-			schoolClassService.save(new SchoolClass(
-					null,
+			schoolClassRepo.save(new SchoolClass(
 					"aaaaaa",
 					SClass.FIFTH,
 					s

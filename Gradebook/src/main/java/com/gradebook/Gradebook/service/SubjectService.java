@@ -1,5 +1,6 @@
 package com.gradebook.Gradebook.service;
 
+import com.gradebook.Gradebook.model.dto.GradeDTO;
 import com.gradebook.Gradebook.model.dto.SubjectDTO;
 import com.gradebook.Gradebook.model.entity.Subject;
 import com.gradebook.Gradebook.repo.SubjectRepo;
@@ -22,14 +23,16 @@ public class SubjectService implements ISubjectService{
     }
 
     @Override
-    public Subject saveSubject(Subject subject) {
-        return subjectRepo.save(subject);
+    public SubjectDTO saveSubject(SubjectDTO payload) {
+        Subject subject = new Subject(payload.getName());
+        subjectRepo.save(subject);
+        return this.convertToDTO(subject);
     }
 
     @Override
-    public void updateSubject(SubjectDTO subjectDTO) {
-        Subject tmp = subjectRepo.getById(subjectDTO.getId());
-        tmp.setName(subjectDTO.getName());
+    public void updateSubject(Long id, SubjectDTO payload) {
+        Subject tmp = subjectRepo.getById(payload.getId());
+        tmp.setName(payload.getName());
         subjectRepo.save(tmp);
     }
 

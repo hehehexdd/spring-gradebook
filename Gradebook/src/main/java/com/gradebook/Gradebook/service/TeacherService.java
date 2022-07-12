@@ -88,8 +88,7 @@ public class TeacherService implements ITeacherService{
 
     @Override
     public void delete(Long id) {
-        Teacher teacher = this.teacherRepo.getById(id);
-        this.teacherRepo.delete(teacher);
+        teacherRepo.deleteById(id);
     }
 
     @Override
