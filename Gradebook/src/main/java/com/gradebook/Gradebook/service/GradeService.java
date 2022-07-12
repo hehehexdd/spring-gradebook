@@ -108,7 +108,9 @@ public class GradeService implements IGradeService{
             gradeDTO.setDate(grade.getDate());
             gradeDTO.setSubject((grade.getSubject() != null) ? grade.getSubject().getName() : null);
             gradeDTO.setStudentId((grade.getStudent() != null ? grade.getStudent().getId() : null));
+            gradeDTO.setStudentName(grade.getStudent().getFirstName() + " " + grade.getStudent().getLastName());
             gradeDTO.setTeacherId((grade.getTeacher() != null ? grade.getTeacher().getId() : null));
+            gradeDTO.setTeacherName(grade.getTeacher().getFirstName() + " " + grade.getTeacher().getLastName());
         }
 
         return gradeDTO;

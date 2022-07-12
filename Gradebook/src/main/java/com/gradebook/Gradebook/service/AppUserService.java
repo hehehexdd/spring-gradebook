@@ -61,7 +61,6 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     public void updateUser(Long id, AppUserDTO payload) {
         AppUser tmp;
         tmp = userRepo.findByUsername(payload.getUsername());
-        //tmp.setEmail(user.getEmail());
         tmp.setAccountLocked(payload.isAccountLocked());
         userRepo.save(tmp);
     }

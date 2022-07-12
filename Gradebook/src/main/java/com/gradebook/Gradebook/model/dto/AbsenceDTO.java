@@ -5,18 +5,24 @@ import java.time.LocalDate;
 public class AbsenceDTO {
     private Long id;
     private Long studentId;
+    private String studentName;
     private String subject;
     private Long teacherId;
+    private String teacherName;
     private LocalDate date;
 
     public AbsenceDTO() {
     }
 
-    public AbsenceDTO(Long id, Long studentId, String subject, Long teacherId, LocalDate date) {
+    public AbsenceDTO(Long id, Long studentId, String studentName,
+                      String subject, Long teacherId, String teacherName,
+                      LocalDate date) {
         this.id = id;
         this.studentId = studentId;
+        this.studentName = studentName;
         this.subject = subject;
         this.teacherId = teacherId;
+        this.teacherName = teacherName;
         this.date = date;
     }
 

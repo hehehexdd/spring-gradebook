@@ -21,24 +21,10 @@ public class AbsenceController {
     private final IAbsenceService absenceService;
 
     @Autowired
-    private final IStudentService studentService;
-
-    @Autowired
-    private final ITeacherService teacherService;
-
-    @Autowired
-    private final ISubjectService subjectService;
-
-    @Autowired
     private final IParentService parentService;
 
-    public AbsenceController(IAbsenceService absenceService, IStudentService studentService,
-                             ITeacherService teacherService, ISubjectService subjectService,
-                             IParentService parentService) {
+    public AbsenceController(IAbsenceService absenceService, IParentService parentService) {
         this.absenceService = absenceService;
-        this.studentService = studentService;
-        this.teacherService = teacherService;
-        this.subjectService = subjectService;
         this.parentService = parentService;
     }
 
