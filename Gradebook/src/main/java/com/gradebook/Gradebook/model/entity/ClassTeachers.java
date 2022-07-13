@@ -23,6 +23,16 @@ public class ClassTeachers {
     @JoinColumn(name = "subjectId")
     private Subject subject;
 
+    public ClassTeachers() {
+    }
+
+    public ClassTeachers(SchoolClass studentClass, Teacher teacher, Subject subject) {
+        this.id = null;
+        this.studentClass = studentClass;
+        this.teacher = teacher;
+        this.subject = subject;
+    }
+
     public Long getId() {
         return id;
     }

@@ -12,6 +12,7 @@ public interface ISubjectService {
     void updateSubject(Long id, SubjectDTO gradeDTO);
     void deleteSubject(Long id);
     SubjectDTO getSubjectById(Long id);
+    Subject findSubjectById(Long id);
     Subject getSubjectByName(String name);
     List<SubjectDTO> getAllSubjects();
     SubjectDTO convertToDTO(Subject subject);

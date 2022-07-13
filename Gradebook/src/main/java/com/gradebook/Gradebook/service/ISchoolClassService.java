@@ -6,7 +6,7 @@ import com.gradebook.Gradebook.model.entity.SchoolClass;
 import java.util.List;
 
 public interface ISchoolClassService {
-    SchoolClassDTO saveClass(Long id, SchoolClassDTO payload);
+    SchoolClassDTO saveClass(SchoolClassDTO payload);
     void update(Long id, SchoolClassDTO payload);
     void delete(Long id);
     SchoolClassDTO getById(Long id);

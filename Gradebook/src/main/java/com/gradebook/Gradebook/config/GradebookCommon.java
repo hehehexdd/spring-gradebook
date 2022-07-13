@@ -25,5 +25,8 @@ public class GradebookCommon {
 
     public static final String SCHOOL_CLASS_BASE_URI = "/api/schoolclass";
 
+    public static final String CLASS_TEACHERS_BASE_URI = "/api/classteachers";
+
     public static final String TERM_PROGRAM_BASE_URI = "/api/termProgram";
+
 }

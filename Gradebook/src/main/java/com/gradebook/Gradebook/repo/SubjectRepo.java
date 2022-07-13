@@ -12,4 +12,6 @@ public interface SubjectRepo extends JpaRepository<Subject, Long> {
 
     @Query("SELECT s FROM Subject s WHERE s.id in :ids")
     List<Subject> getAllSubjectsByIds(@Param("ids") List<Long> ids);
+
+
 }

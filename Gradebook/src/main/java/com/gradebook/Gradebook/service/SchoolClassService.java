@@ -28,7 +28,7 @@ public class SchoolClassService implements ISchoolClassService{
     }
 
     @Override
-    public SchoolClassDTO saveClass(Long id, SchoolClassDTO payload) {
+    public SchoolClassDTO saveClass(SchoolClassDTO payload) {
         SchoolClass schoolClass = new SchoolClass(
                 payload.getName(),
                 payload.getClassYear(),
@@ -41,8 +41,8 @@ public class SchoolClassService implements ISchoolClassService{
     @Override
     public void update(Long id, SchoolClassDTO payload) {
         SchoolClass tmp = schoolClassRepo.getById(id);
-        tmp.setClassYear(payload.getClassYear());
-        tmp.setName(payload.getName());
+        if(payload.getClassYear() != null) tmp.setClassYear(payload.getClassYear());
+        if(payload.getName() != null) tmp.setName(payload.getName());
         schoolClassRepo.save(tmp);
     }
 
