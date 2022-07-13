@@ -32,12 +32,11 @@ public class TermProgramService implements ITermProgramService {
     public TermProgramDTO save(TermProgramDTO termProgramDTO) {
         ClassTeachers classTeachers = classTeacherRepo.getById(termProgramDTO.getId());
 
-        return convertToDTO(new TermProgram(
-                null,
+        return convertToDTO(termProgramRepo.save( new TermProgram(
                 classTeachers,
                 termProgramDTO.getTimestamp(),
                 termProgramDTO.getWeekDay()
-        ));
+        )));
     }
 
     @Override

@@ -21,8 +21,7 @@ public class TermProgram {
     public TermProgram() {
     }
 
-    public TermProgram(Long id, ClassTeachers classTeachers, String timestamp, WeekDay weekDay) {
-        this.id = id;
+    public TermProgram(ClassTeachers classTeachers, String timestamp, WeekDay weekDay) {
         this.classTeachers = classTeachers;
         this.timestamp = timestamp;
         this.weekDay = weekDay;
