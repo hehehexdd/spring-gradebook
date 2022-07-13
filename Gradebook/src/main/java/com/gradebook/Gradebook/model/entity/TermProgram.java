@@ -22,6 +22,7 @@ public class TermProgram {
     }
 
     public TermProgram(ClassTeachers classTeachers, String timestamp, WeekDay weekDay) {
+        this.id = null;
         this.classTeachers = classTeachers;
         this.timestamp = timestamp;
         this.weekDay = weekDay;

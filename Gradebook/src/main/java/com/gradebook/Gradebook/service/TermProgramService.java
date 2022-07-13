@@ -30,7 +30,7 @@ public class TermProgramService implements ITermProgramService {
 
     @Override
     public TermProgramDTO save(TermProgramDTO termProgramDTO) {
-        ClassTeachers classTeachers = classTeacherRepo.getById(termProgramDTO.getId());
+        ClassTeachers classTeachers = classTeacherRepo.getById(termProgramDTO.getClassTeacherId());
 
         return convertToDTO(termProgramRepo.save(new TermProgram(
                 classTeachers,
