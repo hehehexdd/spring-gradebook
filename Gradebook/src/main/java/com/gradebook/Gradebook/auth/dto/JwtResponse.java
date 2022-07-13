@@ -5,14 +5,16 @@ import com.gradebook.Gradebook.model.entity.RoleType;
 public class JwtResponse {
     private Long userId;
     private RoleType role;
+    private boolean accountLocked;
     private String jwtToken;
 
     public JwtResponse() {
     }
 
-    public JwtResponse(Long userId, RoleType role,  String jwtToken) {
+    public JwtResponse(Long userId, RoleType role, boolean accountLocked,  String jwtToken) {
         this.userId = userId;
         this.role = role;
+        this.accountLocked = accountLocked;
         this.jwtToken = jwtToken;
     }
 
@@ -28,6 +30,10 @@ public class JwtResponse {
         return role;
     }
 
+    public boolean isAccountLocked() {
+        return accountLocked;
+    }
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }
@@ -38,5 +44,9 @@ public class JwtResponse {
 
     public void setRole(RoleType role) {
         this.role = role;
+    }
+
+    public void setAccountLocked(boolean accountLocked) {
+        this.accountLocked = accountLocked;
     }
 }

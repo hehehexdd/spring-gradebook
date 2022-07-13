@@ -58,9 +58,14 @@ public class TermProgramService implements ITermProgramService {
                 termProgram.getId(),
                 termProgram.getTimestamp(),
                 termProgram.getWeekDay(),
+                termProgram.getClassTeachers().getId(),
                 termProgram.getClassTeachers() != null ? termProgram.getClassTeachers().getStudentClass().getId() : null,
+                termProgram.getClassTeachers() != null ? termProgram.getClassTeachers().getStudentClass().getName() : null,
                 termProgram.getClassTeachers() != null ? termProgram.getClassTeachers().getTeacher().getId() : null,
-                termProgram.getClassTeachers() != null ? termProgram.getClassTeachers().getSubject().getId() : null
+                termProgram.getClassTeachers() != null ?
+                        termProgram.getClassTeachers().getTeacher().getFirstName() + " " + termProgram.getClassTeachers().getTeacher().getLastName()  : null,
+                termProgram.getClassTeachers() != null ? termProgram.getClassTeachers().getSubject().getId() : null,
+                termProgram.getClassTeachers() != null ? termProgram.getClassTeachers().getSubject().getName() : null
         );
     }
 }
