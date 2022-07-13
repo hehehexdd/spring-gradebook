@@ -19,6 +19,11 @@ public class TermProgramController {
         this.termProgramService = termProgramService;
     }
 
+    @GetMapping(path = "/all")
+    public List<TermProgramDTO> getAll() {
+        return termProgramService.getAll();
+    }
+
     @GetMapping(path = "/{classId}")
     public List<TermProgramDTO> getClassTermProgramByClassId(@PathVariable Long classId) {
         return termProgramService.getAllByClassId(classId);

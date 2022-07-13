@@ -47,6 +47,13 @@ public class TermProgramService implements ITermProgramService {
     }
 
     @Override
+    public List<TermProgramDTO> getAll() {
+        return termProgramRepo.findAll()
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteAllByClassId(Long id) {
         termProgramRepo.deleteAllByClassTeachers_StudentClass_Id(id);
     }

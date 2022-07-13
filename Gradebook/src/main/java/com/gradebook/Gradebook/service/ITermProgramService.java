@@ -9,6 +9,7 @@ public interface ITermProgramService {
     TermProgramDTO save(TermProgramDTO termProgramDTO);
     List<TermProgramDTO> getAllByClassId(Long id);
     void deleteAllByClassId(Long id);
+    List<TermProgramDTO> getAll();
 
     TermProgramDTO convertToDTO(TermProgram termProgram);
 }
