@@ -35,8 +35,8 @@ public class DirectorController {
 
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateDirector(@PathVariable("id") Long id, @RequestBody RegisterDTO payload) {
-        directorService.update(id, payload);
+    public DirectorDTO updateDirector(@PathVariable("id") Long id, @RequestBody RegisterDTO payload) {
+        return directorService.update(id, payload);
     }
 
     @PostMapping(path = "/register")

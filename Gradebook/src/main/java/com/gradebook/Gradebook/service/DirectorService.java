@@ -28,14 +28,14 @@ public class DirectorService implements IDirectorService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public DirectorService(DirectorRepo directorRepo, ISchoolService schoolService) {
+    public DirectorService(DirectorRepo directorRepo, ISchoolService schoolService, PasswordEncoder passwordEncoder) {
         this.directorRepo = directorRepo;
         this.schoolService = schoolService;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    //TO-DO
     @Override
-    public void update(Long id, RegisterDTO registerDTO) {
+    public DirectorDTO update(Long id, RegisterDTO registerDTO) {
         Director director = directorRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Director not found!"));
 
         director.setUsername((registerDTO.getUsername() != null) ? registerDTO.getUsername() : director.getUsername());
@@ -46,6 +46,8 @@ public class DirectorService implements IDirectorService {
         director.setFirstName((registerDTO.getFirstName() != null) ? registerDTO.getFirstName() : director.getFirstName());
         director.setLastName((registerDTO.getLastName() != null) ? registerDTO.getLastName() : director.getLastName());
         director.setSchool((registerDTO.getSchoolId() != null) ? schoolService.findById(registerDTO.getSchoolId()) : director.getSchool());
+
+        return convertToDTO(directorRepo.save(director));
     }
 
     @Override
@@ -61,7 +63,7 @@ public class DirectorService implements IDirectorService {
                 payload.getEmail(),
                 passwordEncoder.encode(payload.getPassword()),
                 RoleType.DIRECTOR,
-                false,
+                true,
                 payload.getFirstName(),
                 payload.getLastName(),
                 schoolService.findById(payload.getSchoolId())
@@ -79,11 +81,6 @@ public class DirectorService implements IDirectorService {
     }
 
     @Override
-    public Director findByUsername(String username) {
-        return directorRepo.findByUsername(username);
-    }
-
-    @Override
     public DirectorDTO getById(Long id) {
         Optional<Director> director = directorRepo.findById(id);
 
@@ -92,10 +89,6 @@ public class DirectorService implements IDirectorService {
         }
 
         return convertToDTO(director.get());
-    }
-
-    public DirectorDTO getByUsername(String username) {
-        return convertToDTO(directorRepo.findByUsername(username));
     }
 
     @Override
@@ -118,8 +111,8 @@ public class DirectorService implements IDirectorService {
             directorDTO.setFirstName(director.getFirstName());
             directorDTO.setLastName(director.getLastName());
             directorDTO.setUsername(director.getUsername());
-            directorDTO.setSchool(director.getSchool().getName());
-            directorDTO.setSchoolId(director.getSchool().getId());
+            directorDTO.setSchool(director.getSchool() != null ? director.getSchool().getName() : null);
+            directorDTO.setSchoolId(director.getSchool() != null ? director.getSchool().getId() : null);
         }
 
         return directorDTO;

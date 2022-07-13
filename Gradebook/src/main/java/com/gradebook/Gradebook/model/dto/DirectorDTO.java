@@ -71,13 +71,28 @@ public class DirectorDTO {
     }
 
     @Override
-    public String toString() {
-        return "DirectorDTO{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
-                ", school='" + school + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DirectorDTO that = (DirectorDTO) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (school != null ? !school.equals(that.school) : that.school != null) return false;
+        return schoolId != null ? schoolId.equals(that.schoolId) : that.schoolId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (school != null ? school.hashCode() : 0);
+        result = 31 * result + (schoolId != null ? schoolId.hashCode() : 0);
+        return result;
     }
 }
