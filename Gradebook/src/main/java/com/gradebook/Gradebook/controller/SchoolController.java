@@ -78,4 +78,9 @@ public class SchoolController {
         return schoolService.getAllSchoolStatistics();
     }
 
+    @DeleteMapping(path = "/{id}")
+    public void deleteSchoolById(@PathVariable Long id) {
+        schoolService.delete(id);
+    }
+
 }
