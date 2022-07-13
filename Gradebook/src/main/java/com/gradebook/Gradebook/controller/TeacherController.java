@@ -60,8 +60,8 @@ public class TeacherController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void createTeacher(@RequestBody RegisterDTO payload) {
-        this.teacherService.createTeacher(payload);
+    public TeacherDTO createTeacher(@RequestBody RegisterDTO payload) {
+        return this.teacherService.createTeacher(payload);
     }
 
     @DeleteMapping(path = "/{id}")
