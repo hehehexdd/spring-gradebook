@@ -79,12 +79,21 @@ public class SchoolService implements ISchoolService {
         return new SchoolStatisticsDTO (
                 school.getId(),
                 school.getName(),
-                (school.getDirector() != null) ? String.format("&s &s", school.getDirector().getFirstName(), school.getDirector().getLastName()) : null,
+                (school.getDirector() != null) ? String.format("%s %s", school.getDirector().getFirstName(), school.getDirector().getLastName()) : null,
                 (school.getDirector() != null) ? school.getId() : null,
                 school.getTeachers().size(),
                 school.getStudents().size(),
                 (Double.isNaN(averageGrade)) ? 0 : averageGrade
         );
+    }
+
+    @Override
+    public List<SchoolStatisticsDTO> getAllSchoolStatistics() {
+        return schoolRepo.findAll()
+                .stream().map(school ->
+                    getStatisticsForSchool(school.getId())
+                )
+                .collect(Collectors.toList());
     }
 
     @Override

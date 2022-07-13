@@ -73,4 +73,9 @@ public class SchoolController {
         return schoolService.getAll();
     }
 
+    @GetMapping(path = "/all/statistics")
+    public List<SchoolStatisticsDTO> getAllSchoolStatistics() {
+        return schoolService.getAllSchoolStatistics();
+    }
+
 }

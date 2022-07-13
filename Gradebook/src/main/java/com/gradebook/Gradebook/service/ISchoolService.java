@@ -28,6 +28,8 @@ public interface ISchoolService {
 
     SchoolStatisticsDTO getStatisticsForSchool(Long id);
 
+    List<SchoolStatisticsDTO> getAllSchoolStatistics();
+
     ResponseEntity getGradeStatistics(Long schoolId);
 
     SchoolDTO convertToDTO(School school);
