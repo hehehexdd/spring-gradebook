@@ -42,6 +42,13 @@ public class TermProgramDTO {
         this.subjectId = subjectId;
     }
 
+
+    public TermProgramDTO(String timestamp, WeekDay weekDay, Long classTeacherId) {
+        this.timestamp = timestamp;
+        this.weekDay = weekDay;
+        this.classTeacherId = classTeacherId;
+    }
+
     public Long getClassTeacherId() {
         return classTeacherId;
     }
