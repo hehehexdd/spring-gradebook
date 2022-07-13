@@ -11,10 +11,8 @@ public interface IAppUserService extends UserDetailsService {
     AppUserDTO saveUser(RegisterDTO userDTO);
     void updateUser(Long id, AppUserDTO payload);
     void deleteUser(Long id);
-    void addRoleToUser(String username, String role);
     AppUser getUser(String username);
     AppUser getUserById(Long id);
     List<AppUserDTO> getAllUsers();
     AppUserDTO convertToDTO(AppUser user);
-    AppUser convertToEntity(AppUserDTO userDTO);
 }

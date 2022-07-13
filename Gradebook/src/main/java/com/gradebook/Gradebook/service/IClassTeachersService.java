@@ -13,6 +13,7 @@ public interface IClassTeachersService {
     ClassTeachersDTO getById(Long id);
     ClassTeachers findById(Long id);
     List<ClassTeachersDTO> getAll();
+    List<ClassTeachersDTO> getAllClassTeachersBySchoolId(Long id);
 
     ClassTeachersDTO convertToDTO(ClassTeachers classTeachers);
 }

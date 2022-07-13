@@ -77,6 +77,13 @@ public class ClassTeachersService implements IClassTeachersService {
     }
 
     @Override
+    public List<ClassTeachersDTO> getAllClassTeachersBySchoolId(Long id) {
+        return classTeacherRepo.getAllByTeacher_Id(id)
+                .stream().map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public ClassTeachersDTO convertToDTO(ClassTeachers classTeachers) {
         ClassTeachersDTO classTeachersDTO = new ClassTeachersDTO();
 

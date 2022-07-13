@@ -30,6 +30,7 @@
 .classpath
 .factorypath
 .properties
+.bin
 
 Gradebook/build.gradle
 Gradebook/build/resources/main/application.properties

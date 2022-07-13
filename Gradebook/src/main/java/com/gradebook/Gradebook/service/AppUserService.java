@@ -71,12 +71,6 @@ public class AppUserService implements IAppUserService, UserDetailsService {
     }
 
     @Override
-    public void addRoleToUser(String username, String role) {
-        AppUser user = userRepo.findByUsername(username);
-        user.setRole(RoleType.valueOf(role));
-    }
-
-    @Override
     public AppUser getUser(String username) {
         return userRepo.findByUsername(username);
     }
@@ -110,20 +104,4 @@ public class AppUserService implements IAppUserService, UserDetailsService {
         }
         return userDTO;
     }
-
-    @Override
-    public AppUser convertToEntity(AppUserDTO userDTO) {
-        AppUser user = new AppUser();
-        if(userDTO != null) {
-            user.setId(userDTO.getId());
-            user.setUsername(userDTO.getUsername());
-            user.setEmail(userDTO.getEmail());
-            user.setPassword(userRepo.findByUsername(user.getUsername()).getPassword());
-            user.setRole(RoleType.valueOf(userDTO.getRole()));
-        }
-        return user;
-    }
-
-
-
 }
