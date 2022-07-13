@@ -10,4 +10,5 @@ import java.util.List;
 public interface ClassTeacherRepo extends JpaRepository<ClassTeachers, Long> {
 
     List<ClassTeachers> getAllByTeacher_Id(Long id);
+    List<ClassTeachers> getAllByTeacher_School_Id(Long id);
 }
