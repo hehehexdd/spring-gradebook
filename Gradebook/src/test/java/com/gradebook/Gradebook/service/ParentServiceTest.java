@@ -62,12 +62,6 @@ class ParentServiceTest {
     }
 
     @Test
-    void delete() {
-        this.parentService.delete(1l);
-        assertThat(1).isEqualTo(1);
-    }
-
-    @Test
     void updateParentWithoutKids() {
         var expected = new ParentDTO(1L,"Ivan","Ivanov","Tester");
         var actual = this.parentService.update(1l,expected);
@@ -122,5 +116,11 @@ class ParentServiceTest {
         assertThat(actualParents.get(1).getFirstName()).isEqualTo(expectedParents.get(1).getFirstName());
         assertThat(actualParents.get(1).getLastName()).isEqualTo(expectedParents.get(1).getLastName());
     }
+    @Test
+    void delete() {
+        this.parentService.delete(1l);
+        assertThat(1).isEqualTo(1);
+    }
+
 
 }

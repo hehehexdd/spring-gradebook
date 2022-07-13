@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface ITeacherService {
     TeacherDTO update(Long teacherId, TeacherDTO teacher);
-    void createTeacher(RegisterDTO user);
+    TeacherDTO createTeacher(RegisterDTO user);
     void delete(Long id);
     TeacherDTO getById(Long id);
     Teacher findById(Long id);

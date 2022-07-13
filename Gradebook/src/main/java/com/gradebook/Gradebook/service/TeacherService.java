@@ -33,20 +33,21 @@ public class TeacherService implements ITeacherService{
     private final ISchoolService schoolService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
 
-    public TeacherService(TeacherRepo teacherRepo, ClassTeacherRepo classTeacherRepo, IStudentService studentService, ISubjectService subjectService, ISchoolService schoolService) {
+    public TeacherService(TeacherRepo teacherRepo, ClassTeacherRepo classTeacherRepo, IStudentService studentService, ISubjectService subjectService, ISchoolService schoolService, PasswordEncoder passwordEncoder) {
         this.teacherRepo = teacherRepo;
         this.classTeacherRepo = classTeacherRepo;
         this.studentService = studentService;
         this.subjectService = subjectService;
         this.schoolService = schoolService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public void createTeacher(RegisterDTO user) {
+    public TeacherDTO createTeacher(RegisterDTO user) {
         Long schoolId = user.getSchoolId();
 
         School school = schoolService.findById(schoolId);
@@ -63,6 +64,7 @@ public class TeacherService implements ITeacherService{
                 );
 
         this.teacherRepo.save(teacher);
+        return this.convertToDTO(teacher);
     }
 
     @Override

@@ -99,6 +99,6 @@ public class AuthController {
         final UserDetails userDetails = userService.loadUserByUsername(jwtRequest.getUsername());
         final String token = jwtUtility.generateToken(userDetails);
 
-        return  new JwtResponse(user.getId(), user.getRole(), token);
+        return  new JwtResponse(user.getId(), user.getRole(), user.isAccountLocked(), token);
     }
 }

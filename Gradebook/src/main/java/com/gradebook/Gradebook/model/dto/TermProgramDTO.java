@@ -11,17 +11,26 @@ public class TermProgramDTO {
 
     private Long classTeacherId;
     private Long classId;
+    private String className;
     private Long teacherId;
+    private String teacherName;
     private Long subjectId;
+    private String subjectName;
 
-    public TermProgramDTO(Long id, String timestamp, WeekDay weekDay, Long classTeacherId, Long classId, Long teacherId, Long subjectId) {
+    public TermProgramDTO(Long id, String timestamp, WeekDay weekDay, Long classTeacherId,
+                          Long classId, String className,
+                          Long teacherId, String teacherName,
+                          Long subjectId, String subjectName) {
         this.id = id;
         this.timestamp = timestamp;
         this.weekDay = weekDay;
         this.classTeacherId = classTeacherId;
         this.classId = classId;
+        this.className = className;
         this.teacherId = teacherId;
+        this.teacherName = teacherName;
         this.subjectId = subjectId;
+        this.subjectName = subjectName;
     }
 
     public TermProgramDTO(Long id, String timestamp, WeekDay weekDay, Long classId, Long teacherId, Long subjectId) {
@@ -90,5 +99,29 @@ public class TermProgramDTO {
 
     public void setSubjectId(Long subjectId) {
         this.subjectId = subjectId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 }
